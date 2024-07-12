@@ -1,0 +1,22 @@
+﻿{
+  "InstalledPluginNames": [
+    "Obsolete field, using only for compatibility"
+  ],
+  "InstalledPlugins": [
+    {
+      "SystemName": "Misc.NopStationTeams",
+      "Version": "4.70.2"
+    },
+    {
+      "SystemName": "Widgets.FacebookPixel",
+      "Version": "4.70.7"
+    },
+    {
+      "SystemName": "Payments.Manual",
+      "Version": "4.70.3"
+    }
+  ],
+  "PluginNamesToUninstall": [],
+  "PluginNamesToDelete": [],
+  "PluginNamesToInstall": []
+}

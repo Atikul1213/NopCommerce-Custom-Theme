@@ -1,0 +1,57 @@
+﻿@model EmployeeSettingModel
+<h2>EmployeeSetting</h2>
+@{
+    
+    //page title
+    Layout = "_AdminLayout";
+    ViewBag.PageTitle = T("Admin.Configuration.Settings.Employee").Text;
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("Order settings");
+}
+
+@{
+
+    const string hideEmployeeTotalsBlockAttributeName = "OrderSettingsPage.HideOrderTotalsBlock";
+    var customer = await workContext.GetCurrentCustomerAsync();
+    var hideEmployeeTotalsBlock = await genericAttributeService.GetAttributeAsync<bool>(customer, hideEmployeeTotalsBlockAttributeName);
+}
+
+
+
+
+<form asp-controller="Setting" asp-action="EmployeeOption" method="post">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            @T("Admin.Configuration.Settings.Employee")
+        </h1>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.Save")
+            </button>
+            @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.OrderSettingsButtons, additionalData = Model })
+        </div>
+    </div>
+
+    
+
+   
+    <section class="content">
+        <div class="container-fluid">
+            <div class="form-horizontal">
+                @await Component.InvokeAsync(typeof(StoreScopeConfigurationViewComponent))
+                @await Component.InvokeAsync(typeof(SettingModeViewComponent))
+                <div asp-validation-summary="All"></div>
+
+                <nop-cards id="ordersettings-cards">
+                    
+                   
+                    <nop-card asp-name="employeeSetting" asp-icon="far fa-money-bill-alt" asp-title="@T("Admin.Configuration.Settings.Order.BlockTitle.EmployeeSetting")" asp-hide-block-attribute-name="@hideEmployeeTotalsBlockAttributeName" asp-hide="@hideEmployeeTotalsBlock" asp-advanced="true">@await Html.PartialAsync("~/Plugins/Misc.NopStationTeams/Areas/Admin/Views/Setting/_Employee.EmployeeSetting.cshtml", Model)</nop-card>
+                    
+                    @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.OrderSettingsDetailsBlock, additionalData = Model })
+                </nop-cards>
+            </div>
+        </div>
+    </section>
+    
+</form>
