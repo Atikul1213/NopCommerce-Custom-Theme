@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Nop.Core.Caching;
 using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Model;
 using Nop.Plugin.Misc.NopStationTeams.Domain;
+using Nop.Plugin.Misc.NopStationTeams.Infrastructure;
 using Nop.Plugin.Misc.NopStationTeams.Services;
 using Nop.Services;
 using Nop.Services.Localization;
@@ -40,6 +41,9 @@ public class EmployeeModelFactory : IEmployeeModelFactory
     public async Task<EmployeeListModel> PrepareEmployeeListModelAsync(EmployeeSearchModel searchModel)
     {
         ArgumentNullException.ThrowIfNull(nameof(searchModel));
+        
+        
+        
         var employees = await _employeeService.SearchEmployeesAsync(searchModel.Name, searchModel.EmployeeStatusId,
 
                        pageIndex: searchModel.Page - 1,
@@ -47,9 +51,29 @@ public class EmployeeModelFactory : IEmployeeModelFactory
 
         //prepare grid model
 
+        var output = await _staticCacheManager.GetAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey, async () =>
+        {
+            var model = await new EmployeeListModel().PrepareToGridAsync(searchModel, employees, () =>
+            {
+                return employees.SelectAwait(async employee =>
+                {
+                    return await PrepareEmployeeModelAsync(null, employee, true);
+                });
+            });
 
-        EmployeeListModel output = (EmployeeListModel)_cache.Get(cacheKeyName);
 
+
+            return model;
+        });
+
+
+
+
+
+
+
+        //EmployeeListModel output = (EmployeeListModel)_cache.Get(cacheKeyName);
+        /**
         if (output == null)
         {
 
@@ -80,7 +104,7 @@ public class EmployeeModelFactory : IEmployeeModelFactory
 
             _cache.Set(cacheKeyName, output, TimeSpan.FromMinutes(1));
         }
-
+        */
 
         return output;
     }

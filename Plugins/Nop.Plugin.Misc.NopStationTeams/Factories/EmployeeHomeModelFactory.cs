@@ -3,10 +3,14 @@ using DocumentFormat.OpenXml.Office2010.Excel;
 
 using Nop.Plugin.Misc.NopStationTeams.Domain;
 using Nop.Plugin.Misc.NopStationTeams.Model;
+using Nop.Plugin.Misc.NopStationTeams.Services;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Web.Models.Media;
-
+using Nop.Data;
+using Nop.Plugin.Misc.NopStationTeams.Services;
+using Nop.Core.Caching;
+using Nop.Plugin.Misc.NopStationTeams.Infrastructure;
 namespace Nop.Plugin.Misc.NopStationTeams.Factories;
 public class EmployeeHomeModelFactory : IEmployeeHomeModelFactory
 {
@@ -15,14 +19,18 @@ public class EmployeeHomeModelFactory : IEmployeeHomeModelFactory
     private readonly ILocalizationService _localizationService;
     private readonly IPictureService _pictureService;
     private readonly EmployeeSettings _employeeSettings;
+    private readonly IStaticCacheManager _staticCacheManager;
+    private readonly IRepository<Employee> _employeeRepository;
     #endregion
 
     #region Ctor
-    public EmployeeHomeModelFactory(ILocalizationService localizationService, IPictureService pictureService, EmployeeSettings employeeSettings)
+    public EmployeeHomeModelFactory(ILocalizationService localizationService, IPictureService pictureService, EmployeeSettings employeeSettings, IRepository<Employee> employeeRepository, IStaticCacheManager staticCacheManager)
     {
         _localizationService = localizationService;
         _pictureService = pictureService;
         _employeeSettings = employeeSettings;
+        _employeeRepository = employeeRepository;
+        _staticCacheManager = staticCacheManager;
     }
 
     #endregion
@@ -31,8 +39,32 @@ public class EmployeeHomeModelFactory : IEmployeeHomeModelFactory
     #region Method
     public async Task<IList<EmployeeHomeModel>> PrepareEmployeeHomeListModelAsync(IList<Employee> employee)
     {
+
+        var output = await _staticCacheManager.GetAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey, async()=>{
+
+            var query = _employeeRepository.GetAll();
+            if (_employeeSettings.IsMVP)
+                query = query.Where(x => x.IsMVP == true).ToList();
+
+            else if (_employeeSettings.IsCertified)
+                query = query.Where(x => x.IsCertified == true).ToList();
+
+            else if( (_employeeSettings.IsMVP == false) && (_employeeSettings.IsCertified == false) ) 
+                query = query.Where(x=>(x.IsMVP == false && x.IsCertified==false)).ToList();
+
+            var model = new List<EmployeeHomeModel>();
+            foreach(var emp in query)
+            {
+                model.Add( await PrepareEmployeeHomeModelAsync(emp));
+            }
+
+            return model;
+        });
+
+        return output;
+        /**
          var model = new List<EmployeeHomeModel>();
-         
+
         foreach(var emp in employee)
         {
             if (_employeeSettings.IsMVP==true && emp.IsMVP==true)
@@ -50,10 +82,11 @@ public class EmployeeHomeModelFactory : IEmployeeHomeModelFactory
             {
                 model.Add(await PrepareEmployeeHomeModelAsync(emp));
             }
-           
-
         }
+
         return model;
+        */
+
     }
 
     public async Task<EmployeeHomeModel> PrepareEmployeeHomeModelAsync(Employee employee)
