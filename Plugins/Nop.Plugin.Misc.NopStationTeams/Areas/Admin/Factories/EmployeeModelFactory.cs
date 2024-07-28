@@ -1,4 +1,7 @@
-﻿using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Model;
+﻿using LinqToDB.Common.Internal.Cache;
+using Microsoft.Extensions.Caching.Memory;
+using Nop.Core.Caching;
+using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Model;
 using Nop.Plugin.Misc.NopStationTeams.Domain;
 using Nop.Plugin.Misc.NopStationTeams.Services;
 using Nop.Services;
@@ -14,16 +17,21 @@ public class EmployeeModelFactory : IEmployeeModelFactory
     private readonly IEmployeeService _employeeService;
     private readonly ILocalizationService _localizationService;
     private readonly IPictureService _pictureService;
+    private readonly IMemoryCache _cache;
+    private readonly IStaticCacheManager _staticCacheManager;
+    private readonly string cacheKeyName = "employeeList";
 
     #endregion
 
 
     #region Ctor
-    public EmployeeModelFactory(IEmployeeService employeeService, ILocalizationService localizationService, IPictureService pictureService)
+    public EmployeeModelFactory(IEmployeeService employeeService, ILocalizationService localizationService, IPictureService pictureService, IMemoryCache memoryCache, IStaticCacheManager staticCacheManager)
     {
         _employeeService = employeeService;
         _localizationService = localizationService;
         _pictureService = pictureService;
+        _cache = memoryCache;
+        _staticCacheManager = staticCacheManager;
     }
 
     #endregion
@@ -39,28 +47,42 @@ public class EmployeeModelFactory : IEmployeeModelFactory
 
         //prepare grid model
 
-        var model = await new EmployeeListModel().PrepareToGridAsync(searchModel, employees, () =>
+
+        EmployeeListModel output = (EmployeeListModel)_cache.Get(cacheKeyName);
+
+        if (output == null)
         {
-            return employees.SelectAwait(async employee =>
+
+            //output = new EmployeeListModel();
+
+            /// var model = await new EmployeeListModel().PrepareToGridAsync(searchModel, employees, () =>
+            output = await new EmployeeListModel().PrepareToGridAsync(searchModel, employees, () =>
             {
-                ////fill in model values from the entity
-                //var employeeModel = new EmployeeModel()
-                //{
-                //    Designation = employee.Designation,
-                //    EmployeeStatusId = employee.EmployeeStatusId,
-                //    Id = employee.Id,
-                //    Name = employee.Name,
-                //    IsCertified = employee.IsCertified,
-                //    IsMVP = employee.IsMVP,
-                //    EmployeeStatusStr = await _localizationService.GetLocalizedEnumAsync(employee.EmployeeStatus)
-                //};
+                return employees.SelectAwait(async employee =>
+                {
+                    ////fill in model values from the entity
+                    //var employeeModel = new EmployeeModel()
+                    //{
+                    //    Designation = employee.Designation,
+                    //    EmployeeStatusId = employee.EmployeeStatusId,
+                    //    Id = employee.Id,
+                    //    Name = employee.Name,
+                    //    IsCertified = employee.IsCertified,
+                    //    IsMVP = employee.IsMVP,
+                    //    EmployeeStatusStr = await _localizationService.GetLocalizedEnumAsync(employee.EmployeeStatus)
+                    //};
 
 
-                return await PrepareEmployeeModelAsync(null, employee, true);
+                    return await PrepareEmployeeModelAsync(null, employee, true);
+                });
             });
-        });
 
-        return model;
+
+            _cache.Set(cacheKeyName, output, TimeSpan.FromMinutes(1));
+        }
+
+
+        return output;
     }
 
 
