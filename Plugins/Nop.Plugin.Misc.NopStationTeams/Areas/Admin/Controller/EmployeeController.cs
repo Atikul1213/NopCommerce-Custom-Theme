@@ -109,6 +109,7 @@ public class EmployeeController : BasePluginController
             //update picture seo file name
             await UpdatePictureSeoNamesAsync(employee);
             await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey);
+            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
 
             return continueEditing ? RedirectToAction("Edit", new { id = employee.Id }) : RedirectToAction("List");
         }
@@ -158,7 +159,8 @@ public class EmployeeController : BasePluginController
             
            
             await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey);
-          
+            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
+
             return continueEditing ? RedirectToAction("Edit", new { id = employee.Id }) : RedirectToAction("List");
         }
 

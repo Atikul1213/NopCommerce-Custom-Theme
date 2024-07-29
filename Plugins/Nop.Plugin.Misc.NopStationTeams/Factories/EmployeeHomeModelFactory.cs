@@ -35,7 +35,7 @@ public class EmployeeHomeModelFactory : IEmployeeHomeModelFactory
     public async Task<IList<EmployeeHomeModel>> PrepareEmployeeHomeListModelAsync(IList<Employee> employee)
     {
 
-        var output = await _staticCacheManager.GetAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey, async()=>{
+        var output = await _staticCacheManager.GetAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey, async()=>{
 
             var query = _employeeRepository.GetAll();
             if (_employeeSettings.IsMVP)

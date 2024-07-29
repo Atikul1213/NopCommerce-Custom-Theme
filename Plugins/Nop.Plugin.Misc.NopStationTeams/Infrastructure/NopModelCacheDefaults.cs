@@ -8,6 +8,6 @@ public static partial class NopModelCacheDefaults
     public static string AdminEmployeeAllPrefixCacheKey => "Nop.Plugin.Misc.NopStationTeams.Admin";
 
 
-    public static CacheKey PublicEmployeeAllModelKey => new("PUblicEmployeeList", PublicEmployeeAllPrefixCacheKey);
+    public static CacheKey PublicEmployeeAllModelKey => new("PublicEmployeeList", PublicEmployeeAllPrefixCacheKey);
     public static string PublicEmployeeAllPrefixCacheKey => "Nop.Plugin.Misc.NopStationTeams.Public";
 }
