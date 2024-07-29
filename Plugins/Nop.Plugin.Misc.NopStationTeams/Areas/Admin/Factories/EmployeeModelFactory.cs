@@ -18,20 +18,20 @@ public class EmployeeModelFactory : IEmployeeModelFactory
     private readonly IEmployeeService _employeeService;
     private readonly ILocalizationService _localizationService;
     private readonly IPictureService _pictureService;
-    private readonly IMemoryCache _cache;
+    
     private readonly IStaticCacheManager _staticCacheManager;
-    private readonly string cacheKeyName = "employeeList";
+     
 
     #endregion
 
 
     #region Ctor
-    public EmployeeModelFactory(IEmployeeService employeeService, ILocalizationService localizationService, IPictureService pictureService, IMemoryCache memoryCache, IStaticCacheManager staticCacheManager)
+    public EmployeeModelFactory(IEmployeeService employeeService, ILocalizationService localizationService, IPictureService pictureService,   IStaticCacheManager staticCacheManager)
     {
         _employeeService = employeeService;
         _localizationService = localizationService;
         _pictureService = pictureService;
-        _cache = memoryCache;
+        
         _staticCacheManager = staticCacheManager;
     }
 
@@ -61,7 +61,7 @@ public class EmployeeModelFactory : IEmployeeModelFactory
                 });
             });
 
-
+            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
 
             return model;
         });
@@ -130,9 +130,10 @@ public class EmployeeModelFactory : IEmployeeModelFactory
                     EmployeeStatusStr = await _localizationService.GetLocalizedEnumAsync(employee.EmployeeStatus),
                     PictureId = employee.PictureId
                 };
+
+            
             var picture = await _pictureService.GetPictureByIdAsync(employee.PictureId);
             (model.PictureThumbnailUrl, _) = await _pictureService.GetPictureUrlAsync(picture, 75);
-
 
             model.EmployeeStatusStr = await _localizationService.GetLocalizedEnumAsync(employee.EmployeeStatus);
         }
@@ -148,6 +149,9 @@ public class EmployeeModelFactory : IEmployeeModelFactory
     public async Task<EmployeeSearchModel> PrepareEmployeeSearchModelAsync(EmployeeSearchModel searchModel)
     {
         ArgumentNullException.ThrowIfNull(nameof(searchModel));
+
+
+
         searchModel.AvailableEmployeeStatusOptions = (await EmployeeStatus.Active.ToSelectListAsync()).ToList();
         searchModel.AvailableEmployeeStatusOptions.Insert(0,
              new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem

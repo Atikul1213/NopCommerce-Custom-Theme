@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
+using Nop.Core.Caching;
 using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Factories;
 using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Model;
 using Nop.Plugin.Misc.NopStationTeams.Domain;
+using Nop.Plugin.Misc.NopStationTeams.Infrastructure;
 using Nop.Plugin.Misc.NopStationTeams.Services;
 using Nop.Services.Media;
 using Nop.Web.Framework;
@@ -21,7 +23,7 @@ public class EmployeeController : BasePluginController
     private readonly IPictureService _pictureService;
     private readonly IWorkContext _workContext;
     private readonly EmployeeSettings _employeeSettings;
-
+    private readonly IStaticCacheManager _staticCacheManager;
     #endregion
 
     #region Ctor
@@ -30,7 +32,8 @@ public class EmployeeController : BasePluginController
         IEmployeeModelFactory employeeModelFactory, 
         IPictureService pictureService, 
         IWorkContext workContext,
-        EmployeeSettings employeeSettings   
+        EmployeeSettings employeeSettings,
+        IStaticCacheManager staticCacheManager
         )
     {
         _employeeService = employeeService;
@@ -38,6 +41,7 @@ public class EmployeeController : BasePluginController
         _pictureService = pictureService;
         _workContext = workContext;
         _employeeSettings = employeeSettings;
+        _staticCacheManager = staticCacheManager;
     }
 
     #endregion
@@ -104,13 +108,13 @@ public class EmployeeController : BasePluginController
             await _employeeService.InsertEmployeeAsync(employee);
             //update picture seo file name
             await UpdatePictureSeoNamesAsync(employee);
-
-
+            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey);
 
             return continueEditing ? RedirectToAction("Edit", new { id = employee.Id }) : RedirectToAction("List");
         }
 
         model = await _employeeModelFactory.PrepareEmployeeModelAsync(model, null);
+        
         return View("Create", model);
     }
 
@@ -150,7 +154,11 @@ public class EmployeeController : BasePluginController
 
 
             await _employeeService.UpdateEmployeeAsync(employee);
-
+            
+            
+           
+            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey);
+          
             return continueEditing ? RedirectToAction("Edit", new { id = employee.Id }) : RedirectToAction("List");
         }
 
@@ -167,8 +175,7 @@ public class EmployeeController : BasePluginController
         var employee = await _employeeService.GetEmployeeByIdAsync(model.Id);
         if (employee == null)
             return RedirectToAction("List");
-
-
+        await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey);
         await _employeeService.DeleteEmployeeAsync(employee);
         return RedirectToAction("List");
     }
@@ -200,7 +207,7 @@ public class EmployeeController : BasePluginController
         {
             throw;
         }
-
+        await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey);
         return Json(new { Result = true });
     }
     #endregion

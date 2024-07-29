@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Nop.Core.Caching;
 using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Factories;
 using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Model.Settings;
 using Nop.Plugin.Misc.NopStationTeams.Domain;
+using Nop.Plugin.Misc.NopStationTeams.Infrastructure;
 using Nop.Services.Configuration;
 using Nop.Services.Localization;
 using Nop.Services.Messages;
@@ -22,6 +24,7 @@ public partial class SettingController : BaseAdminController
     private readonly ISettingService _settingService;
     private readonly INotificationService _notificationService;
     private readonly ILocalizationService _localizationService;
+    private readonly IStaticCacheManager _staticCacheManager;
 
     public SettingController
        
@@ -30,7 +33,8 @@ public partial class SettingController : BaseAdminController
         ISettingModelFactory settingModelFactory,
         ISettingService settingService,
         INotificationService notificationService,
-        ILocalizationService localizationService
+        ILocalizationService localizationService,
+        IStaticCacheManager staticCacheManager
      )
     {
         _permissionService = permissionService;
@@ -38,6 +42,7 @@ public partial class SettingController : BaseAdminController
         _settingService = settingService;
         _notificationService = notificationService;
         _localizationService = localizationService;
+        _staticCacheManager = staticCacheManager;
     }
 
 
@@ -47,7 +52,8 @@ public partial class SettingController : BaseAdminController
             return AccessDeniedView();
 
         var model = await _settingModelFactory.PrepareEmployeeSettingModelAsync();
-       
+
+
         return View("EmployeeOption", model);
     }
 
@@ -76,6 +82,7 @@ public partial class SettingController : BaseAdminController
 
 
 
+             await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
 
             await _settingService.ClearCacheAsync();
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Nop.Core.Caching;
 using Nop.Core.Infrastructure;
 using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Factories;
 using Nop.Plugin.Misc.NopStationTeams.Areas.Admin.Infrastructure;
@@ -33,6 +34,7 @@ public class NopStartup : INopStartup
         services.AddScoped<IEmployeeModelFactory, EmployeeModelFactory>();
         services.AddScoped<IEmployeeHomeModelFactory, EmployeeHomeModelFactory>();
         services.AddScoped<ISettingModelFactory, SettingModelFactory>();
+        
         
     }
 }
