@@ -50,8 +50,21 @@ public class EmployeeModelFactory : IEmployeeModelFactory
                        pageSize: searchModel.PageSize);
 
         //prepare grid model
+      
+        var count = employees.Count();
 
-        var output = await _staticCacheManager.GetAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey, async () =>
+        var query = employees.Where(x => x.IsMVP).ToList();
+        if(query.Count()==count)
+            searchModel.IsMVP = true;
+
+        query = employees.Where(x => x.IsCertified).ToList();
+        if(query.Count()==count)
+            searchModel.IsCertified = true;
+
+
+        var cacheKey = _staticCacheManager.PrepareKeyForDefaultCache(NopModelCacheDefaults.AdminEmployeeAllModelKey, searchModel.IsMVP, searchModel.IsCertified,0);
+
+        var output = await _staticCacheManager.GetAsync(cacheKey, async () =>
         {
             var model = await new EmployeeListModel().PrepareToGridAsync(searchModel, employees, () =>
             {
@@ -61,7 +74,7 @@ public class EmployeeModelFactory : IEmployeeModelFactory
                 });
             });
 
-            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
+            await _staticCacheManager.RemoveByPrefixAsync(NopModelCacheDefaults.PublicEmployeeAllPrefixCacheKey);
 
             return model;
         });

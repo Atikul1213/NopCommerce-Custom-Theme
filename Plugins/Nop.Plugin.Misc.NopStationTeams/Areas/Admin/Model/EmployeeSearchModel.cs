@@ -21,5 +21,8 @@ public record EmployeeSearchModel : BaseSearchModel
     [NopResourceDisplayName("Admin.Misc.Employee.List.EmployeeStatus")]
     public int EmployeeStatusId { get; set; }
     public IList<SelectListItem> AvailableEmployeeStatusOptions { get; set; }
+    public bool IsMVP { get; set; }
+    public bool IsCertified { get; set; }
+
 
 }
