@@ -82,7 +82,7 @@ public partial class SettingController : BaseAdminController
 
 
 
-             await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
+            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.AdminEmployeeAllModelKey);
 
             await _settingService.ClearCacheAsync();
 

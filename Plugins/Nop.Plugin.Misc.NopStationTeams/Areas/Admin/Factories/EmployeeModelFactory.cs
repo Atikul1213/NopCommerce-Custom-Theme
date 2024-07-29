@@ -61,7 +61,7 @@ public class EmployeeModelFactory : IEmployeeModelFactory
                 });
             });
 
-            await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
+           // await _staticCacheManager.RemoveAsync(NopModelCacheDefaults.PublicEmployeeAllModelKey);
 
             return model;
         });
