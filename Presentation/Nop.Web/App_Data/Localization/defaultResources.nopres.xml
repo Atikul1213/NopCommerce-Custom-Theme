@@ -3,9 +3,10 @@
   <LocaleResource Name="Account.AccountActivation">
     <Value>Account activation</Value>
   </LocaleResource>
-  <LocaleResource Name="Account.AccountActivation.Activated">
-    <Value>Your account has been activated</Value>
-  </LocaleResource>
+
+    <LocaleResource Name="Account.AccountActivation.Activated">
+        <Value>Your account has been activated</Value>
+    </LocaleResource>
   <LocaleResource Name="Account.AccountActivation.AlreadyActivated">
     <Value>Your account already has been activated</Value>
   </LocaleResource>

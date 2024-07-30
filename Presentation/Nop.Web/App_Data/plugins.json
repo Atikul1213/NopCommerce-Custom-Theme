@@ -18,6 +18,10 @@
     {
       "SystemName": "Shipping.UPS",
       "Version": "4.70.8"
+    },
+    {
+      "SystemName": "Widgets.SocialMediaSharing",
+      "Version": "4.71"
     }
   ],
   "PluginNamesToUninstall": [],

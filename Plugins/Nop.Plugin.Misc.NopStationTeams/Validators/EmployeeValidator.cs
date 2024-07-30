@@ -14,8 +14,6 @@ namespace Nop.Plugin.Misc.NopStationTeams.Validators
             RuleFor(x => x.Designation).NotEmpty().WithMessageAwait(localizationService.GetResourceAsync("Admin.Misc.Employee.Fields.Designation.Required"));
             RuleFor(x => x.PictureId).NotEmpty().WithMessageAwait(localizationService.GetResourceAsync("Admin.Misc.Employee.Fields.Picture.Required"));
 
-
-
             SetDatabaseValidationRules<Employee>();
         }
     }
