@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nop.Core;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Services;
@@ -17,5 +18,7 @@ public interface IShareMediaService
     Task<ShareMedia> GetShareMediaByIdAsync(int  shareId);
 
     Task<IList<ShareMedia>> GetAllShareMediaAsync();
-    
+
+    Task<IPagedList<ShareMedia>> SearchGetAllShareMediaAsync(int pageIndex = 0, int pageSize = int.MaxValue);
+ 
 }

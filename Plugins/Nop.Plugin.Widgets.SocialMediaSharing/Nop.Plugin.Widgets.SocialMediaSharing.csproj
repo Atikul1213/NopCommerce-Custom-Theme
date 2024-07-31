@@ -25,6 +25,7 @@
   <ItemGroup>
     <None Remove="Areas\Admin\Views\Create.cshtml" />
     <None Remove="Areas\Admin\Views\List.cshtml" />
+    <None Remove="Areas\Admin\Views\ShareMedia\Edit.cshtml" />
     <None Remove="Areas\Admin\Views\ShareMedia\_CreateOrUpdate.cshtml" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
@@ -35,6 +36,9 @@
 
   <ItemGroup>
     <Content Include="Areas\Admin\Views\ShareMedia\Create.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\ShareMedia\Edit.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\ShareMedia\List.cshtml">

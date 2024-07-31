@@ -13,8 +13,13 @@ using Nop.Web.Framework.Mvc.ModelBinding;
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model;
 public record ShareMediaModel : BaseNopEntityModel
 {
-    [BindNever]
-    public override int Id { get; set; }
+    // [BindNever]
+    // [NopResourceDisplayName("Admin.Widget.SocialMediaSharing.Model.Id")]
+    // public override int Id { get; set; }
+    public ShareMediaModel()
+    {
+        
+    }
 
     [NopResourceDisplayName("Admin.Widget.SocialMediaSharing.Model.Name")]
     public string Name { get; set; }
@@ -31,10 +36,8 @@ public record ShareMediaModel : BaseNopEntityModel
     [NopResourceDisplayName("Admin.Widget.SocialMediaSharing.Model.IconId")]
     [UIHint("Picture")]
     public int IconId { get; set; }
-    public string IconThumbnailUrl { get; set; }
 
-    internal ShareMedia MapTo(ShareMedia entity)
-    {
-        throw new NotImplementedException();
-    }
+    [NopResourceDisplayName("Admin.Widget.SocialMediaSharing.Model.Icon")]
+    public string IconThumbnailUrl { get; set; }
+   
 }

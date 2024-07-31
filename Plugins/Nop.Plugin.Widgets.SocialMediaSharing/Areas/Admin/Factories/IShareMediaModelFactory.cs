@@ -12,5 +12,9 @@ public interface IShareMediaModelFactory
     Task<ShareMediaModel> PrepareShareMediaModelAsync(ShareMedia media);
     Task<ShareMedia> PrepareShareMediaAsync(ShareMediaModel media);
 
-    Task<IList<ShareMediaModel>> PrepareShareMediaListModelAsync();
+    Task<ShareMediaListModel> PrepareShareMediaListModelAsync(ShareMediaSearchModel searchModel);
+    Task<ShareMediaSearchModel> PrepareShareMediaSearchModelAsync(ShareMediaSearchModel searchModel);
+
+    
+
 }

@@ -42,8 +42,6 @@ public class EmployeeModelFactory : IEmployeeModelFactory
     {
         ArgumentNullException.ThrowIfNull(nameof(searchModel));
         
-        
-        
         var employees = await _employeeService.SearchEmployeesAsync(searchModel.Name, searchModel.EmployeeStatusId,
 
                        pageIndex: searchModel.Page - 1,

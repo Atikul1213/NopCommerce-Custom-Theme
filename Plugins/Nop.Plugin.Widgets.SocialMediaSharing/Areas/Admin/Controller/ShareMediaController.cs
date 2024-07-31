@@ -31,17 +31,28 @@ public class ShareMediaController : BasePluginController
 
     public async Task<IActionResult> List()
     {
-        var model = await _shareMediaModelFactory.PrepareShareMediaListModelAsync();
+        var searchModel = await _shareMediaModelFactory.PrepareShareMediaSearchModelAsync(new ShareMediaSearchModel());
 
-        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml",model);
+        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml", searchModel);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> List(ShareMediaSearchModel searchModel)
+    {
+
+        var model = await _shareMediaModelFactory.PrepareShareMediaListModelAsync(searchModel);
+        return Json(model);
+    }
+
+
+
 
 
     public async Task<IActionResult> Create()
     {
 
-
-        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Create.cshtml");
+        var model = new ShareMediaModel();
+        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Create.cshtml",model);
     }
 
 
@@ -68,11 +79,62 @@ public class ShareMediaController : BasePluginController
             await UpdatePictureSeoNameAsync(model);
 
 
-            return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml");
+            return RedirectToAction("List");  
         }
 
-        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml");
+        return RedirectToAction("List");  
     }
+
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        var shareMedia = await _shareMediaService.GetShareMediaByIdAsync(id);
+
+        if (shareMedia == null)
+            return RedirectToAction("List");
+
+        var model = await _shareMediaModelFactory.PrepareShareMediaModelAsync(shareMedia);
+
+        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Edit.cshtml",model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(ShareMediaModel model)
+    {
+        var shareMedia = await _shareMediaService.GetShareMediaByIdAsync(model.Id);
+
+        if(shareMedia == null)
+            return RedirectToAction("List");
+
+        if(ModelState.IsValid)
+        {
+            var obj = new ShareMedia();
+            obj = await _shareMediaModelFactory.PrepareShareMediaAsync(model);
+
+            await _shareMediaService.UpdateShareMediaAsync(obj);
+            return RedirectToAction("List");
+        }
+        return RedirectToAction("List");
+    }
+
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(ShareMediaModel model)
+    {
+
+        var shareMedia = await _shareMediaService.GetShareMediaByIdAsync(model.Id);
+        if (shareMedia == null)
+            return RedirectToAction("List");
+
+        await _shareMediaService.DeleteShareMediaAsync(shareMedia);
+        return RedirectToAction("List");
+
+    }
+
+
+
 
 
 

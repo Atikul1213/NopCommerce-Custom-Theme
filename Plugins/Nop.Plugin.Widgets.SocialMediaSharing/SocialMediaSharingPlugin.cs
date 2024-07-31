@@ -65,6 +65,14 @@ namespace Nop.Plugin.Widgets.SocialMediaSharing
                 ["Admin.Widget.ShareMedia.AddNew"] = "AddNew",
                 ["Admin.Widget.ShareMedia.BackToList"] = "BackToList",
 
+
+                ["Admin.Widget.ShareMedia"] = "ShareMedia",
+                ["Admin.Widget.SocialMediaSharing.Model.Id"] = "Edit",
+                ["Admin.Widget.SocialMediaSharing.Model.Icon"] = "Icon",
+                ["Admin.Widget.ShareMedia.EditDetails"] = "Edit Details",
+                
+
+
             });
 
             await base.InstallAsync();

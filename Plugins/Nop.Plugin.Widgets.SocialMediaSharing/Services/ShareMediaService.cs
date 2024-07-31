@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nop.Core;
 using Nop.Data;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 
@@ -26,8 +27,21 @@ public class ShareMediaService : IShareMediaService
     {
         var query = from m in _repository.Table
                     select m;
+        query = query.OrderBy(x => x.DisplayOrder);
+
         return await query.ToListAsync();
     }
+
+  
+    public virtual async Task<IPagedList<ShareMedia>> SearchGetAllShareMediaAsync(int pageIndex = 0, int pageSize = int.MaxValue)
+    {
+        var query = from m in _repository.Table
+                    select m;
+        query = query.OrderBy(x => x.DisplayOrder);
+
+        return await query.ToPagedListAsync(pageIndex, pageSize);
+    }
+
 
     public virtual async Task<ShareMedia> GetShareMediaByIdAsync(int shareId)
     {
