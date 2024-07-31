@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model;
+﻿using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.MediaFolder;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 using Nop.Plugin.Widgets.SocialMediaSharing.Services;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
 using Nop.Web.Framework.Models.Extensions;
-using Nop.Web.Models.Boards;
 
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Factories;
 public class ShareMediaModelFactory : IShareMediaModelFactory

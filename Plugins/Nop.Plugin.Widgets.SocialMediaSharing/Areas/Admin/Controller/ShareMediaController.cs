@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Factories;
-using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model;
+using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.MediaFolder;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 using Nop.Plugin.Widgets.SocialMediaSharing.Services;
 using Nop.Services.Media;
