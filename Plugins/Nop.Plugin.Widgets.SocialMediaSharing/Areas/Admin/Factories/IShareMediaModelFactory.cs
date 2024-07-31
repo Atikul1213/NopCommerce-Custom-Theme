@@ -4,12 +4,12 @@ using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Factories;
 public interface IShareMediaModelFactory
 {
-    Task<ShareMediaModel> PrepareShareMediaModelAsync(ShareMedia media);
+    Task<ShareMediaModel> PrepareShareMediaModelAsync(ShareMediaModel model, ShareMedia entity);
+    Task<ShareMediaListModel> PrepareShareMediaListModelAsync(ShareMediaSearchModel searchModel);
+
     Task<ShareMedia> PrepareShareMediaAsync(ShareMediaModel media);
 
-    Task<ShareMediaListModel> PrepareShareMediaListModelAsync(ShareMediaSearchModel searchModel);
     Task<ShareMediaSearchModel> PrepareShareMediaSearchModelAsync(ShareMediaSearchModel searchModel);
 
-    
 
 }

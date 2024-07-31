@@ -31,6 +31,9 @@ public class ShareStartup : INopStartup
 
         services.AddScoped<IShareMediaService, ShareMediaService>();
         services.AddScoped<IShareMediaModelFactory, ShareMediaModelFactory>();
+        services.AddScoped<IShareOptionService, ShareOptionService>();
+        services.AddScoped<IShareOptionModelFactory, ShareOptionModelFactory>();
+
         
 
     }

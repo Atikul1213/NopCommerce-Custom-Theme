@@ -27,11 +27,21 @@
     <None Remove="Areas\Admin\Views\List.cshtml" />
     <None Remove="Areas\Admin\Views\ShareMedia\Edit.cshtml" />
     <None Remove="Areas\Admin\Views\ShareMedia\_CreateOrUpdate.cshtml" />
+    <None Remove="Areas\Admin\Views\ShareMedia\_CreateOrUpdateMenu.cshtml" />
+    <None Remove="Areas\Admin\Views\ShareMedia\_CreateOrUpdateResource.cshtml" />
+    <None Remove="Areas\Admin\Views\ShareOption\Edit.cshtml" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
     <None Remove="Views\Shared\Components\SocialMediaSharing\Default.cshtml" />
     <None Remove="Views\_ViewImports.cshtml" />
+  </ItemGroup>
+  
+  
+  
+  
+  <ItemGroup>
+    <Compile Include="Areas\Admin\Views\ShareOption\Edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +55,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\ShareMedia\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\ShareMedia\_CreateOrUpdateMenu.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\ShareMedia\_CreateOrUpdateResource.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\_ViewImports.cshtml">

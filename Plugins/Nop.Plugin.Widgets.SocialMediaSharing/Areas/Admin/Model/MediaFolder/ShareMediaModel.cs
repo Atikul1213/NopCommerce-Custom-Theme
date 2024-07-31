@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
+using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 using Nop.Web.Framework.Models;
 using Nop.Web.Framework.Mvc.ModelBinding;
 
@@ -9,7 +11,8 @@ public record ShareMediaModel : BaseNopEntityModel
     // public override int Id { get; set; }
     public ShareMediaModel()
     {
-
+        ShareOptionSearchModel = new ShareOptionSearchModel();
+        
     }
 
     [NopResourceDisplayName("Admin.Widget.SocialMediaSharing.Model.Name")]
@@ -30,5 +33,7 @@ public record ShareMediaModel : BaseNopEntityModel
 
     [NopResourceDisplayName("Admin.Widget.SocialMediaSharing.Model.Icon")]
     public string IconThumbnailUrl { get; set; }
+
+    public ShareOptionSearchModel ShareOptionSearchModel { get; set; }
 
 }

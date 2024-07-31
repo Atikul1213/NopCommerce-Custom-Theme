@@ -7,4 +7,5 @@ namespace Nop.Web.Areas.Admin.Models.Localization;
 /// </summary>
 public partial record LocaleResourceListModel : BasePagedListModel<LocaleResourceModel>
 {
+
 }

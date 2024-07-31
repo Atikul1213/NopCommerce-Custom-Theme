@@ -31,6 +31,7 @@ public class ShareMediaController : BasePluginController
 
     public async Task<IActionResult> List()
     {
+
         var searchModel = await _shareMediaModelFactory.PrepareShareMediaSearchModelAsync(new ShareMediaSearchModel());
 
         return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml", searchModel);
@@ -92,8 +93,10 @@ public class ShareMediaController : BasePluginController
 
         if (shareMedia == null)
             return RedirectToAction("List");
+        var obj = new ShareMediaModel();
 
-        var model = await _shareMediaModelFactory.PrepareShareMediaModelAsync(shareMedia);
+        var model = await _shareMediaModelFactory.PrepareShareMediaModelAsync(obj, shareMedia);
+
 
         return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Edit.cshtml",model);
     }
