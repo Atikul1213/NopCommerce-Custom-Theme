@@ -40,9 +40,10 @@ public class ShareOptionService : IShareOptionService
         await _repository.InsertAsync(shareOption);
     }
 
-    public virtual async Task<IPagedList<ShareOption>> SearchGetAllShareOptionAsync(int pageIndex = 0, int pageSize = int.MaxValue)
+    public virtual async Task<IPagedList<ShareOption>> SearchGetAllShareOptionAsync(int shareId, int pageIndex = 0, int pageSize = int.MaxValue)
     {
         var query = from m in _repository.Table
+                    where m.ShareMediaId==shareId
                     select m;
         return await query.ToPagedListAsync(pageIndex, pageSize);
     }

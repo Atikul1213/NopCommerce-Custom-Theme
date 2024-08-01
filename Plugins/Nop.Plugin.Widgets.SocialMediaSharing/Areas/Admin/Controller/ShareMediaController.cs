@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Factories;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.MediaFolder;
+using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 using Nop.Plugin.Widgets.SocialMediaSharing.Services;
 using Nop.Services.Media;
 using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
+using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework.Mvc.Filters;
+using Nop.Web.Framework.Mvc.ModelBinding;
+using Nop.Web.Framework.Validators;
 
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Controller;
 [AuthorizeAdmin]
@@ -21,14 +26,21 @@ public class ShareMediaController : BasePluginController
     private readonly IShareMediaModelFactory _shareMediaModelFactory;
     private readonly IShareMediaService _shareMediaService;
     private readonly IPictureService _pictureService;
+    private readonly IShareOptionModelFactory _shareOptionModelFactory;
+    private readonly IShareOptionService _shareOptionService;
     
-    public ShareMediaController(IShareMediaModelFactory shareMediaModelFactory, IShareMediaService shareMediaService, IPictureService pictureService)
+    public ShareMediaController(IShareMediaModelFactory shareMediaModelFactory, IShareMediaService shareMediaService, IPictureService pictureService,IShareOptionModelFactory shareOptionModelFactory,IShareOptionService shareOptionService)
     {
         _shareMediaModelFactory = shareMediaModelFactory;
         _shareMediaService = shareMediaService;
         _pictureService = pictureService;
+        _shareOptionModelFactory = shareOptionModelFactory;
+        _shareOptionService = shareOptionService;
     }
 
+
+
+    #region Method
     public async Task<IActionResult> List()
     {
 
@@ -137,9 +149,84 @@ public class ShareMediaController : BasePluginController
     }
 
 
+    #endregion
 
 
 
+
+    #region Jquery
+
+    [HttpPost]
+    public virtual async Task<IActionResult> ShareOptionList(ShareOptionSearchModel searchModel)
+    {
+        var entity = await _shareMediaService.GetShareMediaByIdAsync(searchModel.ShareMediaId);
+         
+
+        var model = await _shareOptionModelFactory.PrepareShareOptionListModelAsync(searchModel, entity); 
+        return Json(model);
+
+    }
+
+
+
+
+    // Resoure Add
+    [HttpPost]
+
+    public virtual async Task<IActionResult> ShareOptionAdd(int shareMediaId, [Validate]ShareOptionModel model)
+    {
+
+        if (!ModelState.IsValid)
+        {
+            return ErrorJson(ModelState.SerializeErrors());
+        }
+
+
+        
+        var res = await _shareOptionModelFactory.PrepareShareOptionAsync(model);
+        await _shareOptionService.InsertShareOptionAsync(res);
+
+        return Json(new { Result = true });
+    }
+
+
+    [HttpPost]
+    public virtual async Task<IActionResult> ShareOptionUpdate([Validate]ShareOptionModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return ErrorJson(ModelState.SerializeErrors());
+        }
+
+        var shareOption = await _shareOptionService.GetShareOptionByIdAsync(model.Id);
+        if (shareOption == null)
+            throw new ArgumentException("Error occur when you tried to edit", nameof(model.Id));
+
+        var obj = new ShareOption();
+        obj = await _shareOptionModelFactory.PrepareShareOptionAsync(model);
+        await _shareOptionService.UpdateShareOptionAsync(obj);
+        return new NullJsonResult();
+    }
+
+
+
+
+    [HttpPost]
+
+    public virtual async Task<IActionResult> ShareOptionDelete(int id)
+    {
+
+        var shareOption = await _shareOptionService.GetShareOptionByIdAsync(id);
+        if (shareOption == null)
+            throw new ArgumentException("No resource found with the specified id", nameof(id));
+
+        await _shareOptionService.DeleteShareOptionAsync(shareOption);
+
+        return new NullJsonResult();
+    }
+
+
+    #endregion
 
 
 

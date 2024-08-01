@@ -10,10 +10,16 @@ using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Factories;
 public interface IShareOptionModelFactory
 {
-    Task<ShareOption> PrepareShareOptionAsync(ShareOptionModel model);
+    Task<ShareOptionListModel> PrepareShareOptionListModelAsync(ShareOptionSearchModel searchModel, ShareMedia entity);
+    Task<ShareOptionModel> PrepareShareOptionModelAsync(ShareOptionModel model, ShareOption entity);
 
-    Task<ShareOptionModel> PrepareShareOptionModelAsync(ShareOption entity);
+   Task<ShareOption> PrepareShareOptionAsync(ShareOptionModel model);
 
-    Task<ShareOptionListModel> PrepareShareOptionListModelAsync(ShareOptionSearchModel searchModel);
-    Task<ShareOptionSearchModel> PrepareShareOptionSearchModelAsync(ShareOptionSearchModel searchModel);
+
+
+
+
+
+
+   // Task<ShareOptionSearchModel> PrepareShareOptionSearchModelAsync(ShareOptionSearchModel searchModel);
 }

@@ -18,11 +18,41 @@ public class ShareOptionModelFactory : IShareOptionModelFactory
         _shareOptionService = shareOptionService;
     }
 
-    public async Task<ShareOptionModel> PrepareShareOptionModelAsync(ShareOption entity)
+
+
+    public async Task<ShareOptionListModel> PrepareShareOptionListModelAsync(ShareOptionSearchModel searchModel, ShareMedia media)
     {
-        if(entity == null)
+        ArgumentNullException.ThrowIfNull(searchModel);
+        ArgumentNullException.ThrowIfNull(media);
+
+        var mediaOptionList = await _shareOptionService.SearchGetAllShareOptionAsync(media.Id, pageIndex:searchModel.Page-1, pageSize:searchModel.PageSize);
+
+       
+        var model = await new ShareOptionListModel().PrepareToGridAsync(searchModel, mediaOptionList, () =>
+        {
+            return mediaOptionList.SelectAwait(async obj=>
+            {
+                //var shareOptionModel = new ShareOptionModel()
+                //{
+                //    CustomMessage = obj.CustomMessage,
+                //    ShareMediaId = obj.ShareMediaId,
+                //    IncludedLink = obj.IncludedLink,
+                //    zone = obj.zone
+                //};
+                return await PrepareShareOptionModelAsync(new ShareOptionModel(), obj);
+            });
+        });
+
+        return model;
+
+    }
+
+    public async Task<ShareOptionModel> PrepareShareOptionModelAsync(ShareOptionModel model, ShareOption entity)
+    {
+        if (entity == null)
             throw new NotImplementedException();
-        var model = new ShareOptionModel()
+
+        var obj = new ShareOptionModel()
         {
             Id = entity.Id,
             ShareMediaId = entity.Id,
@@ -30,49 +60,44 @@ public class ShareOptionModelFactory : IShareOptionModelFactory
             IncludedLink = entity.IncludedLink,
             zone = entity.zone
         };
-        model.WidgetZoneList = WidgetZoneHelper.GetAllWidgetZone();
-        return model;
+        return obj;
     }
+
+
 
     public async Task<ShareOption> PrepareShareOptionAsync(ShareOptionModel model)
     {
-        if(model == null) 
-        throw new NotImplementedException();
+        if (model == null)
+            throw new NotImplementedException();
 
         var entity = new ShareOption()
         {
-           ShareMediaId = model.ShareMediaId,
-           CustomMessage = model.CustomMessage,
-           IncludedLink = model.IncludedLink,
-           zone = model.zone
+            ShareMediaId = model.ShareMediaId,
+            CustomMessage = model.CustomMessage,
+            IncludedLink = model.IncludedLink,
+            zone = model.zone
+            
         };
 
-        return  entity;
+        return entity;
 
     }
 
-    public async Task<ShareOptionListModel> PrepareShareOptionListModelAsync(ShareOptionSearchModel searchModel)
-    {
 
-        var shareOptionList = await _shareOptionService.SearchGetAllShareOptionAsync(pageIndex: searchModel.Page - 1, pageSize: searchModel.PageSize);
 
-        var model = await new ShareOptionListModel().PrepareToGridAsync(searchModel, shareOptionList, () =>
-        {
-            return shareOptionList.SelectAwait(async s =>
-            {
-                return await PrepareShareOptionModelAsync(s);
-            });
 
-        });
-        return model;
-        
-    }
 
-    public async Task<ShareOptionSearchModel> PrepareShareOptionSearchModelAsync(ShareOptionSearchModel searchModel)
-    {
-        //throw new NotImplementedException();
 
-        searchModel.SetGridPageSize();
-        return searchModel;
-    }
+
+
+    //public async Task<ShareOptionSearchModel> PrepareShareOptionSearchModelAsync(ShareOptionSearchModel searchModel)
+    //{
+    //    //throw new NotImplementedException();
+
+    //    searchModel.SetGridPageSize();
+    //    return searchModel;
+    //}
+
+
+
 }

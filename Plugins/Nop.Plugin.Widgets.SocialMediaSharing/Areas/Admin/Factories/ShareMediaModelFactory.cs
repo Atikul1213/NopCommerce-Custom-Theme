@@ -71,6 +71,7 @@ public class ShareMediaModelFactory : IShareMediaModelFactory
  
         model = entity.ToModel(model);
         
+        
         //model.Id = entity.Id;
         //model.Url = entity.Url;
         //model.Name = entity.Name;
@@ -79,10 +80,10 @@ public class ShareMediaModelFactory : IShareMediaModelFactory
         //model.IconId = entity.IconId;
 
         model.ShareOptionSearchModel = PrepareShareOptionSearchModel(model.ShareOptionSearchModel, entity);
+        
 
         var picture = await _pictureService.GetPictureByIdAsync(entity.IconId);
         (model.IconThumbnailUrl, _) = await _pictureService.GetPictureUrlAsync(picture, 75);
-
         return model;
 
     }
@@ -95,34 +96,13 @@ public class ShareMediaModelFactory : IShareMediaModelFactory
         ArgumentNullException.ThrowIfNull(media);
         searchModel.ShareMediaId = media.Id;
         searchModel.SetGridPageSize();
+
         return searchModel;
     }
 
 
     public async Task<ShareMediaSearchModel> PrepareShareMediaSearchModelAsync(ShareMediaSearchModel searchModel)
     {
-
-        await _localizationService.AddOrUpdateLocaleResourceAsync(new Dictionary<string, string>
-        {
-            ["Admin.Widget.SocialMediaSharing.Model.Name"] = "Media Name",
-            ["Admin.Widget.SocialMediaSharing.Model.Url"] = "Url",
-            ["Admin.Widget.SocialMediaSharing.Model.DisplayOrder"] = "DisplayOrder",
-            ["Admin.Widget.SocialMediaSharing.Model.IsActive"] = "IsActive",
-            ["Admin.Widget.SocialMediaSharing.Model.IconId"] = "IconId",
-            ["Admin.Widget.ShareMedia.AddNew"] = "AddNew",
-            ["Admin.Widget.ShareMedia.BackToList"] = "BackToList",
-
-
-
-            ["Admin.Widget.ShareMedia"] = "ShareMedia",
-            ["Admin.Widget.SocialMediaSharing.Model.Id"] = "Edit",
-            ["Admin.Widget.SocialMediaSharing.Model.Icon"] = "Icon",
-            ["Admin.Widget.ShareMedia.EditDetails"] = "Edit Details",
-
-
-
-
-        });
 
          
         searchModel.SetGridPageSize();

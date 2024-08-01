@@ -22,5 +22,4 @@ public partial record ShareOptionSearchModel : BaseSearchModel
 
     public ShareOptionModel AddShareOptionModel { get; set; }
 
-
 }

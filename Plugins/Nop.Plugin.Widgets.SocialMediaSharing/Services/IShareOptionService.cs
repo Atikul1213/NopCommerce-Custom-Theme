@@ -9,6 +9,10 @@ using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Services;
 public interface IShareOptionService
 {
+
+
+
+
     Task InsertShareOptionAsync(ShareOption shareOption);
     Task UpdateShareOptionAsync(ShareOption shareOption);
     Task DeleteShareOptionAsync(ShareOption shareOption);
@@ -17,5 +21,5 @@ public interface IShareOptionService
 
     Task<IList<ShareOption>> GetShareOptionListAsync();
 
-    Task<IPagedList<ShareOption>> SearchGetAllShareOptionAsync(int pageIndex=0, int pageSize=int.MaxValue);
+    Task<IPagedList<ShareOption>> SearchGetAllShareOptionAsync(int shareId, int pageIndex=0, int pageSize=int.MaxValue);
 }

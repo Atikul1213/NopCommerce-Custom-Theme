@@ -22,6 +22,5 @@ public record ShareOptionModel : BaseNopEntityModel
     public string zone { get; set; }
     public IList<SelectListItem> WidgetZoneList { get; set; }
 
-   
 
 }
