@@ -70,9 +70,14 @@ namespace Nop.Plugin.Widgets.SocialMediaSharing
                 ["Admin.Widget.SocialMediaSharing.Model.Id"] = "Edit",
                 ["Admin.Widget.SocialMediaSharing.Model.Icon"] = "Icon",
                 ["Admin.Widget.ShareMedia.EditDetails"] = "Edit Details",
+
+
+                ["Admin.SocialMediaSharing.ShareMedia"] = "Media View",
+                ["Admin.SocialMediaSharing.ShareMediaOption"] = "ShareOption",
+                ["Admin.ShareMediaOption.ShareOption.Fields.CustomMessage"] = "CustomMessage",
+                ["Admin.ShareMediaOption.ShareOption.Fields.IncludedLink"] = "IncludedLink",
+                ["Admin.ShareMediaOption.ShareOption.Fields.zone"] = "zone",
                 
-
-
             });
 
             await base.InstallAsync();

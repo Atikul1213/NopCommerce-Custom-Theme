@@ -1,5 +1,4 @@
-﻿<h2>Menu View</h2>
-@model ShareMediaModel
+﻿@model ShareMediaModel
 @{
     const string hideInfoBlockAttributeName = "LanguagePage.HideInfoBlock";
     var customer = await workContext.GetCurrentCustomerAsync();
@@ -16,8 +15,8 @@
     <div class="container-fluid">
         <div class="form-horizontal">
             <nop-cards id="language-cards">
-                <nop-card asp-name="language-info" asp-icon="fas fa-info" asp-title="@T("Admin.Configuration.Languages.Info")" asp-hide-block-attribute-name="@hideInfoBlockAttributeName" asp-hide="@hideInfoBlock" asp-advanced="false">@await Html.PartialAsync("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/_CreateOrUpdate.cshtml", Model)</nop-card>
-                <nop-card asp-name="language-resources" asp-icon="fas fa-database" asp-title="@T("Admin.Configuration.Languages.Resources")" asp-hide-block-attribute-name="@hideResourcesBlockAttributeName" asp-hide="@hideResourcesBlock" asp-advanced="false">@await Html.PartialAsync("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/_CreateOrUpdateResource.cshtml", Model)</nop-card>
+                <nop-card asp-name="language-info" asp-icon="fas fa-info" asp-title="@T("Admin.SocialMediaSharing.ShareMedia")" asp-hide-block-attribute-name="@hideInfoBlockAttributeName" asp-hide="@hideInfoBlock" asp-advanced="false">@await Html.PartialAsync("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/_CreateOrUpdate.cshtml", Model)</nop-card>
+                <nop-card asp-name="language-resources" asp-icon="fas fa-database" asp-title="@T("Admin.SocialMediaSharing.ShareMediaOption")" asp-hide-block-attribute-name="@hideResourcesBlockAttributeName" asp-hide="@hideResourcesBlock" asp-advanced="false">@await Html.PartialAsync("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/_CreateOrUpdateResource.cshtml", Model)</nop-card>
 
                 @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.LanguageDetailsBlock, additionalData = Model })
             </nop-cards>

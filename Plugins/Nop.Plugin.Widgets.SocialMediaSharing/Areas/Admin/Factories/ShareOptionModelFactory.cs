@@ -78,6 +78,7 @@ public class ShareOptionModelFactory : IShareOptionModelFactory
             zone = model.zone
             
         };
+        entity.Id = model.Id;
 
         return entity;
 

@@ -28,7 +28,8 @@ public class ShareMediaController : BasePluginController
     private readonly IPictureService _pictureService;
     private readonly IShareOptionModelFactory _shareOptionModelFactory;
     private readonly IShareOptionService _shareOptionService;
-    
+
+    #region Ctor
     public ShareMediaController(IShareMediaModelFactory shareMediaModelFactory, IShareMediaService shareMediaService, IPictureService pictureService,IShareOptionModelFactory shareOptionModelFactory,IShareOptionService shareOptionService)
     {
         _shareMediaModelFactory = shareMediaModelFactory;
@@ -38,6 +39,7 @@ public class ShareMediaController : BasePluginController
         _shareOptionService = shareOptionService;
     }
 
+    #endregion
 
 
     #region Method
@@ -182,7 +184,6 @@ public class ShareMediaController : BasePluginController
         }
 
 
-        
         var res = await _shareOptionModelFactory.PrepareShareOptionAsync(model);
         await _shareOptionService.InsertShareOptionAsync(res);
 
@@ -203,6 +204,9 @@ public class ShareMediaController : BasePluginController
             throw new ArgumentException("Error occur when you tried to edit", nameof(model.Id));
 
         var obj = new ShareOption();
+        model.ShareMediaId = shareOption.ShareMediaId;
+        obj.Id = shareOption.Id;
+
         obj = await _shareOptionModelFactory.PrepareShareOptionAsync(model);
         await _shareOptionService.UpdateShareOptionAsync(obj);
         return new NullJsonResult();
@@ -227,14 +231,6 @@ public class ShareMediaController : BasePluginController
 
 
     #endregion
-
-
-
-
-
-
-
-
 
 
 

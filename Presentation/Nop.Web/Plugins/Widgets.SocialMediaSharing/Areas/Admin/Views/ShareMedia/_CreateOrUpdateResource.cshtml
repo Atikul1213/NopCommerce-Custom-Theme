@@ -1,4 +1,4 @@
-﻿<h2>ResourceView</h2>
+﻿ 
 
 @model ShareMediaModel
 
@@ -17,9 +17,9 @@
                         @await Html.PartialAsync("Table", new DataTablesModel
                         {
                             Name = "ShareOption-grid",
-                            UrlRead = new DataUrl("ShareOptionList", "ShareMedia",null),
-                         //   UrlUpdate = new DataUrl("ShareOptionUpdate", "ShareMedia", null),
-                          //  UrlDelete = new DataUrl("ShareOptionDelete", "ShareMedia", null),
+                            UrlRead = new DataUrl("ShareOptionList", "ShareMedia", new RouteValueDictionary { [nameof(Model.ShareOptionSearchModel.ShareMediaId)] = Model.Id}),
+                            UrlUpdate = new DataUrl("ShareOptionUpdate", "ShareMedia", null),
+                            UrlDelete = new DataUrl("ShareOptionDelete", "ShareMedia", null),
                            //SearchButtonId = "search-resources",
                             
                             Length = Model.ShareOptionSearchModel.PageSize,
@@ -30,20 +30,20 @@
                             {
                                 new ColumnProperty(nameof(ShareOptionModel.CustomMessage))
                                 {
-                                    Title = T("Admin.Configuration.Languages.Resources.Fields.Name").Text,
+                                Title = T("Admin.ShareMediaOption.ShareOption.Fields.CustomMessage").Text,
                                     Width = "300",
                                     Editable = true,
                                     EditType = EditType.String
                                 },
                             new ColumnProperty(nameof(ShareOptionModel.IncludedLink))
                                 {
-                                    Title = T("Admin.Configuration.Languages.Resources.Fields.Value").Text,
+                                    Title = T("Admin.ShareMediaOption.ShareOption.Fields.IncludedLink").Text,
                                     Editable = true,
                                     EditType = EditType.String
                                 },
                             new ColumnProperty(nameof(ShareOptionModel.zone))
                                 {
-                                    Title = T("Admin.Configuration.Languages.Resources.Fields.Name").Text,
+                          Title = T("Admin.ShareMediaOption.ShareOption.Fields.zone").Text,
                                     Width = "300",
                                     Editable = true,
                                     EditType = EditType.String
@@ -89,7 +89,7 @@
                                      <nop-label asp-for="@Model.ShareOptionSearchModel.CustomMessage" />
                                     </div>
                                     <div class="col-md-9">
-                                    <nop-editor asp-for="@Model.ShareOptionSearchModel.CustomMessage" />
+                                    <nop-textarea asp-for="@Model.ShareOptionSearchModel.CustomMessage" />
                                     <span asp-validation-for="@Model.ShareOptionSearchModel.CustomMessage"></span>
                                     </div>
                                 </div>

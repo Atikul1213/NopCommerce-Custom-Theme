@@ -103,8 +103,32 @@ public class ShareMediaModelFactory : IShareMediaModelFactory
 
     public async Task<ShareMediaSearchModel> PrepareShareMediaSearchModelAsync(ShareMediaSearchModel searchModel)
     {
+        await _localizationService.AddOrUpdateLocaleResourceAsync(new Dictionary<string, string>
+        {
+            ["Admin.Widget.SocialMediaSharing.Model.Name"] = "Media Name",
+            ["Admin.Widget.SocialMediaSharing.Model.Url"] = "Url",
+            ["Admin.Widget.SocialMediaSharing.Model.DisplayOrder"] = "DisplayOrder",
+            ["Admin.Widget.SocialMediaSharing.Model.IsActive"] = "IsActive",
+            ["Admin.Widget.SocialMediaSharing.Model.IconId"] = "IconId",
+            ["Admin.Widget.ShareMedia.AddNew"] = "AddNew",
+            ["Admin.Widget.ShareMedia.BackToList"] = "BackToList",
 
-         
+
+            ["Admin.Widget.ShareMedia"] = "ShareMedia",
+            ["Admin.Widget.SocialMediaSharing.Model.Id"] = "Edit",
+            ["Admin.Widget.SocialMediaSharing.Model.Icon"] = "Icon",
+            ["Admin.Widget.ShareMedia.EditDetails"] = "Edit Details",
+
+
+            ["Admin.SocialMediaSharing.ShareMedia"] = "Media View",
+            ["Admin.SocialMediaSharing.ShareMediaOption"] = "ShareOption",
+            ["Admin.ShareMediaOption.ShareOption.Fields.CustomMessage"] = "CustomMessage",
+            ["Admin.ShareMediaOption.ShareOption.Fields.IncludedLink"] = "IncludedLink",
+            ["Admin.ShareMediaOption.ShareOption.Fields.zone"] = "zone",
+
+        });
+
+
         searchModel.SetGridPageSize();
 
         return searchModel;
