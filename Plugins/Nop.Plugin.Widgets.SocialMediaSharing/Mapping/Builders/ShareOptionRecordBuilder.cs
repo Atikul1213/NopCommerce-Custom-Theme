@@ -15,8 +15,8 @@ public class ShareOptionRecordBuilder : NopEntityBuilder<ShareOption>
     {
         table.WithColumn(nameof(ShareOption.Id)).AsInt32().PrimaryKey().Identity()
             .WithColumn(nameof(ShareOption.ShareMediaId)).AsInt32()
-            .WithColumn(nameof(ShareOption.IncludedLink)).AsBoolean()
-            .WithColumn(nameof(ShareOption.CustomMessage)).AsString(330)
-            .WithColumn(nameof(ShareOption.zone)).AsString(343);
+            .WithColumn(nameof(ShareOption.IncludedLink)).AsBoolean().Nullable()
+            .WithColumn(nameof(ShareOption.CustomMessage)).AsString(330).Nullable()
+            .WithColumn(nameof(ShareOption.zone)).AsString(343).NotNullable();
     }
 }

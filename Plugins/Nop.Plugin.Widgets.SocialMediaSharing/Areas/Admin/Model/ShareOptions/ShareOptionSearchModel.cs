@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Web.Framework.Models;
+using Nop.Web.Framework.Mvc.ModelBinding;
 
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
 public partial record ShareOptionSearchModel : BaseSearchModel
@@ -15,8 +16,11 @@ public partial record ShareOptionSearchModel : BaseSearchModel
         AddShareOptionModel = new ShareOptionModel();
     }
     public int ShareMediaId { get; set; }
+    [NopResourceDisplayName("Admin.ShareMediaOption.ShareOption.Fields.CustomMessage")]
     public string CustomMessage { get; set; }
+    [NopResourceDisplayName("Admin.ShareMediaOption.ShareOption.Fields.IncludedLink")]
     public bool IncludedLink { get; set; }
+    [NopResourceDisplayName("Admin.ShareMediaOption.ShareOption.Fields.zone")]
     public string zone { get; set; }
     public IList<SelectListItem> WidgetZoneList { get; set; }
 

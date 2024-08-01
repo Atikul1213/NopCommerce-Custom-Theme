@@ -208,6 +208,7 @@ public class ShareMediaController : BasePluginController
         obj.Id = shareOption.Id;
 
         obj = await _shareOptionModelFactory.PrepareShareOptionAsync(model);
+        obj.Id = shareOption.Id;
         await _shareOptionService.UpdateShareOptionAsync(obj);
         return new NullJsonResult();
     }

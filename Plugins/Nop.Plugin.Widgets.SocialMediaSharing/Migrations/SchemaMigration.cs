@@ -4,7 +4,7 @@ using Nop.Data.Migrations;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Migrations;
-[NopSchemaMigration("2024/07/30 06:40:55:1687541", "ShareMedia base schema", MigrationProcessType.Update)]
+[NopSchemaMigration("2024/08/01 06:46:55:1687541", "ShareMedia base schema", MigrationProcessType.Update)]
 public class SchemaMigration: ForwardOnlyMigration
 {
 

@@ -14,10 +14,10 @@ public class ShareMediaRecordBuilder : NopEntityBuilder<ShareMedia>
     public override void MapEntity(CreateTableExpressionBuilder table)
     {
         table.WithColumn(nameof(ShareMedia.Id)).AsInt32().PrimaryKey().Identity()
-            .WithColumn(nameof(ShareMedia.Name)).AsString(400)
+            .WithColumn(nameof(ShareMedia.Name)).AsString(400).NotNullable()
             .WithColumn(nameof(ShareMedia.IconId)).AsInt32()
-            .WithColumn(nameof(ShareMedia.DisplayOrder)).AsInt32()
-            .WithColumn(nameof(ShareMedia.Url)).AsString(400)
+            .WithColumn(nameof(ShareMedia.DisplayOrder)).AsInt32().Nullable()
+            .WithColumn(nameof(ShareMedia.Url)).AsString(400).NotNullable()
             .WithColumn(nameof(ShareMedia.IsActive)).AsBoolean();
 
     }
