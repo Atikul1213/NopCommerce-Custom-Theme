@@ -22,10 +22,20 @@ public class ShareOptionService : IShareOptionService
         await _repository.DeleteAsync(shareOption);
     }
 
-    public virtual async Task<ShareOption> GetShareOptionByIdAsync(int optionId)
+    public async Task<IList<ShareOption>> GetAllShareOptionAsync(int mediaId)
+    {
+        var option = await (from s in _repository.Table
+                     where s.ShareMediaId == mediaId
+                     select s).ToListAsync();
+        
+        return option;
+                    
+    }
+
+    public virtual async Task<ShareOption> GetShareOptionByIdAsync(int mediaId)
     {
         
-        return await _repository.GetByIdAsync(optionId);
+        return await _repository.GetByIdAsync(mediaId);
     }
 
     public virtual async Task<IList<ShareOption>> GetShareOptionListAsync()

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nop.Core.Infrastructure;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Factories;
+using Nop.Plugin.Widgets.SocialMediaSharing.Factories;
 using Nop.Plugin.Widgets.SocialMediaSharing.Services;
 
 namespace Nop.Plugin.Widgets.SocialMediaSharing.Infrastructure;
@@ -33,7 +34,7 @@ public class ShareStartup : INopStartup
         services.AddScoped<IShareMediaModelFactory, ShareMediaModelFactory>();
         services.AddScoped<IShareOptionService, ShareOptionService>();
         services.AddScoped<IShareOptionModelFactory, ShareOptionModelFactory>();
-
+        services.AddScoped<ISocialMediaHomeModelFactory, SocialMediaHomeModelFactory>();
         
 
     }

@@ -32,7 +32,8 @@
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
-    <None Remove="Views\Shared\Components\SocialMediaSharing\Default.cshtml" />
+    <None Remove="Views\Shared\Components\SocialMediaView\Default.cshtml" />
+    <None Remove="Views\Shared\SocialMediaList.cshtml" />
     <None Remove="Views\_ViewImports.cshtml" />
   </ItemGroup>
 
@@ -64,10 +65,13 @@
     <Content Include="plugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\Components\SocialMediaSharing\Default.cshtml">
+    <Content Include="Views\Shared\Components\SocialMediaView\Default.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\_ViewImports.cshtml">
+    <Content Include="Views\Shared\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\SocialMediaList.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
