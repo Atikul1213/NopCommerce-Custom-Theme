@@ -1,16 +1,19 @@
-
 @using Nop.Web.Framework.Models.DataTables
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+
 @model List<SocialMediaHomeModel>
 
+@{
+    var currentUrl = Context.Request.GetEncodedUrl();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Share Modal</title>
-
     <style>
-
         body {
             font-family: Arial, sans-serif;
         }
@@ -30,8 +33,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.4);
             padding-top: 60px;
         }
 
@@ -81,225 +83,143 @@
         #copyBtn {
             padding: 10px 20px;
         }
-
-
-
     </style>
-
-   
 </head>
 <body>
-    <button class="btn btn-primary" id="shareBtn"><i class="bi bi-share-fill"></i>Share</button>
+    <button class="btn btn-primary" type="button" id="shareBtn"><i class="bi bi-share-fill"></i> Share</button>
 
     <div id="shareModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>Share advert</h3>
             <div class="share-options">
-                <div class="developer-container">
-                    @foreach (var media in Model)
-                    {
-                        <div class="developer-item card">
-                            <div class="card-body">
-
-                                <div>
-
-                                 @{
-                                     var data = new ViewDataDictionary(ViewData)
-                                    {
-                                         {"pictureUrl",media.Icon.ThumbImageUrl}
-                                    };
-
-                                     @await Html.PartialAsync("~/Plugins/Widgets.SocialMediaSharing/Views/Shared/SocialMediaList.cshtml", data);
-
-                                   }
-                                </div>
-
-                                <div class="card-text">
-                                    <h5 class="name">@media.Name</h5>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    }
-                </div>
- 
+                @foreach (var media in Model)
+                {
+                    <a data-provider="@media.Name" href="@($"{media.Url}u={currentUrl}")" onclick="openShareWindow(event,this.href)" target="_blank" rel="noopener" title="Share on @media.Name">
+                        <img src="@media.Icon.ThumbImageUrl" alt="@media.Name" />
+                        Share on @media.Name
+                    </a>
+                }
             </div>
-            <input type="text" value="https://example.com" id="shareLink">
+            <input type="text" value="@currentUrl" id="shareLink" readonly>
             <button id="copyBtn">Copy</button>
         </div>
     </div>
 
     <script>
-        // Get the modal
-        var modal = document.getElementById("shareModal");
+        document.addEventListener("DOMContentLoaded", function () {
+            var shareBtn = document.getElementById("shareBtn");
+            var shareModal = document.getElementById("shareModal");
+            var closeModal = document.querySelector(".close");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("shareBtn");
+            shareBtn.onclick = function () {
+                shareModal.style.display = "block";
+            };
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+            closeModal.onclick = function () {
+                shareModal.style.display = "none";
+            };
 
-        // When the user clicks the button, open the modal
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
+            window.onclick = function (event) {
+                if (event.target == shareModal) {
+                    shareModal.style.display = "none";
+                }
+            };
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
+            document.getElementById("copyBtn").onclick = function () {
+                var shareLink = document.getElementById("shareLink");
+                shareLink.select();
+                document.execCommand("copy");
+                alert("Link copied to clipboard!");
+            };
+        });
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Copy link to clipboard
-        var copyBtn = document.getElementById("copyBtn");
-        var shareLink = document.getElementById("shareLink");
-
-        copyBtn.onclick = function () {
-            shareLink.select();
-            document.execCommand("copy");
-            alert("Link copied to clipboard!");
+        function openShareWindow(event, url) {
+            event.preventDefault();
+            window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+            return false;
         }
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnCopyProductUrl").click(function () {
+                navigator.clipboard.writeText($("#txtCopyProductUrl").val());
+                var copied = $(this).attr("data-copied");
+                $(this).text(copied);
+            });
+
+            $("#btnShareAdvertMobile").on('click', async () => {
+                try {
+                    await navigator.share({ title: document.title, text: window.location.href });
+                } catch (err) {
+                    console.log(err);
+                }
+            });
+
+            $("#btn_notify_similar").on('click', async (e) => {
+                e.preventDefault();
+                if ($('#btnAutoModalLogin').length) {
+                    $('#frm_login_popup').prop("send-alert", true);
+                    $('.btnExternalLogin').prop("send-alert", true);
+                    $('#btnAutoModalLogin').click();
+                    return false;
+                }
+
+                var productId = $("#btn_notify_similar").attr("data-productid");
+                var thisButton = $(this);
+                if (productId) {
+                    thisButton.attr('disabled', true);
+                    var baseUrl = window.location.origin;
+                    var currentUrl = window.location.href.replace(baseUrl, '');
+                    var requestModel = {
+                        ProductId: productId,
+                        SearchLink: currentUrl
+                    };
+
+                    addAntiForgeryToken(requestModel);
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "@(Url.Action("SubscribeToEmailAlertsForProduct", "EmailAlert"))",
+                        data: requestModel,
+                        success: function (response) {
+                            alert(response.Message);
+                        },
+                        error: function () {
+                            alert("Something went wrong! Please contact the store owner.");
+                        },
+                        complete: function () {
+                            thisButton.attr('disabled', false);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $("#mobileShare").on('click', async () => {
+            try {
+                await navigator.share({ title: document.title, text: window.location.href });
+            } catch (err) {
+                console.log(err);
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.click-to-call .call-block').on('click', function (e) {
+                e.preventDefault();
+                var phoneNumber = $(this).attr("data-number");
+                var textSpan = $(this).find('span');
+                textSpan.text(phoneNumber);
+                $(this).removeClass("call-block");
+                $(this).off('click');
+            });
+        });
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@* 
-
-
-@{
-    var cnt = 0;
-}
-
-
-<div class="developer-container">
-    @foreach(var media in Model)
-    {
-        <div class="developer-item card">
-            <div class="card-body">
-                    
-                    <div>
-                    
-                        @{
-                            var data = new ViewDataDictionary(ViewData)
-                            {
-                                {"pictureUrl",media.Icon.ThumbImageUrl}
-                            };
-                        @await Html.PartialAsync("~/Plugins/Widgets.SocialMediaSharing/Views/Shared/SocialMediaList.cshtml", data);
-                        
-                        }
-                    </div>
-
-                <div class="card-text">
-                    <h5 class="name">@media.Name</h5> 
-                </div>
-
-
-            </div>
-        </div>
-
-
-    }
-</div>
-
-
-
-
-<style>
-
-    .developer-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: flex-start;
-    }
-
-    .developer-item {
-        width: 225px;
-        box-sizing: border-box;
-        padding: 15px;
-        text-align: center;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-        overflow: hidden;
-        transition: box-shadow 0.3s ease-in-out;
-    }
-
-        .developer-item:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-    .card-body {
-        padding: 0;
-    }
-
-    .slider-wrapper.theme-custom {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .card-text {
-        text-align: center;
-        padding-top: 10px;
-    }
-
-    .name {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #333;
-    }
-
-    .designation {
-        font-size: 16px;
-        color: #666;
-        margin-bottom: 5px;
-    }
-
-    .badge-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px; /* Adjust the gap between badges as needed */
-        margin-top: 10px; /* Add margin if needed */
-    }
-
-    .badge {
-        display: flex;
-        align-items: center;
-        gap: 5px; /* Adjust the gap between the image and the text */
-    }
-
-</style> 
-*@

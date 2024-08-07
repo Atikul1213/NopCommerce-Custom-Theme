@@ -41,6 +41,7 @@ namespace Nop.Plugin.Widgets.SocialMediaSharing
                 new List<string> 
                 {
                     PublicWidgetZones.HomepageTop,
+                    PublicWidgetZones. ProductDetailsOverviewBottom ,
                     
                 /*    
 
