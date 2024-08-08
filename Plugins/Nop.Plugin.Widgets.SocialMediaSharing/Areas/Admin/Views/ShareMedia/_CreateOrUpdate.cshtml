@@ -1,4 +1,4 @@
-﻿@model ShareMediaModel
+﻿ @model ShareMediaModel
 
 @inject IWebHelper webHelper
 
@@ -12,12 +12,28 @@
                 @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.EmailAccountDetailsTop, additionalData = Model })
                 <div class="card card-default">
                     <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="SocialMedia" />
+                            </div>
+                            <div class="col-md-9">
+                                <select id="SocialMedia" asp-for="SocialMedia" class="form-control">
+                                    @foreach (var platform in SocialMediaInfo.Platforms)
+                                    {
+                                        <option value="@platform.Key">@platform.Value.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="SocialMedia"></span>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-md-3">
                                 <nop-label asp-for="Name" />
                             </div>
                             <div class="col-md-9">
-                                <nop-editor asp-for="Name" asp-required="true" />
+                                <input id="Name" asp-for="Name" class="form-control" />
                                 <span asp-validation-for="Name"></span>
                             </div>
                         </div>
@@ -27,7 +43,133 @@
                                 <nop-label asp-for="Url" />
                             </div>
                             <div class="col-md-9">
-                                <nop-editor asp-for="Url" asp-required="true" />
+                                <input id="Url" asp-for="Url" class="form-control" />
+                                <span asp-validation-for="Url"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="DisplayOrder" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="DisplayOrder" />
+                                <span asp-validation-for="DisplayOrder"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="IsActive" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="IsActive" />
+                                <span asp-validation-for="IsActive"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="IconId" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="IconId" />
+                                <span asp-validation-for="IconId"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+
+            console.log("it is from document");
+            // Load the platforms into a JavaScript object
+            var platforms = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
+            SocialMediaInfo.Platforms.ToDictionary(p => p.Key.ToString(), p => new { p.Value.Name, p.Value.Url })
+            ));
+
+            // Trigger event when SocialMedia dropdown value changes
+            $('#SocialMedia').change(function () {
+                var selectedPlatform = $(this).val(); // Get selected value
+                if (platforms[selectedPlatform]) { // If the platform exists in the dictionary
+                    $('#Name').val(platforms[selectedPlatform].Name); // Set the Name field
+                    $('#Url').val(platforms[selectedPlatform].Url); // Set the Url field
+                }
+            });
+
+            // Initialize with the current selected value (useful if you have a default selected)
+            var initialPlatform = $('#SocialMedia').val();
+            if (platforms[initialPlatform]) {
+                $('#Name').val(platforms[initialPlatform].Name);
+                $('#Url').val(platforms[initialPlatform].Url);
+            }
+        });
+    </script>
+}
+
+
+
+@*
+
+@model ShareMediaModel
+
+@inject IWebHelper webHelper
+
+<div asp-validation-summary="ModelOnly"></div>
+<input asp-for="Id" type="hidden" />
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.EmailAccountDetailsTop, additionalData = Model })
+                <div class="card card-default">
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="SocialMedia" />
+                            </div>
+                            <div class="col-md-9">
+                               
+                                <select id="SocialMedia" asp-for="SocialMedia" class="form-control">
+                                    @foreach(var platform in SocialMediaInfo.Platforms)
+                                    {
+                                        <option value="@platform.Key">@platform.Value.Name</option>
+                                    }
+                                </select>
+
+                                <span asp-validation-for="SocialMedia"></span>
+                            </div>
+                         </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="Name" />
+                            </div>
+                            <div class="col-md-9">
+                                <input id="Name" asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="Url" />
+                            </div>
+                            <div class="col-md-9">
+                                <input id="Url" asp-for="Url" class="form-control" />
                                 <span asp-validation-for="Url"></span>
                             </div>
                         </div>
@@ -70,4 +212,32 @@
             </div>
         </div>
     </div>
+
+
+
 </section>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log(" this is call");
+            var platforms = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
+            SocialMediaInfo.Platforms.ToDictionary(p => p.Key.ToString(), p => new { p.Value.Name, p.Value.Url })
+            ));
+
+            
+            console.log("print:  ", platforms);
+            console.log("social media", $("#SocialMedia").val());
+
+            $('#SocialMedia').change(function () {
+                var selectedPlatform = $(this).val();
+                if (platforms[selectedPlatform]) {
+                    $('#Name').val(platforms[selectedPlatform].Name);
+                    $('#Url').val(platforms[selectedPlatform].Url);
+                }
+            });
+        });
+    </script>
+}
+
+*@

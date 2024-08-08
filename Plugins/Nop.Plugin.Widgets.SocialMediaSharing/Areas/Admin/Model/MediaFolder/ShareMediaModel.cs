@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.MediaFolder;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
 using Nop.Web.Framework.Models;
 using Nop.Web.Framework.Mvc.ModelBinding;
@@ -31,5 +32,7 @@ public record ShareMediaModel : BaseNopEntityModel
     public string IconThumbnailUrl { get; set; }
 
     public ShareOptionSearchModel ShareOptionSearchModel { get; set; }
+
+    public SocialMediaPlatform SocialMedia { get; set;}
 
 }
