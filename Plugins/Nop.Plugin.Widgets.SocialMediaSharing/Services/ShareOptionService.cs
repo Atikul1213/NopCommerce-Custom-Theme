@@ -38,6 +38,11 @@ public class ShareOptionService : IShareOptionService
         return await _repository.GetByIdAsync(mediaId);
     }
 
+    public virtual async Task<ShareOption> GetShareOptionByIdZoneAsync(int mediaId, string zone)
+    {
+        return await _repository.Table.Where(x => x.ShareMediaId == mediaId && x.zone.Contains(zone)).FirstOrDefaultAsync();
+    }
+
     public virtual async Task<IList<ShareOption>> GetShareOptionListAsync()
     {
         var query = from m in _repository.Table
