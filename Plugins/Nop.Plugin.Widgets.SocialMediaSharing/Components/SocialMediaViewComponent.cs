@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
+﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Plugin.Widgets.SocialMediaSharing.Factories;
 using Nop.Plugin.Widgets.SocialMediaSharing.Services;
 using Nop.Web.Framework.Components;
@@ -20,7 +14,6 @@ public class SocialMediaViewComponent : NopViewComponent
         _socialMediaHomeModelFactory = socialMediaHomeModelFactory;
     }
 
-    
     public async Task<IViewComponentResult> InvokeAsync(string widgetZone, object additionalData)
     {
 

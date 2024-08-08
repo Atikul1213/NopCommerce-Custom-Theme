@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
+﻿using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 using Nop.Plugin.Widgets.SocialMediaSharing.Models;
 using Nop.Plugin.Widgets.SocialMediaSharing.Services;
-using Nop.Services;
 using Nop.Services.Media;
 using Nop.Web.Models.Media;
 
@@ -29,9 +23,6 @@ public class SocialMediaHomeModelFactory : ISocialMediaHomeModelFactory
 
     public async Task<SocialMediaHomeModel> PrepareSocialMediaHomeModelAsync(ShareMedia entity)
     {
-        
-
-
         var picture = await _pictureService.GetPictureByIdAsync(entity.IconId);
 
         var pictureModel = new PictureModel()
@@ -43,15 +34,10 @@ public class SocialMediaHomeModelFactory : ISocialMediaHomeModelFactory
             FullSizeImageUrl = (await _pictureService.GetPictureUrlAsync(picture)).Url 
         };
 
-        
-
-
         var model = new SocialMediaHomeModel();
         model.Url = entity.Url;
         model.Name = entity.Name;
         model.Icon = pictureModel;
- 
-
 
         return model;
     }
@@ -71,24 +57,21 @@ public class SocialMediaHomeModelFactory : ISocialMediaHomeModelFactory
             
             if(option.Count()>0)
             {
-                 option = option.Where(x => x.zone.Contains(widgetZone)).ToList();
+                 option = option.Where(x => x.Zone.Contains(widgetZone)).ToList();
                  if(option.Any())
-                    {
-                         var model = await PrepareSocialMediaHomeModelAsync(media);
+                  {
+                        var model = await PrepareSocialMediaHomeModelAsync(media);
 
-                         var obj = await _shareOptionService.GetShareOptionByIdZoneAsync(media.Id, widgetZone);
+                        var obj = await _shareOptionService.GetShareOptionByIdZoneAsync(media.Id, widgetZone);
+
                         if (obj?.CustomMessage == null)
                             model.CustomMessage = " ";
+
                         else
                             model.CustomMessage = obj.CustomMessage;
-
-                        model.IncludedLink = false;
-                        if (model.IncludedLink)
-                            model.IncludedLink = obj.IncludedLink;
-
-
-                    mediaList.Add(model);
-                    }
+ 
+                        mediaList.Add(model);
+                 }
 
             }
 

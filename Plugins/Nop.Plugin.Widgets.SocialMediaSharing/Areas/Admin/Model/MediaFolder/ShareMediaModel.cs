@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
-using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 using Nop.Web.Framework.Models;
 using Nop.Web.Framework.Mvc.ModelBinding;
 
 public record ShareMediaModel : BaseNopEntityModel
 {
-    // [BindNever]
-    // [NopResourceDisplayName("Admin.Widget.SocialMediaSharing.Model.Id")]
-    // public override int Id { get; set; }
     public ShareMediaModel()
     {
         ShareOptionSearchModel = new ShareOptionSearchModel();

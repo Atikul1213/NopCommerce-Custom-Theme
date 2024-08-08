@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Factories;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.MediaFolder;
 using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
@@ -42,7 +36,7 @@ public class ShareMediaController : BasePluginController
     #endregion
 
 
-    #region Method
+    #region Method 
     public async Task<IActionResult> List()
     {
 
@@ -56,17 +50,15 @@ public class ShareMediaController : BasePluginController
     {
 
         var model = await _shareMediaModelFactory.PrepareShareMediaListModelAsync(searchModel);
+
         return Json(model);
     }
-
-
-
-
 
     public async Task<IActionResult> Create()
     {
 
         var model = new ShareMediaModel();
+
         return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Create.cshtml",model);
     }
 
@@ -75,6 +67,7 @@ public class ShareMediaController : BasePluginController
     protected virtual async Task UpdatePictureSeoNameAsync(ShareMedia media)
     {
         var picture = await _pictureService.GetPictureByIdAsync(media.IconId);
+
         if (picture != null)
             await _pictureService.SetSeoFilenameAsync(picture.Id, await _pictureService.GetPictureSeNameAsync(media.Name));
     }
@@ -111,9 +104,9 @@ public class ShareMediaController : BasePluginController
 
         var model = await _shareMediaModelFactory.PrepareShareMediaModelAsync(obj, shareMedia);
 
-
         return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Edit.cshtml",model);
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Edit(ShareMediaModel model)
@@ -121,6 +114,7 @@ public class ShareMediaController : BasePluginController
         var shareMedia = await _shareMediaService.GetShareMediaByIdAsync(model.Id);
 
         if(shareMedia == null)
+
             return RedirectToAction("List");
 
         if(ModelState.IsValid)
@@ -129,8 +123,10 @@ public class ShareMediaController : BasePluginController
             obj = await _shareMediaModelFactory.PrepareShareMediaAsync(model);
 
             await _shareMediaService.UpdateShareMediaAsync(obj);
+
             return RedirectToAction("List");
         }
+
         return RedirectToAction("List");
     }
 
@@ -140,14 +136,14 @@ public class ShareMediaController : BasePluginController
     [HttpPost]
     public async Task<IActionResult> Delete(ShareMediaModel model)
     {
-
         var shareMedia = await _shareMediaService.GetShareMediaByIdAsync(model.Id);
+
         if (shareMedia == null)
             return RedirectToAction("List");
 
         await _shareMediaService.DeleteShareMediaAsync(shareMedia);
-        return RedirectToAction("List");
 
+        return RedirectToAction("List");
     }
 
 
@@ -162,19 +158,15 @@ public class ShareMediaController : BasePluginController
     public virtual async Task<IActionResult> ShareOptionList(ShareOptionSearchModel searchModel)
     {
         var entity = await _shareMediaService.GetShareMediaByIdAsync(searchModel.ShareMediaId);
-         
 
         var model = await _shareOptionModelFactory.PrepareShareOptionListModelAsync(searchModel, entity); 
+
         return Json(model);
 
     }
 
-
-
-
-    // Resoure Add
+   
     [HttpPost]
-
     public virtual async Task<IActionResult> ShareOptionAdd(int shareMediaId, [Validate]ShareOptionModel model)
     {
 
@@ -182,7 +174,6 @@ public class ShareMediaController : BasePluginController
         {
             return ErrorJson(ModelState.SerializeErrors());
         }
-
 
         var res = await _shareOptionModelFactory.PrepareShareOptionAsync(model);
         await _shareOptionService.InsertShareOptionAsync(res);
@@ -200,6 +191,7 @@ public class ShareMediaController : BasePluginController
         }
 
         var shareOption = await _shareOptionService.GetShareOptionByIdAsync(model.Id);
+
         if (shareOption == null)
             throw new ArgumentException("Error occur when you tried to edit", nameof(model.Id));
 
@@ -209,19 +201,19 @@ public class ShareMediaController : BasePluginController
 
         obj = await _shareOptionModelFactory.PrepareShareOptionAsync(model);
         obj.Id = shareOption.Id;
+
         await _shareOptionService.UpdateShareOptionAsync(obj);
+
         return new NullJsonResult();
     }
 
 
-
-
     [HttpPost]
-
     public virtual async Task<IActionResult> ShareOptionDelete(int id)
     {
 
         var shareOption = await _shareOptionService.GetShareOptionByIdAsync(id);
+
         if (shareOption == null)
             throw new ArgumentException("No resource found with the specified id", nameof(id));
 

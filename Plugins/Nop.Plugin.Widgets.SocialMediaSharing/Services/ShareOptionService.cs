@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nop.Core;
+﻿using Nop.Core;
 using Nop.Data;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 
@@ -40,7 +35,7 @@ public class ShareOptionService : IShareOptionService
 
     public virtual async Task<ShareOption> GetShareOptionByIdZoneAsync(int mediaId, string zone)
     {
-        return await _repository.Table.Where(x => x.ShareMediaId == mediaId && x.zone.Contains(zone)).FirstOrDefaultAsync();
+        return await _repository.Table.Where(x => x.ShareMediaId == mediaId && x.Zone.Contains(zone)).FirstOrDefaultAsync();
     }
 
     public virtual async Task<IList<ShareOption>> GetShareOptionListAsync()

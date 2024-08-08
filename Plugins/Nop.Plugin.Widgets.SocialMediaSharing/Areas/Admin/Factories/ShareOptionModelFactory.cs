@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
+﻿using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.ShareOptions;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 using Nop.Plugin.Widgets.SocialMediaSharing.Services;
 using Nop.Web.Framework.Models.Extensions;
@@ -19,7 +14,6 @@ public class ShareOptionModelFactory : IShareOptionModelFactory
     }
 
 
-
     public async Task<ShareOptionListModel> PrepareShareOptionListModelAsync(ShareOptionSearchModel searchModel, ShareMedia media)
     {
         ArgumentNullException.ThrowIfNull(searchModel);
@@ -27,18 +21,10 @@ public class ShareOptionModelFactory : IShareOptionModelFactory
 
         var mediaOptionList = await _shareOptionService.SearchGetAllShareOptionAsync(media.Id, pageIndex:searchModel.Page-1, pageSize:searchModel.PageSize);
 
-       
         var model = await new ShareOptionListModel().PrepareToGridAsync(searchModel, mediaOptionList, () =>
         {
             return mediaOptionList.SelectAwait(async obj=>
             {
-                //var shareOptionModel = new ShareOptionModel()
-                //{
-                //    CustomMessage = obj.CustomMessage,
-                //    ShareMediaId = obj.ShareMediaId,
-                //    IncludedLink = obj.IncludedLink,
-                //    zone = obj.zone
-                //};
                 return await PrepareShareOptionModelAsync(new ShareOptionModel(), obj);
             });
         });
@@ -57,12 +43,10 @@ public class ShareOptionModelFactory : IShareOptionModelFactory
             Id = entity.Id,
             ShareMediaId = entity.Id,
             CustomMessage = entity.CustomMessage,
-            IncludedLink = entity.IncludedLink,
-            zone = entity.zone
+            Zone = entity.Zone
         };
         return obj;
     }
-
 
 
     public async Task<ShareOption> PrepareShareOptionAsync(ShareOptionModel model)
@@ -74,31 +58,12 @@ public class ShareOptionModelFactory : IShareOptionModelFactory
         {
             ShareMediaId = model.ShareMediaId,
             CustomMessage = model.CustomMessage,
-            IncludedLink = model.IncludedLink,
-            zone = model.zone
-            
+            Zone = model.Zone
         };
-       
 
         return entity;
 
     }
-
-
-
-
-
-
-
-
-    //public async Task<ShareOptionSearchModel> PrepareShareOptionSearchModelAsync(ShareOptionSearchModel searchModel)
-    //{
-    //    //throw new NotImplementedException();
-
-    //    searchModel.SetGridPageSize();
-    //    return searchModel;
-    //}
-
 
 
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentMigrator.Builders.Create.Table;
+﻿using FluentMigrator.Builders.Create.Table;
 using Nop.Data.Mapping.Builders;
 using Nop.Plugin.Widgets.SocialMediaSharing.Domains;
 
@@ -15,8 +10,7 @@ public class ShareOptionRecordBuilder : NopEntityBuilder<ShareOption>
     {
         table.WithColumn(nameof(ShareOption.Id)).AsInt32().PrimaryKey().Identity()
             .WithColumn(nameof(ShareOption.ShareMediaId)).AsInt32()
-            .WithColumn(nameof(ShareOption.IncludedLink)).AsBoolean().Nullable()
             .WithColumn(nameof(ShareOption.CustomMessage)).AsString(330).Nullable()
-            .WithColumn(nameof(ShareOption.zone)).AsString(343).NotNullable();
+            .WithColumn(nameof(ShareOption.Zone)).AsString(343).NotNullable();
     }
 }

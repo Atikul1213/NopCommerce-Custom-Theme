@@ -27,10 +27,9 @@ namespace Nop.Plugin.Widgets.SocialMediaSharing
 
         public Type GetWidgetViewComponent(string widgetZone)
         {
-            //  if (widgetZone == PublicWidgetZones.HomepageTop)
-            //  {
-                  return typeof(SocialMediaViewComponent);
-            //}
+          
+               return typeof(SocialMediaViewComponent);
+            
         }
 
 
@@ -297,9 +296,9 @@ namespace Nop.Plugin.Widgets.SocialMediaSharing
             {
                 ["Admin.Widget.SocialMediaSharing.Model.Name"] = "Media Name",
                 ["Admin.Widget.SocialMediaSharing.Model.Url"] = "Url",
-                ["Admin.Widget.SocialMediaSharing.Model.DisplayOrder"] = "DisplayOrder",
+                ["Admin.Widget.SocialMediaSharing.Model.DisplayOrder"] = "Display Order",
                 ["Admin.Widget.SocialMediaSharing.Model.IsActive"] = "IsActive",
-                ["Admin.Widget.SocialMediaSharing.Model.IconId"] = "IconId",
+                ["Admin.Widget.SocialMediaSharing.Model.IconId"] = "Icon",
                 ["Admin.Widget.ShareMedia.AddNew"] = "AddNew",
                 ["Admin.Widget.ShareMedia.BackToList"] = "BackToList",
 
@@ -311,10 +310,9 @@ namespace Nop.Plugin.Widgets.SocialMediaSharing
 
 
                 ["Admin.SocialMediaSharing.ShareMedia"] = "Media View",
-                ["Admin.SocialMediaSharing.ShareMediaOption"] = "ShareOption",
-                ["Admin.ShareMediaOption.ShareOption.Fields.CustomMessage"] = "CustomMessage",
-                ["Admin.ShareMediaOption.ShareOption.Fields.IncludedLink"] = "IncludedLink",
-                ["Admin.ShareMediaOption.ShareOption.Fields.zone"] = "zone",
+                ["Admin.SocialMediaSharing.ShareMediaOption"] = "Share Option",
+                ["Admin.ShareMediaOption.ShareOption.Fields.CustomMessage"] = "Custom Message",
+                ["Admin.ShareMediaOption.ShareOption.Fields.zone"] = "Zone",
                 
             });
 

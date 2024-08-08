@@ -18,10 +18,9 @@ public partial record ShareOptionSearchModel : BaseSearchModel
     public int ShareMediaId { get; set; }
     [NopResourceDisplayName("Admin.ShareMediaOption.ShareOption.Fields.CustomMessage")]
     public string CustomMessage { get; set; }
-    [NopResourceDisplayName("Admin.ShareMediaOption.ShareOption.Fields.IncludedLink")]
-    public bool IncludedLink { get; set; }
+
     [NopResourceDisplayName("Admin.ShareMediaOption.ShareOption.Fields.zone")]
-    public string zone { get; set; }
+    public string Zone { get; set; }
     public IList<SelectListItem> WidgetZoneList { get; set; }
 
     public ShareOptionModel AddShareOptionModel { get; set; }

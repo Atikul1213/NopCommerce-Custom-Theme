@@ -10,9 +10,6 @@
                 <div class="card card-default">
                     <div class="card-body">
 
-
-                        
-
                         @await Html.PartialAsync("Table", new DataTablesModel
                         {
                             Name = "ShareOption-grid",
@@ -34,15 +31,10 @@
                                     Editable = true,
                                     EditType = EditType.String
                                 },
-                            new ColumnProperty(nameof(ShareOptionModel.IncludedLink))
+                         
+                            new ColumnProperty(nameof(ShareOptionModel.Zone))
                                 {
-                                    Title = T("Admin.ShareMediaOption.ShareOption.Fields.IncludedLink").Text,
-                                    Editable = true,
-                                    EditType = EditType.String
-                                },
-                            new ColumnProperty(nameof(ShareOptionModel.zone))
-                                {
-                          Title = T("Admin.ShareMediaOption.ShareOption.Fields.zone").Text,
+                                    Title = T("Admin.ShareMediaOption.ShareOption.Fields.zone").Text,
                                     Width = "300",
                                     Editable = true,
                                     EditType = EditType.String
@@ -67,14 +59,6 @@
                             }
                         })
 
-                        
-
-
-
-
-
-
-
 
 
                         <div class="card card-default no-margin">
@@ -89,29 +73,17 @@
                                     </div>
                                     <div class="col-md-9">
                                     <nop-textarea asp-for="@Model.ShareOptionSearchModel.CustomMessage" />
-                                    @* <span asp-validation-for="@Model.ShareOptionSearchModel.CustomMessage"></span> *@
+                                    <span asp-validation-for="@Model.ShareOptionSearchModel.CustomMessage"></span>
                                     </div>
                                 </div>
-
-
-                                <div class="form-group row">
-                                    <div class="col-md-3">
-                                    <nop-label asp-for="@Model.ShareOptionSearchModel.IncludedLink" />
-                                    </div>
-                                    <div class="col-md-9">
-                                    <nop-editor asp-for="@Model.ShareOptionSearchModel.IncludedLink" role="checkbox"/>
-                                    @* <span asp-validation-for="@Model.ShareOptionSearchModel.IncludedLink"></span> *@
-                                    </div>
-                                </div>
-
 
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                    <nop-label asp-for="@Model.ShareOptionSearchModel.zone" />
+                                    <nop-label asp-for="@Model.ShareOptionSearchModel.Zone" />
                                 </div>
                                 <div class="col-md-9">
-                                    <nop-select asp-for="@Model.ShareOptionSearchModel.zone" asp-items="@Model.ShareOptionSearchModel.WidgetZoneList" />
-                                    <span asp-validation-for="@Model.ShareOptionSearchModel.zone"></span>
+                                    <nop-select asp-for="@Model.ShareOptionSearchModel.Zone" asp-items="@Model.ShareOptionSearchModel.WidgetZoneList" />
+                                    <span asp-validation-for="@Model.ShareOptionSearchModel.Zone"></span>
                                 </div>
                             </div>
 
@@ -130,26 +102,11 @@
                                       $('#addShareOption').click(function () {
                                        $('#addShareOption').attr('disabled', true);
 
-                                        var value = false;
-                                          if ($("#@Html.IdFor(Model=>Model.ShareOptionSearchModel.IncludedLink)").is(':checked'))
-                                              value = true;
-                                           
-
-                                       
-
                                         var postData = {
                                             CustomMessage:$("#@Html.IdFor(Model=>Model.ShareOptionSearchModel.CustomMessage)").val(),
-                                           // IncludedLink: $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.IncludedLink)").attr('checked'),
-                                           IncludedLink:value,
-                                           
-                                           zone: $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.zone)").val()
+                                           Zone: $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.Zone)").val()
 
                                         };
-
-
-                                        
-                                        console.log("postdata messga", postData);
-                                       
 
                                         addAntiForgeryToken(postData);
 
@@ -161,16 +118,13 @@
                                             success: function (data, textStatus, jqXHR) {
                                                 if (data.Result) {
                                                     //reload grid
-                                                  updateTable('#ShareOption-grid');
+                                                     updateTable('#ShareOption-grid');
 
                                                     //clear input value
-                                                   
-                                                $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.CustomMessage)").val('');
-                                                $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.IncludedLink)").val('').attr('checked', false);
-                                                $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.zone)").val('');
-
-
-                                                } else {
+                                                    $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.CustomMessage)").val('');
+                                                    $("#@Html.IdFor(Model => Model.ShareOptionSearchModel.Zone)").val('');
+                                                } 
+                                                else {
                                                     //display errors if returned
                                                     display_nop_error(data);
                                                 }
