@@ -43,11 +43,20 @@ public class SocialMediaHomeModelFactory : ISocialMediaHomeModelFactory
             FullSizeImageUrl = (await _pictureService.GetPictureUrlAsync(picture)).Url 
         };
 
+        var obj = await _shareOptionService.GetShareOptionByIdAsync(entity.Id);
+
 
         var model = new SocialMediaHomeModel();
         model.Url = entity.Url;
         model.Name = entity.Name;
         model.Icon = pictureModel;
+        model.CustomMessage = obj?.CustomMessage;
+        if (model.CustomMessage == null)
+            model.CustomMessage = "";
+        model.IncludedLink = false;
+        if(model.IncludedLink)
+            model.IncludedLink = obj.IncludedLink;
+
 
         return model;
     }

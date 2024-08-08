@@ -12,4 +12,7 @@ public record SocialMediaHomeModel : BaseNopEntityModel
     public string Name { get; set; }
     public PictureModel Icon { get; set; }
     public string Url { get; set; }
+    public string CustomMessage { get; set; }
+    public bool IncludedLink { get; set; }
+
 }

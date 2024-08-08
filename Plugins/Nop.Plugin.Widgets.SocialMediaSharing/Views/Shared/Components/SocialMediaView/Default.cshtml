@@ -1,7 +1,6 @@
 @using Nop.Web.Framework.Models.DataTables
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Extensions
-
 @model List<SocialMediaHomeModel>
 
 @{
@@ -95,7 +94,30 @@
             <div class="share-options">
                 @foreach (var media in Model)
                 {
-                    if (media.Name == "Facebook" || media.Name == "WhatsApp" || media.Name == "Linkedin" || media.Name=="Twitter")
+
+                    string urlWithMessage;
+
+                    if(media.Name=="WhatsApp")
+                        urlWithMessage = $"{media.Url}{currentUrl} {Uri.EscapeDataString(media.CustomMessage)}";
+                    else if(media.Name=="Facebook")
+                        urlWithMessage = $"{media.Url}{currentUrl}&hashtag={Uri.EscapeDataString(media.CustomMessage)}";
+                        
+                    else
+                    urlWithMessage = $"{media.Url}{currentUrl}&message={Uri.EscapeDataString(media.CustomMessage)}";
+
+                    if (media.IncludedLink)
+                    {
+                        urlWithMessage += $"&link={currentUrl}";
+                    }
+
+                    <a data-provider="@media.Name" href="@urlWithMessage" onclick="openShareWindow(event,this.href)" target="_blank" rel="noopener" title="Share on @media.Name">
+                        <img src="@media.Icon.ThumbImageUrl" alt="@media.Name" />
+                        Share on @media.Name
+                    </a>
+
+
+                @* 
+                    if (media.IncludedLink)
                     {
                         <a data-provider="@media.Name" href="@($"{media.Url}{currentUrl}")" onclick="openShareWindow(event,this.href)" target="_blank" rel="noopener" title="Share on @media.Name">
                             <img src="@media.Icon.ThumbImageUrl" alt="@media.Name" />
@@ -105,11 +127,11 @@
                     }
 
                     else{
-                        <a data-provider="@media.Name" href="@($"{media.Url}{currentUrl}")" onclick="openShareWindow(event,this.href)" target="_blank" rel="noopener" title="Share on @media.Name">
+                        <a data-provider="@media.Name" href="@($"{media.Url}")" onclick="openShareWindow(event,this.href)" target="_blank" rel="noopener" title="Share on @media.Name">
                             <img src="@media.Icon.ThumbImageUrl" alt="@media.Name" />
                             Share on @media.Name
                         </a>
-                    }
+                    } *@
 
 
                 }
