@@ -5,6 +5,8 @@ public enum SocialMediaPlatform
     WhatsApp,
     Twitter,
     LinkedIn,
+    Outlook,
+    Gmail,
     Instagram,
     TikTok,
     YouTube,

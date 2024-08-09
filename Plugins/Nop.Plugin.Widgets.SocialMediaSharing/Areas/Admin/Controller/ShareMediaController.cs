@@ -42,7 +42,8 @@ public class ShareMediaController : BasePluginController
 
         var searchModel = await _shareMediaModelFactory.PrepareShareMediaSearchModelAsync(new ShareMediaSearchModel());
 
-        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml", searchModel);
+       return View("List", searchModel);
+        //return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml", searchModel);
     }
 
     [HttpPost]
@@ -58,8 +59,8 @@ public class ShareMediaController : BasePluginController
     {
 
         var model = new ShareMediaModel();
-
-        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Create.cshtml",model);
+        return View("Create", model);
+       // return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Create.cshtml",model);
     }
 
 
@@ -104,7 +105,8 @@ public class ShareMediaController : BasePluginController
 
         var model = await _shareMediaModelFactory.PrepareShareMediaModelAsync(obj, shareMedia);
 
-        return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Edit.cshtml",model);
+        return View("Edit", model);
+        //return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Edit.cshtml",model);
     }
 
 
