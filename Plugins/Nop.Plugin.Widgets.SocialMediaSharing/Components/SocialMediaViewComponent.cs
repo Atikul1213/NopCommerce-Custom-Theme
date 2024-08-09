@@ -26,9 +26,9 @@ public class SocialMediaViewComponent : NopViewComponent
 
         var model = await _socialMediaHomeModelFactory.PrepareSocialMediaListModelAsync(shareMedia, widgetZone);
 
-        if (model == null)
+        if (model == null || model.Count==0)
             return Content("");
-
+       
         return View("~/Plugins/Widgets.SocialMediaSharing/Views/Shared/Components/SocialMediaView/Default.cshtml",model);
     }
 

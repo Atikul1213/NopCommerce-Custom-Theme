@@ -13,6 +13,9 @@
                 <div class="card card-default">
                     <div class="card-body">
 
+                        @if (Model.Name == null)
+                        {
+                            
                         <div class="form-group row">
                             <div class="col-md-3">
                                 <nop-label asp-for="SocialMedia" />
@@ -27,6 +30,7 @@
                                 <span asp-validation-for="SocialMedia"></span>
                             </div>
                         </div>
+                        }
 
                         <div class="form-group row">
                             <div class="col-md-3">
@@ -85,11 +89,12 @@
         </div>
     </div>
 </section>
-<script>
 
+
+<script>
     $(document).ready(function () {
 
-        console.log("it is from document");
+        
         // Load the platforms into a JavaScript object
         var platforms = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
             SocialMediaInfo.Platforms.ToDictionary(p => p.Key.ToString(), p => new { p.Value.Name, p.Value.Url })

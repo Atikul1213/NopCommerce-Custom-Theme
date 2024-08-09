@@ -9,4 +9,6 @@ public record SocialMediaHomeModel : BaseNopEntityModel
     public string Url { get; set; }
     public string CustomMessage { get; set; }
 
+    public string Zone { get; set; }
+
 }

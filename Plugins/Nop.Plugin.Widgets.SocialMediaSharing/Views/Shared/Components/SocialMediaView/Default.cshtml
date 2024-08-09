@@ -6,6 +6,9 @@
 
 @{
     var currentUrl = Context.Request.GetEncodedUrl();
+    var zone = Model[0].Zone;
+    var zoneModal = Model[0].Zone + "Modal";
+    var closeModal = Model[0].Zone + "Close";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -86,11 +89,11 @@
     </style>
 </head>
 <body>
-    <button class="btn btn-primary" type="button" id="shareBtn"><i class="bi bi-share-fill"></i> Share</button>
+    <button class="btn btn-primary" type="button" id="@zone"><i class="bi bi-share-fill"></i> Share</button>
 
-    <div id="shareModal" class="modal">
+    <div id="@zoneModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span id="@closeModal" class="close">&times;</span>
             <h3>Share advert</h3>
             <div class="share-options">
                 @foreach (var media in Model)
@@ -131,9 +134,9 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            var shareBtn = document.getElementById("shareBtn");
-            var shareModal = document.getElementById("shareModal");
-            var closeModal = document.querySelector(".close");
+            var shareBtn = document.getElementById("@zone");
+            var shareModal = document.getElementById("@zoneModal");
+            var closeModal = document.getElementById("@closeModal");
 
             shareBtn.onclick = function () {
                 shareModal.style.display = "block";

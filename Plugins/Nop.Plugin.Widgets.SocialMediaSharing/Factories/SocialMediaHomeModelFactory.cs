@@ -69,6 +69,8 @@ public class SocialMediaHomeModelFactory : ISocialMediaHomeModelFactory
 
                         else
                             model.CustomMessage = obj.CustomMessage;
+
+                        model.Zone = widgetZone;
  
                         mediaList.Add(model);
                  }
