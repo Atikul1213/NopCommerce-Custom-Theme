@@ -24,7 +24,7 @@ public class ShareMediaController : BasePluginController
     private readonly IShareOptionService _shareOptionService;
 
     #region Ctor
-    public ShareMediaController(IShareMediaModelFactory shareMediaModelFactory, IShareMediaService shareMediaService, IPictureService pictureService,IShareOptionModelFactory shareOptionModelFactory,IShareOptionService shareOptionService)
+    public ShareMediaController(IShareMediaModelFactory shareMediaModelFactory, IShareMediaService shareMediaService, IPictureService pictureService, IShareOptionModelFactory shareOptionModelFactory, IShareOptionService shareOptionService)
     {
         _shareMediaModelFactory = shareMediaModelFactory;
         _shareMediaService = shareMediaService;
@@ -42,7 +42,7 @@ public class ShareMediaController : BasePluginController
 
         var searchModel = await _shareMediaModelFactory.PrepareShareMediaSearchModelAsync(new ShareMediaSearchModel());
 
-       return View("List", searchModel);
+        return View("List", searchModel);
         //return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/List.cshtml", searchModel);
     }
 
@@ -60,7 +60,7 @@ public class ShareMediaController : BasePluginController
 
         var model = new ShareMediaModel();
         return View("Create", model);
-       // return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Create.cshtml",model);
+        // return View("~/Plugins/Widgets.SocialMediaSharing/Areas/Admin/Views/ShareMedia/Create.cshtml",model);
     }
 
 
@@ -74,24 +74,24 @@ public class ShareMediaController : BasePluginController
     }
 
 
-    [HttpPost]
-    public async Task<IActionResult>Create(ShareMediaModel obj)
+    [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+    public async Task<IActionResult> Create(ShareMediaModel obj, bool continueEditing)
     {
         if (ModelState.IsValid)
         {
             var model = new ShareMedia();
-                
-            model= await _shareMediaModelFactory.PrepareShareMediaAsync(obj);
+
+            model = await _shareMediaModelFactory.PrepareShareMediaAsync(obj);
 
             await _shareMediaService.InsertShareMediaAsync(model);
 
             await UpdatePictureSeoNameAsync(model);
 
 
-            return RedirectToAction("List");  
+            return continueEditing ? RedirectToAction("Edit", new { id = model.Id }) : RedirectToAction("List");
         }
 
-        return RedirectToAction("List");  
+        return RedirectToAction("List");
     }
 
 
@@ -110,23 +110,23 @@ public class ShareMediaController : BasePluginController
     }
 
 
-    [HttpPost]
-    public async Task<IActionResult> Edit(ShareMediaModel model)
+    [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+    public async Task<IActionResult> Edit(ShareMediaModel model, bool continueEditing)
     {
         var shareMedia = await _shareMediaService.GetShareMediaByIdAsync(model.Id);
 
-        if(shareMedia == null)
+        if (shareMedia == null)
 
             return RedirectToAction("List");
 
-        if(ModelState.IsValid)
+        if (ModelState.IsValid)
         {
             var obj = new ShareMedia();
             obj = await _shareMediaModelFactory.PrepareShareMediaAsync(model);
 
             await _shareMediaService.UpdateShareMediaAsync(obj);
 
-            return RedirectToAction("List");
+            return continueEditing ? RedirectToAction("Edit", new { id = obj.Id }) : RedirectToAction("List");
         }
 
         return RedirectToAction("List");
@@ -149,6 +149,35 @@ public class ShareMediaController : BasePluginController
     }
 
 
+
+
+    [HttpPost]
+
+    public async Task<IActionResult> DeleteSelected(ICollection<int> selectedId)
+    {
+        if (selectedId == null || selectedId.Count == 0)
+            return NoContent();
+
+        try
+        {
+            foreach (var id in selectedId)
+            {
+                var media = await _shareMediaService.GetShareMediaByIdAsync(id);
+                if (media != null)
+                {
+                    await _shareMediaService.DeleteShareMediaAsync(media);
+                }
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return Json(new { Result = true });
+    }
+
+
+
     #endregion
 
 
@@ -161,15 +190,15 @@ public class ShareMediaController : BasePluginController
     {
         var entity = await _shareMediaService.GetShareMediaByIdAsync(searchModel.ShareMediaId);
 
-        var model = await _shareOptionModelFactory.PrepareShareOptionListModelAsync(searchModel, entity); 
+        var model = await _shareOptionModelFactory.PrepareShareOptionListModelAsync(searchModel, entity);
 
         return Json(model);
 
     }
 
-   
+
     [HttpPost]
-    public virtual async Task<IActionResult> ShareOptionAdd(int shareMediaId, [Validate]ShareOptionModel model)
+    public virtual async Task<IActionResult> ShareOptionAdd(int shareMediaId, [Validate] ShareOptionModel model)
     {
 
         if (!ModelState.IsValid)
@@ -185,7 +214,7 @@ public class ShareMediaController : BasePluginController
 
 
     [HttpPost]
-    public virtual async Task<IActionResult> ShareOptionUpdate([Validate]ShareOptionModel model)
+    public virtual async Task<IActionResult> ShareOptionUpdate([Validate] ShareOptionModel model)
     {
         if (!ModelState.IsValid)
         {
