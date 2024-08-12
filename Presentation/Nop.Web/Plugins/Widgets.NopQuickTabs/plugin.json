@@ -1,0 +1,11 @@
+﻿{
+  "Group": "NopQuickTabs",
+  "FriendlyName": "Nop Quick Tabs",
+  "SystemName": "Nop.Plugins.Widgets.NopQuickTabs",
+  "Version": "4.7",
+  "SupportedVersions": [ "4.70" ],
+  "Author": "Md Atikul Islam",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.NopQuickTabs.dll",
+  "Description": "This plugin allows you to add information tabs to product pages that can be mapped to products, categories or manufacturers."
+}

@@ -26,5 +26,10 @@
   ],
   "PluginNamesToUninstall": [],
   "PluginNamesToDelete": [],
-  "PluginNamesToInstall": []
+  "PluginNamesToInstall": [
+    {
+      "Item1": "Nop.Plugins.Widgets.NopQuickTabs",
+      "Item2": "7cb54c4c-9b7a-458c-ba0c-76eec3c7f80d"
+    }
+  ]
 }
