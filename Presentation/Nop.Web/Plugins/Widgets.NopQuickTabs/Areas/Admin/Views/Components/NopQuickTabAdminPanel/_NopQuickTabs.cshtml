@@ -1,154 +1,269 @@
 ﻿@using Nop.Services.Common;
+@using Nop.Core.Domain.Configuration;
+@model TabModel
 
-@model int
-
-@inject IWorkContext workContext
-@inject IGenericAttributeService genericAttributeService
-@inject AdminAreaSettings adminAreaSettings
+@inject IWorkContext workContext;
+@inject IGenericAttributeService genericAttributeService;
+@inject AdminAreaSettings adminAreaSettings;
 
 @{
     var defaultGridPageSize = adminAreaSettings.DefaultGridPageSize;
     var gridPageSizes = adminAreaSettings.GridPageSizes;
 
-    var productId = Model;
+    var productId = Model.ProductId;
 
     const string quickTabsBlockAttributeName = "ProductPage.SS.QuickTabs";
     var hideQuickTabsBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), quickTabsBlockAttributeName, defaultValue: true);
 }
 
+<div class="card-body">
+    <div class="card card-default">
+        <div class="card-body">
+            @if (productId > 0)
+            {
+                <section class="content">
+                    <div class="form-horizontal">
+                        <div class="cards-group">
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        @T("NopQuickTabs.Admin.NopProductsTabTitle.ProductSpecificTabs")
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    @{
+                                        await Html.RenderPartialAsync("Table", new DataTablesModel
+                                        {
+                                            Name = "product-specific-tabs-grid",
+                                            UrlRead = new DataUrl("ListProductSpecificTabs", "Tab", new RouteValueDictionary { ["productId"] = productId }),
+                                            UrlDelete = new DataUrl("DeleteProductSpecificTabs", "Tab", new RouteValueDictionary { ["productId"] = productId }),
+                                            UrlUpdate = new DataUrl("UpdateTabs", "Tab", new RouteValueDictionary { ["productId"] = productId }),
+                                           // Length = defaultGridPageSize,
+                                            Length = Model.TabOptionModel.PageSize,
+                                            LengthMenu = Model.TabOptionModel.AvailablePageSizes,
+                                           // LengthMenu = gridPageSizes,
+                                            ColumnCollection = new List<ColumnProperty>
+                                            {
+                                                new ColumnProperty(nameof(TabModel.Title))
+                                                {
+                                                    Title = T("Admin.Widget.NopQuickTab.Field.Title").Text,
+                                                    Width = "300",
+                                                    Editable = true,
+                                                    EditType = EditType.String
+                                                },
+                                                new ColumnProperty(nameof(TabModel.ContentType))
+                                                {
+                                                    Title = T("Admin.Widget.NopQuickTab.Field.ContentType").Text,
+                                                    Width = "100",
+                                                    Editable = true,
+                                                    EditType = EditType.Number
+                                                },
+                                            
 
-    <div class="card-body">
-        <div class="card card-default">
-            <div class="card-body">
+                                                new ColumnProperty(nameof(TabModel.DisplayOrder))
+                                                {
+                                                    Title = T("Admin.Widget.NopQuickTab.Field.DisplayOrder").Text,
+                                                    Editable = true,
+                                                    EditType = EditType.Number
+                                                },
+                                                new ColumnProperty(nameof(TabModel.IsActive))
+                                                {
+                                                    Title = T("Admin.Widget.NopQuickTab.Field.IsActive").Text,
+                                                    Width = "100",
+                                                    Editable = true,
+                                                    EditType = EditType.Checkbox
+                                                },
+                                                new ColumnProperty(nameof(TabModel.Id))
+                                                {
+                                                    Title = T("Admin.Common.Edit").Text,
+                                                    Width = "100",
+                                                    ClassName = NopColumnClassDefaults.Button,
+                                                    Render = new RenderButtonsInlineEdit()
+                                                },
+                                                new ColumnProperty(nameof(TabModel.Id))
+                                                {
+                                                    Title = T("Admin.Common.Delete").Text,
+                                                    Width = "100",
+                                                    ClassName = NopColumnClassDefaults.Button,
+                                                    Render = new RenderButtonRemove(T("Admin.Common.Delete").Text)
+                                                }
+                                            }
+                                        });
+                                    }
 
-                @if (productId > 0)
-                {
-                    <div class="content-header clearfix">
-                        <div class="float-left">
+                                    
 
-                            <input type="button" id="btnAddNewProductAttachment" name="btnAddNewProductAttachment"
-                                   value="@T("NopQuickTabs.Admin.NopProductsTabTitle.AddNewTab")"
-                                   onclick="javascript:OpenWindow('@(Url.Action("Create", "Tab", new { productId = productId, IsPopup = true }))', 1080, 700, true); return false;"
-                                   class="btn bg-primary" />
-                                   
+
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="cards-group">
+                                <div class="card card-default">
+
+                                    @Html.HiddenFor(x => x.TabOptionModel.ProductId);
+
+                                    <div class="card-header">
+                                        @T("Admin.Common.AddNewRecord")
+                                    </div>
+
+
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <nop-label asp-for="@Model.TabOptionModel.Title" />
+                                            </div>
+                                            <div class="col-md-9">
+                                                <nop-editor asp-for="@Model.TabOptionModel.Title" />
+                                                <span asp-validation-for="@Model.TabOptionModel.Title"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <nop-label asp-for="@Model.TabOptionModel.ContentType" />
+                                            </div>
+                                            <div class="col-md-9">
+                                                <nop-select asp-for="@Model.TabOptionModel.ContentType" asp-items="@Model.TabOptionModel.ContentTypeOptions" id="ContentTypeSelect" />
+                                                <span asp-validation-for="@Model.TabOptionModel.ContentType"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row" id="DescriptionField" style="display:none;">
+                                            <div class="col-md-3">
+                                                <nop-label asp-for="@Model.TabOptionModel.Description" />
+                                            </div>
+                                            <div class="col-md-9">
+                                                <nop-editor asp-for="@Model.TabOptionModel.Description" asp-template="RichEditor" />
+                                                <span asp-validation-for="@Model.TabOptionModel.Description"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <nop-label asp-for="@Model.TabOptionModel.DisplayOrder" />
+                                            </div>
+                                            <div class="col-md-9">
+                                                <nop-editor asp-for="@Model.TabOptionModel.DisplayOrder" />
+                                                <span asp-validation-for="@Model.TabOptionModel.DisplayOrder"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <nop-label asp-for="@Model.TabOptionModel.IsActive" />
+                                            </div>
+                                            <div class="col-md-9">
+                                                <nop-editor asp-for="@Model.TabOptionModel.IsActive" />
+                                                <span asp-validation-for="@Model.TabOptionModel.IsActive"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-9 offset-md-3">
+                                                <button type="button" id="addTabOption" class="btn btn-primary">@T("Admin.Common.AddNewRecord")</button>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                    <script>
+
+                                        $(function () {
+                                            $('#addTabOption').click(function () {
+                                                $('#addTabOption').attr('disabled', true);
+                                                var description = tinymce.get('@Html.IdFor(Model => Model.TabOptionModel.Description)').getContent();
+                                                var postData = {
+                                                    ProductId: $("#@Html.IdFor(Model => Model.TabOptionModel.ProductId)").val(),
+                                                    Title: $("#@Html.IdFor(Model => Model.TabOptionModel.Title)").val(),
+                                                    ContentType: $("#ContentTypeSelect").val(),
+                                                    Description: description,
+                                                    DisplayOrder: $("#@Html.IdFor(Model => Model.TabOptionModel.DisplayOrder)").val(),
+                                                    IsActive: $("#@Html.IdFor(Model => Model.TabOptionModel.IsActive)").prop('checked')
+                                                };
+
+                                                console.log("postData: ", postData);
+
+                                                addAntiForgeryToken(postData);
+
+                                                $.ajax({
+                                                    cache: false,
+                                                    type: "POST",
+                                                    url: "@Html.Raw(Url.Action("TabOptionAdd", "Tab", new { productId = Model.ProductId }))",
+                                                    data: postData,
+                                                    success: function (data, textStatus, jqXHR) {
+                                                        if (data.Result) {
+                                                            //reload grid
+                                                            updateTable('#product-specific-tabs-grid');
+
+                                                            //clear input value
+                                                            $("#@Html.IdFor(Model => Model.TabOptionModel.Title)").val('');
+                                                            $("#@Html.IdFor(Model => Model.TabOptionModel.ContentType)").val('');
+                                                            tinymce.get('@Html.IdFor(Model => Model.TabOptionModel.Description)').setContent(''); // Clear the TinyMCE content
+                                                            
+                                                            //$("#@Html.IdFor(Model => Model.TabOptionModel.Description)").val('');
+                                                            $("#@Html.IdFor(Model => Model.TabOptionModel.DisplayOrder)").val('');
+                                                            $("#@Html.IdFor(Model => Model.TabOptionModel.IsActive)").prop('checked', false);
+                                                        }
+                                                        else {
+                                                            //display errors if returned
+                                                            display_nop_error(data);
+                                                        }
+                                                    },
+                                                    complete: function (jqXHR, textStatus) {
+                                                        $('#addTabOption').attr('disabled', false);
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+
+
+
+
+
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    function toggleDescriptionField() {
+                                        var selectedValue = $('#ContentTypeSelect').val();
+                                        if (selectedValue == "50") {
+                                            $('#DescriptionField').show();
+                                        } else {
+                                            $('#DescriptionField').hide();
+                                        }
+                                    }
+
+                                    toggleDescriptionField();
+
+                                    $('#ContentTypeSelect').change(function () {
+                                        toggleDescriptionField();
+                                    });
+                                });
+                            </script>
+
+
+
+
 
 
                         </div>
                     </div>
-                 
-                    
-                   
-                    <section class="content">
-                        <div class="form-horizontal">
-                            <div class="cards-group">
-                                <div class="card card-default">
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            @T("NopQuickTabs.Admin.NopProductsTabTitle.ProductSpecificTabs")
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        @{
-                                            await Html.RenderPartialAsync("Table", new DataTablesModel
-                                            {
-                                                Name = "product-specific-tabs-grid",
-                                                UrlRead = new DataUrl("ListProductSpecificTabs", "Tab", new RouteValueDictionary { ["productId"] = productId }),
-                                                UrlDelete = new DataUrl("DeleteProductSpecificTabs", "ProductTabAdmin", new RouteValueDictionary { ["productId"] = productId }),
-                                                UrlUpdate = new DataUrl("UpdateTabs", "ProductTabAdmin", new RouteValueDictionary { ["productId"] = productId }),
-                                                Length = defaultGridPageSize,
-                                                LengthMenu = gridPageSizes,
-                                                ColumnCollection = new List<ColumnProperty>
-                                                                {
-                                                                new ColumnProperty(nameof(TabModel.Title))
-                                                                {
-                                                                     Title = T("Admin.Widget.NopQuickTab.Field.Title").Text
-                                                                },
-                                                                new ColumnProperty(nameof(TabModel.ContentType))
-                                                                {
-                                                                   Title = T("Admin.Widget.NopQuickTab.Field.ContentType").Text
-                                                                },
-                                                                new ColumnProperty(nameof(TabModel.DisplayOrder))
-                                                                {
-                                                                Title = T("Admin.Widget.NopQuickTab.Field.DisplayOrder").Text,
-                                                                Editable = true,
-                                                                EditType = EditType.Number
-                                                                },
-                                                                new ColumnProperty(nameof(TabModel.IsActive))
-                                                                {
-                                                                 Title = T("Admin.Widget.NopQuickTab.Field.IsActive").Text
-                                                                },
+                </section>
 
-
-
-                                                                new ColumnProperty(nameof(TabModel.Id))
-                                                                {
-                                                                Width = "200",
-                                                                Render = new RenderCustom("renderEditButton")
-                                                                },
-                                                                new ColumnProperty(nameof(TabModel.Id))
-                                                                {
-                                                                Width = "200",
-                                                                Render = new RenderButtonsInlineEdit()
-                                                                },
-                                                                new ColumnProperty(nameof(TabModel.Id))
-                                                                {
-                                                                Width = "200",
-                                                                Render = new RenderButtonRemove(T("Admin.Common.Delete").Text)
-                                                                }
-                                                                }
-                                            });
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-
-  
-
-
-                    </div>
-                    </section>
-
-
-
-
-                    <input type="submit" id="btnRefreshGrid" name="btnRefreshGrid" style="display: none" />
-
-                  @* 
-                      <script type="text/javascript">
-                        function renderEditButton(data, type, row, meta) {
-
-                            return '<button class="btn btn-default" onclick="OpenWindow(\'@Url.Action("Edit", "Tab")?id=' + data + '&isPopup=true\', 800, 700, true);return false;" title="@T("SevenSpikes.NopQuickTabs.Admin.NopProductsTabTitle.EditTab")">' +
-                                '<i class="fas fa-pencil-alt"></i>' +
-                                '@T("SevenSpikes.NopQuickTabs.Admin.NopProductsTabTitle.EditTab")' +
-                                '</button>';
-                        }
-                    </script>
-                    *@
-
-                   
-                      <script type="text/javascript">
-                        $(document).ready(function () {
-                            $('#btnRefreshGrid').click(function (e) {
-                                //refresh grid
-
-                                e.preventDefault(); //don't reload the page
-
-                                var productSpecificTabsGrid = $("#product-specific-tabs-grid").DataTable();
-                                productSpecificTabsGrid.ajax.reload();
-
-                          
-
-                                //return false to don't reload a page
-                                return false;
-                            });
-                        });
-                    </script> 
-                    
-                }
-                else
-                {
-                    @T("SevenSpikes.NopQuickTabs.Admin.NopProductsTabTitle.SaveBeforeEdit")
-                }
-            </div>
+               
+            }
+            
         </div>
     </div>
+</div>

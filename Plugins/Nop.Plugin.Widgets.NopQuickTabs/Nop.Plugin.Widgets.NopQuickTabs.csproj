@@ -27,7 +27,8 @@
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
-    <None Remove="Views\Shared\Components\NopQuickTabsView\Default.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\Default.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\_ViewImports.cshtml" />
   </ItemGroup>
 
 
@@ -47,7 +48,7 @@
     <Content Include="Areas\Admin\Views\Tab\_ViewImports.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\Components\NopQuickTabsView\Default.cshtml">
+    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\Default.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -57,6 +58,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\_ViewImports.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using Nop.Core;
-using Nop.Plugin.Widgets.NopQuickTabs.Components;
+using Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Components;
 using Nop.Services.Cms;
 using Nop.Services.Localization;
 using Nop.Services.Plugins;
@@ -31,7 +31,7 @@ namespace Nop.Plugin.Widgets.NopQuickTabs
         {
 
 
-            return typeof(NopQuickTabsViewComponents);
+            return typeof(NopQuickTabAdminPanelComponent);
         }
 
         public Task<IList<string>> GetWidgetZonesAsync()
@@ -41,7 +41,8 @@ namespace Nop.Plugin.Widgets.NopQuickTabs
             return Task.FromResult<IList<string>>(
                 new List<string>
                 {
-                    PublicWidgetZones.HomepageTop,
+                    //PublicWidgetZones.HomepageTop,
+                    AdminWidgetZones.ProductDetailsBlock
                 });
 
         }
@@ -56,6 +57,7 @@ namespace Nop.Plugin.Widgets.NopQuickTabs
                 ["NopQuickTabs.Admin.NopProductsTabTitle.AddNewTab"] = "AddNewTab",
                 ["NopQuickTabs.Admin.NopProductsTabTitle.ProductSpecificTabs"] = "Product specific tabs",
                 ["Admin.Widget.Tab.BackToList"] = "BackToList",
+                ["Admin.Common.AddNewRecord"] = "AddNewTab",
 
                 ["Admin.Widget.NopQuickTab.Field.ProductId"] = "ProductId",
                 ["Admin.Widget.NopQuickTab.Field.Title"] = "Title",

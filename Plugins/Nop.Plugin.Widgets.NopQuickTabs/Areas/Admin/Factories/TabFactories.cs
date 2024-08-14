@@ -69,7 +69,10 @@ public class TabFactories : ITabFactories
             DisplayOrder = entity.DisplayOrder,
             IsActive = entity.IsActive,
             ContentType = entity.ContentType
+
         };
+
+
         return obj;
     }
 

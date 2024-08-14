@@ -90,11 +90,6 @@
                 <nop-card asp-name="product-related-products" asp-icon="fas fa-object-group" asp-title="@T("Admin.Catalog.Products.RelatedProducts")" asp-hide-block-attribute-name="@hideRelatedProductsBlockAttributeName" asp-hide="@hideRelatedProductsBlock" asp-advanced="@(!Model.ProductEditorSettingsModel.RelatedProducts)">@await Html.PartialAsync("_CreateOrUpdate.RelatedProducts", Model)</nop-card>
                 <nop-card asp-name="product-crosssells-products" asp-icon="fas fa-random" asp-title="@T("Admin.Catalog.Products.CrossSells")" asp-hide-block-attribute-name="@hideCrossSellsProductsBlockAttributeName" asp-hide="@hideCrossSellsProductsBlock" asp-advanced="@(!Model.ProductEditorSettingsModel.CrossSellsProducts)">@await Html.PartialAsync("_CreateOrUpdate.CrossSellsProducts", Model)</nop-card>
 
-                <nop-card asp-name="product-quick-tabs" asp-icon="fa fa-link" asp-title="@T("NopQuickTabs.Admin.NopProductsTabTitle")" asp-hide-block-attribute-name="Tabs" asp-hide="false" asp-advanced="false">
-                    @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Areas/Admin/Views/Components/NopQuickTabAdminPanel/_NopQuickTabs.cshtml", Model.Id)
-                </nop-card>
-                
-
 
                 @if (Model.Id > 0)
                 {

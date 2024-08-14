@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Factories;
 using Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Model.Tabs;
-using Nop.Plugin.Widgets.NopQuickTabs.Domains;
 using Nop.Plugin.Widgets.NopQuickTabs.Services;
 using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
+using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework.Mvc.Filters;
+using Nop.Web.Framework.Mvc.ModelBinding;
+using Nop.Web.Framework.Validators;
 
 namespace Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Controller;
 [AuthorizeAdmin]
@@ -27,6 +29,9 @@ public class TabController : BasePluginController
 
     public async Task<JsonResult> ListProductSpecificTabs(TabSearchModel searchModel, int productId)
     {
+
+        // var src = await _tabFactories.PrepareTabSearchModelAsync(searchModel);
+
         var model = await _tabFactories.PrepareTabListModelAsync(searchModel, productId);
 
         return Json(model);
@@ -35,32 +40,59 @@ public class TabController : BasePluginController
 
 
 
-
-    public async Task<IActionResult> Create(int productId, bool IsPopup)
+    [HttpPost]
+    public virtual async Task<IActionResult> TabOptionAdd(int productId, [Validate] TabModel model)
     {
-        var model = new TabModel();
-        model.ProductId = productId;
-        return View("~/Plugins/Widgets.NopQuickTabs/Areas/Admin/Views/Tab/Create.cshtml", model);
-    }
-
-
-    [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
-
-    public async Task<IActionResult> Create(TabModel model, bool continueEditing)
-    {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            var tab = new Tab();
-
-            tab = await _tabFactories.PrepareTabAsync(model);
-            await _tabService.InsertTabAsync(tab);
-
-            return RedirectToAction("Create");
+            return ErrorJson(ModelState.SerializeErrors());
         }
 
-        return RedirectToAction("Create");
+
+        var tab = await _tabFactories.PrepareTabAsync(model);
+        await _tabService.InsertTabAsync(tab);
+
+
+        return Json(new { Result = true });
+    }
+
+
+    [HttpPost]
+    public virtual async Task<IActionResult> UpdateTabs(TabModel model, int productId)
+    {
+        if (!ModelState.IsValid)
+        {
+            return ErrorJson(ModelState.SerializeErrors());
+        }
+
+        var tab = await _tabFactories.PrepareTabAsync(model);
+        tab.Id = model.Id;
+
+        await _tabService.UpdateTabAsync(tab);
+
+        return new NullJsonResult();
+    }
+
+
+
+    [HttpPost]
+
+    public virtual async Task<IActionResult> DeleteProductSpecificTabs(int id, int productId)
+    {
+        var tab = await _tabService.GetTabByIdAsync(id);
+        if (tab == null)
+            throw new ArgumentException("No Resource found with the specified id", nameof(id));
+
+        await _tabService.DeleteTabAsync(tab);
+
+        return new NullJsonResult();
 
     }
+
+
+
+
+
 
 
 
