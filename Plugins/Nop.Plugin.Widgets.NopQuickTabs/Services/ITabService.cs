@@ -12,6 +12,9 @@ public interface ITabService
 
     Task<Tab> GetTabByIdAsync(int id);
 
-    Task<IPagedList<Tab>> GetAllTabAsync(int pageIndex = 0, int pageSize = int.MaxValue);
+    //Task<IList<Tab>> GetProductTabList(int productId);
+
+
+    Task<IPagedList<Tab>> GetAllTabAsync(int productId, int pageIndex = 0, int pageSize = int.MaxValue);
 
 }

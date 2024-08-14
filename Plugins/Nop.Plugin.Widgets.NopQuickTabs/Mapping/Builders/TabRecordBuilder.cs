@@ -9,12 +9,11 @@ public class TabRecordBuilder : NopEntityBuilder<Tab>
     {
         table.WithColumn(nameof(Tab.Id)).AsInt32().PrimaryKey().Identity()
             .WithColumn(nameof(Tab.ProductId)).AsInt32().NotNullable()
-            .WithColumn(nameof(Tab.SystemName)).AsString(400)
-            .WithColumn(nameof(Tab.DisplayName)).AsString(400).NotNullable()
-            .WithColumn(nameof(Tab.Description)).AsString(1000)
-            .WithColumn(nameof(Tab.LimitedToStores)).AsBoolean()
+            .WithColumn(nameof(Tab.Title)).AsString(400)
+            .WithColumn(nameof(Tab.Description)).AsString(1000).Nullable()
             .WithColumn(nameof(Tab.DisplayOrder)).AsInt32()
-            .WithColumn(nameof(Tab.IsEnable)).AsBoolean();
+            .WithColumn(nameof(Tab.IsActive)).AsBoolean()
+            .WithColumn(nameof(Tab.ContentType)).AsInt32().NotNullable();
 
     }
 }

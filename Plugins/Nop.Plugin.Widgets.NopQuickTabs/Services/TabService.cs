@@ -16,16 +16,26 @@ public class TabService : ITabService
         await _repository.DeleteAsync(tab);
     }
 
-    public async Task<IPagedList<Tab>> GetAllTabAsync(int pageIndex = 0, int pageSize = int.MaxValue)
+    public async Task<IPagedList<Tab>> GetAllTabAsync(int productId, int pageIndex = 0, int pageSize = int.MaxValue)
     {
 
         var query = from t in _repository.Table
+                    where t.ProductId == productId
                     orderby t.DisplayOrder
                     select t;
         return await query.ToPagedListAsync(pageIndex, pageSize);
 
     }
 
+    //public async Task<IList<Tab>> GetProductTabList(int productId)
+    //{
+    //    var query = from t in _repository.Table
+    //                where t.ProductId == productId
+    //                orderby t.DisplayOrder
+    //                select t;
+
+    //    return query;
+    //}
 
     public virtual async Task<Tab> GetTabByIdAsync(int id)
     {
