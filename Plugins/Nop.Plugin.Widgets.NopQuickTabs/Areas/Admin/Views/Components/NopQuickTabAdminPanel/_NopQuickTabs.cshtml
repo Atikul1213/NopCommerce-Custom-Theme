@@ -51,18 +51,19 @@
                                                     Editable = true,
                                                     EditType = EditType.String
                                                 },
-                                                new ColumnProperty(nameof(TabModel.ContentType))
+                                                new ColumnProperty(nameof(TabModel.ContentTypeStr))
                                                 {
                                                     Title = T("Admin.Widget.NopQuickTab.Field.ContentType").Text,
-                                                    Width = "100",
-                                                    Editable = true,
-                                                    EditType = EditType.Number
+                                                    Width = "200",
+                                                    Editable = false,
+                                                   
                                                 },
                                             
 
                                                 new ColumnProperty(nameof(TabModel.DisplayOrder))
                                                 {
                                                     Title = T("Admin.Widget.NopQuickTab.Field.DisplayOrder").Text,
+                                                     Width = "100",
                                                     Editable = true,
                                                     EditType = EditType.Number
                                                 },
@@ -71,6 +72,7 @@
                                                     Title = T("Admin.Widget.NopQuickTab.Field.IsActive").Text,
                                                     Width = "100",
                                                     Editable = true,
+                                                    Render = new RenderBoolean(),
                                                     EditType = EditType.Checkbox
                                                 },
                                                 new ColumnProperty(nameof(TabModel.Id))
@@ -104,7 +106,7 @@
                             <div class="cards-group">
                                 <div class="card card-default">
 
-                                    @Html.HiddenFor(x => x.TabOptionModel.ProductId);
+                                    @* @Html.HiddenFor(x => x.TabOptionModel.ProductId); *@
 
                                     <div class="card-header">
                                         @T("Admin.Common.AddNewRecord")

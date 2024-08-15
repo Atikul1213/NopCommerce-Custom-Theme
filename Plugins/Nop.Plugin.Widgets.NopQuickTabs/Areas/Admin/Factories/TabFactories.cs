@@ -68,9 +68,11 @@ public class TabFactories : ITabFactories
             Description = entity.Description,
             DisplayOrder = entity.DisplayOrder,
             IsActive = entity.IsActive,
-            ContentType = entity.ContentType
+            ContentType = entity.ContentType,
+            // ContentTypeStr = await _localizationService.GetLocalizedEnumAsync(entity.ContentType)
 
         };
+        obj.ContentTypeStr = entity.ContentTypes.ToString();
 
 
         return obj;
