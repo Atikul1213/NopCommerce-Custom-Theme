@@ -1,28 +1,50 @@
 ﻿@model TabUIModel
 <h2>This is from the Nop Quick Tabs public page</h2>
 
-
-<div class="productTabs-header">
-    <ul>
-        @foreach (var tab in Model.TabHomeModel)
-        {
-            @if((ContentTypes)tab.ContentType == ContentTypes.Description)
-            {
-                <li>
-                    @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml",Model.ProductModel.FullDescription);
-                </li>
-            }
-
-            @if( (ContentTypes)tab.ContentType == ContentTypes.Specification)
-            {
-                <li>
-                    @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductSpecificationsTab.cshtml", Model.ProductModel.ProductSpecificationModel);
-                </li>
-            }
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-        }
-        
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    @foreach (var tab in Model.TabHomeModel)
+                    {
+                        <a class="nav-item nav-link @(tab == Model.TabHomeModel.First() ? "active" : "")"
+                           id="nav-@tab.ContentType-tab" data-toggle="tab" href="#nav-@tab.ContentType"
+                           role="tab" aria-controls="nav-@tab.ContentType" aria-selected="@(tab == Model.TabHomeModel.First() ? "true" : "false")">
+                            @tab.Title
+                        </a>
+                    }
+                </div>
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                @foreach (var tab in Model.TabHomeModel)
+                {
+                    <div class="tab-pane fade @(tab == Model.TabHomeModel.First() ? "show active" : "")"
+                         id="nav-@tab.ContentType" role="tabpanel" aria-labelledby="nav-@tab.ContentType-tab">
+                        @if ((ContentTypes)tab.ContentType == ContentTypes.Description)
+                        {
+                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml", Model.ProductModel.FullDescription)
+                            ;
+                        }
+
+                        @if ((ContentTypes)tab.ContentType == ContentTypes.Specification)
+                        {
+                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductSpecificationsTab.cshtml", Model.ProductModel.ProductSpecificationModel)
+                            ;
+                        }
+
+                        @if ((ContentTypes)tab.ContentType == ContentTypes.ContactUs)
+                        {
+                            @* @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductContactUsTab.cshtml", Model.ProductModel.ContactUsModel); *@
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
- 

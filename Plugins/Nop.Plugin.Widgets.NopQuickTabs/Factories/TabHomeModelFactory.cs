@@ -24,7 +24,7 @@ public class TabHomeModelFactory : ITabHomeModelFactory
 
     public async Task<TabUIModel> PrepareTabUIModelListAsync(int productId, ProductDetailsModel productModel)
     {
-        var tabList = await _tabService.GetAllTabAsync(productId);
+        var tabList = await _tabService.GetProductTabList(productId);
 
         var tabUIModel = new TabUIModel();
         tabUIModel.ProductModel = productModel;
