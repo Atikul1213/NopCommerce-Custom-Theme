@@ -11,4 +11,7 @@ public interface ITabFactories
     Task<TabListModel> PrepareTabListModelAsync(TabSearchModel searchModel, int productId);
 
     Task<TabSearchModel> PrepareTabSearchModelAsync(TabSearchModel searchModel);
+
+    Task<Tab> PrepareTabDataTableAsync(TabModel model);
+
 }

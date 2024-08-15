@@ -19,8 +19,7 @@ public record TabModel : BaseNopEntityModel
     [NopResourceDisplayName("Admin.Widget.NopQuickTab.Field.IsActive")]
     public bool IsActive { get; set; }
     [NopResourceDisplayName("Admin.Widget.NopQuickTab.Field.ContentType")]
-    public int ContentType { get; set; }
-    public string ContentTypeStr { get; set; }
+    public string ContentType { get; set; }
     public TabOptionModel TabOptionModel { get; set; }
 
 }

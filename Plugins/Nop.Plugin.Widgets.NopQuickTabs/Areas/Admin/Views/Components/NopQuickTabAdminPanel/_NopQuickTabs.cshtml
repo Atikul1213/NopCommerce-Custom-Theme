@@ -16,6 +16,8 @@
     var hideQuickTabsBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), quickTabsBlockAttributeName, defaultValue: true);
 }
 
+<nop-card asp-name="product-quick-tabs" asp-icon="fa fa-link" asp-title="@T("NopQuickTabs.Admin.NopProductsTabTitle")" asp-hide-block-attribute-name="@quickTabsBlockAttributeName" asp-hide="@hideQuickTabsBlock" asp-advanced="false">
+
 <div class="card-body">
     <div class="card card-default">
         <div class="card-body">
@@ -51,7 +53,7 @@
                                                     Editable = true,
                                                     EditType = EditType.String
                                                 },
-                                                new ColumnProperty(nameof(TabModel.ContentTypeStr))
+                                                new ColumnProperty(nameof(TabModel.ContentType))
                                                 {
                                                     Title = T("Admin.Widget.NopQuickTab.Field.ContentType").Text,
                                                     Width = "200",
@@ -208,7 +210,7 @@
 
                                                             //clear input value
                                                             $("#@Html.IdFor(Model => Model.TabOptionModel.Title)").val('');
-                                                            $("#@Html.IdFor(Model => Model.TabOptionModel.ContentType)").val('');
+                                                           
                                                             tinymce.get('@Html.IdFor(Model => Model.TabOptionModel.Description)').setContent(''); // Clear the TinyMCE content
                                                             
                                                             //$("#@Html.IdFor(Model => Model.TabOptionModel.Description)").val('');
@@ -269,3 +271,6 @@
         </div>
     </div>
 </div>
+
+
+</nop-card>

@@ -27,12 +27,33 @@ public class TabFactories : ITabFactories
             Description = model.Description,
             DisplayOrder = model.DisplayOrder,
             IsActive = model.IsActive,
-            ContentType = model.ContentType
+            ContentType = Convert.ToInt32(model.ContentType),
         };
 
 
         return entity;
 
+    }
+
+    public async Task<Tab> PrepareTabDataTableAsync(TabModel model)
+    {
+        if (model == null)
+            throw new NotImplementedException();
+
+        var tabModel = await _tabService.GetTabByIdAsync(model.Id);
+
+        var entity = new Tab()
+        {
+            Title = model.Title,
+            ProductId = model.ProductId,
+            Description = model.Description,
+            DisplayOrder = model.DisplayOrder,
+            IsActive = model.IsActive,
+            ContentType = tabModel.ContentType
+        };
+
+
+        return entity;
     }
 
     public async Task<TabListModel> PrepareTabListModelAsync(TabSearchModel searchModel, int productId)
@@ -60,7 +81,7 @@ public class TabFactories : ITabFactories
         if (entity == null)
             throw new NotImplementedException();
 
-        var obj = new TabModel()
+        return new TabModel()
         {
             Id = entity.Id,
             Title = entity.Title,
@@ -68,30 +89,24 @@ public class TabFactories : ITabFactories
             Description = entity.Description,
             DisplayOrder = entity.DisplayOrder,
             IsActive = entity.IsActive,
-            ContentType = entity.ContentType,
-            // ContentTypeStr = await _localizationService.GetLocalizedEnumAsync(entity.ContentType)
-
+            ContentType = Enum.GetName(typeof(ContentTypes), entity.ContentType),
         };
-        obj.ContentTypeStr = entity.ContentTypes.ToString();
-
-
-        return obj;
     }
 
     public async Task<TabSearchModel> PrepareTabSearchModelAsync(TabSearchModel searchModel)
     {
         await _localizationService.AddOrUpdateLocaleResourceAsync(new Dictionary<string, string>
         {
-            ["NopQuickTabs.Admin.NopProductsTabTitle"] = "Tabs",
-            ["NopQuickTabs.Admin.NopProductsTabTitle.AddNewTab"] = "AddNewTab",
-            ["NopQuickTabs.Admin.NopProductsTabTitle.ProductSpecificTabs"] = "Product specific tabs",
 
-            ["Admin.Widget.NopQuickTab.Field.ProductId"] = "ProductId",
-            ["Admin.Widget.NopQuickTab.Field.Title"] = "Title",
-            ["Admin.Widget.NopQuickTab.Field.Description"] = "Description",
-            ["Admin.Widget.NopQuickTab.Field.DisplayOrder"] = "Display Order",
-            ["Admin.Widget.NopQuickTab.Field.IsActive"] = "IsActive",
-            ["Admin.Widget.NopQuickTab.Field.ContentType"] = "Content Type"
+            ["Admin.Widget.NopQuickTab.Field.Title.Hint"] = "The title of the Tab",
+
+            ["Admin.Widget.NopQuickTab.Field.Description.Hint"] = "The Description is the text that is show in the Product page",
+
+            ["Admin.Widget.NopQuickTab.Field.DisplayOrder.Hint"] = "Display Order of the Tab",
+
+            ["Admin.Widget.NopQuickTab.Field.IsActive.Hint"] = "Check to IsActive the Tab in the Product Page",
+
+            ["Admin.Widget.NopQuickTab.Field.ContentType.Hint"] = "Choose a Content Type"
 
         });
         searchModel.SetGridPageSize();

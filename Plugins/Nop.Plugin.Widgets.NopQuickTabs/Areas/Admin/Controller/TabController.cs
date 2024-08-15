@@ -30,7 +30,7 @@ public class TabController : BasePluginController
     public async Task<JsonResult> ListProductSpecificTabs(TabSearchModel searchModel, int productId)
     {
 
-        // var src = await _tabFactories.PrepareTabSearchModelAsync(searchModel);
+        var src = await _tabFactories.PrepareTabSearchModelAsync(searchModel);
 
         var model = await _tabFactories.PrepareTabListModelAsync(searchModel, productId);
 
@@ -65,7 +65,7 @@ public class TabController : BasePluginController
             return ErrorJson(ModelState.SerializeErrors());
         }
 
-        var tab = await _tabFactories.PrepareTabAsync(model);
+        var tab = await _tabFactories.PrepareTabDataTableAsync(model);
         tab.Id = model.Id;
 
         await _tabService.UpdateTabAsync(tab);

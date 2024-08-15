@@ -61,10 +61,15 @@ namespace Nop.Plugin.Widgets.NopQuickTabs
 
                 ["Admin.Widget.NopQuickTab.Field.ProductId"] = "ProductId",
                 ["Admin.Widget.NopQuickTab.Field.Title"] = "Title",
+                ["Admin.Widget.NopQuickTab.Field.Title.Hint"] = "The title of the Tab",
                 ["Admin.Widget.NopQuickTab.Field.Description"] = "Description",
+                ["Admin.Widget.NopQuickTab.Field.Description.Hint"] = "The Description is the text that is show in the Product page",
                 ["Admin.Widget.NopQuickTab.Field.DisplayOrder"] = "Display Order",
+                ["Admin.Widget.NopQuickTab.Field.DisplayOrder.Hint"] = "Display Order of the Tab",
                 ["Admin.Widget.NopQuickTab.Field.IsActive"] = "IsActive",
-                ["Admin.Widget.NopQuickTab.Field.ContentType"] = "Content Type"
+                ["Admin.Widget.NopQuickTab.Field.IsActive.Hint"] = "Check to IsActive the Tab in the Product Page",
+                ["Admin.Widget.NopQuickTab.Field.ContentType"] = "Content Type",
+                ["Admin.Widget.NopQuickTab.Field.ContentType.Hint"] = "Choose a Content Type"
 
             });
 
