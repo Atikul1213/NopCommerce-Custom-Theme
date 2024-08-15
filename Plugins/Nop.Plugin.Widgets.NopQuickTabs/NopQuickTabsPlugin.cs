@@ -1,5 +1,6 @@
 ﻿using Nop.Core;
 using Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Components;
+using Nop.Plugin.Widgets.NopQuickTabs.Components;
 using Nop.Services.Cms;
 using Nop.Services.Localization;
 using Nop.Services.Plugins;
@@ -29,9 +30,11 @@ namespace Nop.Plugin.Widgets.NopQuickTabs
 
         public Type GetWidgetViewComponent(string widgetZone)
         {
+            if (widgetZone == "productdetails_bottom")
+                return typeof(NopQuickTabsPublicViewComponents);
+            else
 
-
-            return typeof(NopQuickTabAdminPanelComponent);
+                return typeof(NopQuickTabAdminPanelComponent);
         }
 
         public Task<IList<string>> GetWidgetZonesAsync()
@@ -41,7 +44,7 @@ namespace Nop.Plugin.Widgets.NopQuickTabs
             return Task.FromResult<IList<string>>(
                 new List<string>
                 {
-                    //PublicWidgetZones.HomepageTop,
+                    PublicWidgetZones.ProductDetailsBottom,
                     AdminWidgetZones.ProductDetailsBlock
                 });
 

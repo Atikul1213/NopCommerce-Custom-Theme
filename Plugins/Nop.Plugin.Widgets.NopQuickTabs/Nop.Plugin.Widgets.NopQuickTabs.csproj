@@ -72,7 +72,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Infrastructure\" />
-    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>
