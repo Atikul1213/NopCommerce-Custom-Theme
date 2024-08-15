@@ -1,1 +1,28 @@
-﻿<h2>This is from the Nop Quick Tabs public page</h2>
+﻿@model TabUIModel
+<h2>This is from the Nop Quick Tabs public page</h2>
+
+
+<div class="productTabs-header">
+    <ul>
+        @foreach (var tab in Model.TabHomeModel)
+        {
+            @if((ContentTypes)tab.ContentType == ContentTypes.Description)
+            {
+                <li>
+                    @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml",Model.ProductModel.FullDescription);
+                </li>
+            }
+
+            @if( (ContentTypes)tab.ContentType == ContentTypes.Specification)
+            {
+                <li>
+                    @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductSpecificationsTab.cshtml", Model.ProductModel.ProductSpecificationModel);
+                </li>
+            }
+
+
+        }
+        
+    </ul>
+</div>
+ 

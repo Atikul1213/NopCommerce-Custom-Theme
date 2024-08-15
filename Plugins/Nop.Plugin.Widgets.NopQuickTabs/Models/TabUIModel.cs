@@ -6,16 +6,14 @@ public record TabUIModel : BaseNopEntityModel
 {
     public TabUIModel()
     {
-        ProductDetails = new ProductDetailsModel();
+        ProductModel = new ProductDetailsModel();
+        TabHomeModel = new List<TabHomeModel>();
     }
-    public int ProductId { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public int DisplayOrder { get; set; }
-    public bool IsActive { get; set; }
-    public int ContentType { get; set; }
-    public ProductDetailsModel ProductDetails { get; set; }
 
+    public int ProductId { get; set; }
+    public ProductDetailsModel ProductModel { get; set; }
+
+    public IList<TabHomeModel> TabHomeModel { get; set; }
 
 
 }

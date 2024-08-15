@@ -30,7 +30,7 @@ namespace Nop.Plugin.Widgets.NopQuickTabs
 
         public Type GetWidgetViewComponent(string widgetZone)
         {
-            if (widgetZone == "productdetails_bottom")
+            if (widgetZone == PublicWidgetZones.ProductDetailsBottom)
                 return typeof(NopQuickTabsPublicViewComponents);
             else
 

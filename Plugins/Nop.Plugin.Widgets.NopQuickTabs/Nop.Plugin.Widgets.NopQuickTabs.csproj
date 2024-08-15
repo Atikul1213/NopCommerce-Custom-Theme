@@ -28,6 +28,8 @@
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
     <None Remove="Views\Shared\Components\NopQuickTabsPublicView\Default.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductDescriptionTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductSpecificationsTab.cshtml" />
     <None Remove="Views\Shared\Components\NopQuickTabsPublicView\_ViewImports.cshtml" />
   </ItemGroup>
 
@@ -58,6 +60,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductDescriptionTab.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductSpecificationsTab.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\Components\NopQuickTabsPublicView\_ViewImports.cshtml">

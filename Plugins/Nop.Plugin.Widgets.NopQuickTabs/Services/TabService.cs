@@ -27,15 +27,15 @@ public class TabService : ITabService
 
     }
 
-    //public async Task<IList<Tab>> GetProductTabList(int productId)
-    //{
-    //    var query = from t in _repository.Table
-    //                where t.ProductId == productId
-    //                orderby t.DisplayOrder
-    //                select t;
+    public async Task<IList<Tab>> GetProductTabList(int productId)
+    {
+        var query = await (from t in _repository.Table
+                           where t.ProductId == productId && t.IsActive == true
+                           orderby t.DisplayOrder
+                           select t).ToListAsync();
 
-    //    return query;
-    //}
+        return query;
+    }
 
     public virtual async Task<Tab> GetTabByIdAsync(int id)
     {
