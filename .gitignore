@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+*.dll
+/Presentation/Nop.Web/Plugins/Widgets.NopQuickTabs/refs/Microsoft.AspNetCore.Cors.dll
+/Presentation/Nop.Web/Plugins/Widgets.NopQuickTabs/refs/Microsoft.AspNetCore.CookiePolicy.dll

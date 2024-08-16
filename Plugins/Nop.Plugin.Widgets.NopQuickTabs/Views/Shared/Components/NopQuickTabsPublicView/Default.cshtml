@@ -5,10 +5,65 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<style>
+    .container {
+        width: 100%; /* Ensure the container takes up full width */
+        max-width: 100%; /* Prevent any max-width constraints */
+    }
+
+    .nav-tabs {
+        display: flex;
+        justify-content: space-around;
+        background-color: #272e38;
+        border: none;
+    }
+
+        .nav-tabs .nav-item.nav-link {
+            flex-grow: 1;
+            text-align: center;
+            padding: 18px 0;
+            color: #fff;
+            background: #272e38;
+            border-radius: 0;
+            transition: background 0.20s linear;
+        }
+
+            .nav-tabs .nav-item.nav-link.active {
+                background: #272e38;
+                color: #fff;
+            }
+
+                .nav-tabs .nav-item.nav-link.active:after {
+                    content: "";
+                    position: relative;
+                    bottom: -60px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border: 15px solid transparent;
+                    border-top-color: #e74c3c;
+                }
+
+            .nav-tabs .nav-item.nav-link:hover,
+            .nav-tabs .nav-item.nav-link:focus {
+                background: #e74c3c;
+                color: #fff;
+            }
+
+    .tab-content {
+        background: #fdfdfd;
+        line-height: 25px;
+        border: 1px solid #ddd;
+        border-top: 5px solid #e74c3c;
+        border-bottom: 5px solid #e74c3c;
+        padding: 30px 25px;
+        width: 100%; /* Ensure the tab content takes up full width */
+    }
+
+</style>
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-12">
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @foreach (var tab in Model.TabHomeModel)
@@ -24,22 +79,22 @@
             <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                 @foreach (var tab in Model.TabHomeModel)
                 {
-                    <div class="tab-pane fade @(tab == Model.TabHomeModel.First() ? "show active" : "")"
+                    <div class="tab-pane  py-3 px-3 fade @(tab == Model.TabHomeModel.First() ? "show active" : "")"
                          id="nav-@tab.ContentType" role="tabpanel" aria-labelledby="nav-@tab.ContentType-tab">
                         @if ((ContentTypes)tab.ContentType == ContentTypes.Description)
                         {
-                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml", Model.ProductModel.FullDescription)
-                            ;
+                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml", Model.ProductModel.FullDescription);
                         }
 
                         @if ((ContentTypes)tab.ContentType == ContentTypes.Specification)
                         {
-                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductSpecificationsTab.cshtml", Model.ProductModel.ProductSpecificationModel)
-                            ;
+                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductSpecificationsTab.cshtml", Model.ProductModel.ProductSpecificationModel);
                         }
 
-                        @if ((ContentTypes)tab.ContentType == ContentTypes.ContactUs)
+                        @if ((ContentTypes)tab.ContentType == ContentTypes.ShortDescription)
                         {
+                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml", Model.ProductModel.ShortDescription);
+
                             @* @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductContactUsTab.cshtml", Model.ProductModel.ContactUsModel); *@
                         }
                     </div>
