@@ -22,8 +22,6 @@ public class TabController : BasePluginController
         _tabFactories = tabFactories;
 
 
-
-
     }
 
 

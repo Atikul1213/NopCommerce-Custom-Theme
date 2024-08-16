@@ -21,7 +21,7 @@ public class TabStartup : INopStartup
     {
         services.Configure<RazorViewEngineOptions>(options =>
         {
-
+            options.ViewLocationExpanders.Add(new ViewLocationExpander());
         });
 
 

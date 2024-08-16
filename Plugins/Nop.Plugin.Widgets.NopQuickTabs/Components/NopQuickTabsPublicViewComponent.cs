@@ -5,11 +5,11 @@ using Nop.Web.Framework.Components;
 using Nop.Web.Models.Catalog;
 
 namespace Nop.Plugin.Widgets.NopQuickTabs.Components;
-public class NopQuickTabsPublicViewComponents : NopViewComponent
+public class NopQuickTabsPublicViewComponent : NopViewComponent
 {
     private readonly ITabService _tabService;
     private readonly ITabHomeModelFactory _tabHomeModelFactory;
-    public NopQuickTabsPublicViewComponents(ITabService tabService, ITabHomeModelFactory tabHomeModelFactory)
+    public NopQuickTabsPublicViewComponent(ITabService tabService, ITabHomeModelFactory tabHomeModelFactory)
     {
         _tabService = tabService;
         _tabHomeModelFactory = tabHomeModelFactory;
@@ -23,7 +23,7 @@ public class NopQuickTabsPublicViewComponents : NopViewComponent
         if (model == null || model.TabHomeModel.Count == 0)
             return Content("");
 
-        return View("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/Default.cshtml", model);
+        return View("Default", model);
     }
 
 }

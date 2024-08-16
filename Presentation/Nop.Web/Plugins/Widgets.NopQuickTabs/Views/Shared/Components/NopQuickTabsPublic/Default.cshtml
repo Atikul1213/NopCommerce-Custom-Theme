@@ -83,27 +83,22 @@
                          id="nav-@tab.ContentType-@tab.Id" role="tabpanel" aria-labelledby="nav-@tab.ContentType-tab-@tab.Id">
                         @if ((ContentTypes)tab.ContentType == ContentTypes.Description)
                         {
-                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml", Model.ProductModel.FullDescription)
-                            ;
+                            @await Html.PartialAsync("ProductDescriptionTab", Model.ProductModel.FullDescription);
                         }
 
                         @if ((ContentTypes)tab.ContentType == ContentTypes.Specification)
                         {
-                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductSpecificationsTab.cshtml", Model.ProductModel.ProductSpecificationModel)
-                            ;
+                            @await Html.PartialAsync("ProductSpecificationsTab", Model.ProductModel.ProductSpecificationModel); 
                         }
 
                         @if ((ContentTypes)tab.ContentType == ContentTypes.ShortDescription)
                         {
-                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductDescriptionTab.cshtml", Model.ProductModel.ShortDescription)
-                            ;
-
+                            @await Html.PartialAsync("ProductDescriptionTab", Model.ProductModel.ShortDescription);
                         }
 
                         @if ((ContentTypes)tab.ContentType == ContentTypes.Custom)
                         {
-                            @await Html.PartialAsync("~/Plugins/Widgets.NopQuickTabs/Views/Shared/Components/NopQuickTabsPublicView/ProductCustomTab.cshtml", tab.Description)
-                            ;
+                            @await Html.PartialAsync("ProductCustomTab", tab.Description);
                         }
 
                     </div>

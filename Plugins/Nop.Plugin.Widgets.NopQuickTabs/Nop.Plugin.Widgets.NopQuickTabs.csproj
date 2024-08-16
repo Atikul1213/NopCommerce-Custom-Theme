@@ -20,39 +20,29 @@
 
 
   <ItemGroup>
-    <None Remove="Areas\Admin\Views\Components\NopQuickTabAdminPanel\_NopQuickTabs.cshtml" />
-    <None Remove="Areas\Admin\Views\Components\NopQuickTabAdminPanel\_ViewImports.cshtml" />
-    <None Remove="Areas\Admin\Views\Tab\Create.cshtml" />
-    <None Remove="Areas\Admin\Views\Tab\_CreateOrUpdate.cshtml" />
+    <None Remove="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\NopQuickTabs.cshtml" />
+    <None Remove="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\_ViewImports.cshtml" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
-    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\Default.cshtml" />
-    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductContactUsTab.cshtml" />
-    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductCustomTab.cshtml" />
-    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductDescriptionTab.cshtml" />
-    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductSpecificationsTab.cshtml" />
-    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\_ViewImports.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\Default.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductContactUsTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductCustomTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductDescriptionTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductSpecificationsTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\_ViewImports.cshtml" />
+    <None Remove="Views\Shared\_ViewImports.cshtml" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Components\NopQuickTabAdminPanel\_NopQuickTabs.cshtml">
+    <Content Include="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\NopQuickTabs.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Admin\Views\Components\NopQuickTabAdminPanel\_ViewImports.cshtml">
+    <Content Include="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\_ViewImports.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Admin\Views\Tab\Create.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Areas\Admin\Views\Tab\_CreateOrUpdate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Areas\Admin\Views\Tab\_ViewImports.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\Default.cshtml">
+    <Content Include="Views\Shared\Components\NopQuickTabsPublic\Default.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -64,19 +54,22 @@
     <Content Include="plugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductContactUsTab.cshtml">
+    <Content Include="Views\Shared\ProductContactUsTab.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductCustomTab.cshtml">
+    <Content Include="Views\Shared\ProductCustomTab.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductDescriptionTab.cshtml">
+    <Content Include="Views\Shared\ProductDescriptionTab.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductSpecificationsTab.cshtml">
+    <Content Include="Views\Shared\ProductSpecificationsTab.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\_ViewImports.cshtml">
+    <Content Include="Views\Shared\Components\NopQuickTabsPublic\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_ViewImports.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -84,10 +77,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
     <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Infrastructure\" />
   </ItemGroup>
 
 </Project>
