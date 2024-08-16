@@ -19,6 +19,7 @@ public class TabHomeModelFactory : ITabHomeModelFactory
         tabHomeModel.ContentType = entity.ContentType;
         tabHomeModel.IsActive = entity.IsActive;
         tabHomeModel.DisplayOrder = entity.DisplayOrder;
+        tabHomeModel.Id = entity.Id;
         return tabHomeModel;
     }
 

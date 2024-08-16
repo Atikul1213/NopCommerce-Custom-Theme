@@ -29,6 +29,7 @@
     <None Remove="plugin.json" />
     <None Remove="Views\Shared\Components\NopQuickTabsPublicView\Default.cshtml" />
     <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductContactUsTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductCustomTab.cshtml" />
     <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductDescriptionTab.cshtml" />
     <None Remove="Views\Shared\Components\NopQuickTabsPublicView\ProductSpecificationsTab.cshtml" />
     <None Remove="Views\Shared\Components\NopQuickTabsPublicView\_ViewImports.cshtml" />
@@ -64,6 +65,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductContactUsTab.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductCustomTab.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\Components\NopQuickTabsPublicView\ProductDescriptionTab.cshtml">
