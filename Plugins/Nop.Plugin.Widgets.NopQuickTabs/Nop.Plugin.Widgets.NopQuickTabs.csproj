@@ -22,6 +22,8 @@
   <ItemGroup>
     <None Remove="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\NopQuickTabs.cshtml" />
     <None Remove="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\_ViewImports.cshtml" />
+    <None Remove="Areas\Admin\Views\Tab\Create.cshtml" />
+    <None Remove="Areas\Admin\Views\Tab\_CreateOrUpdate.cshtml" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
@@ -40,6 +42,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Tab\Create.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Tab\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\_ViewImports.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\Components\NopQuickTabsPublic\Default.cshtml">

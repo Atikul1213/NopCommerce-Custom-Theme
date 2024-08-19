@@ -2,17 +2,20 @@
 using Nop.Plugin.Widgets.NopQuickTabs.Domains;
 using Nop.Plugin.Widgets.NopQuickTabs.Services;
 using Nop.Services.Localization;
+using Nop.Web.Framework.Factories;
 using Nop.Web.Framework.Models.Extensions;
 
 namespace Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Factories;
-public class TabFactories : ITabFactories
+public class TabModelFactories : ITabModelFactorie
 {
     private readonly ITabService _tabService;
     private readonly ILocalizationService _localizationService;
-    public TabFactories(ITabService tabService, ILocalizationService localizationService)
+    private readonly ILocalizedModelFactory _localizedModelFactory;
+    public TabModelFactories(ITabService tabService, ILocalizationService localizationService, ILocalizedModelFactory localizedModelFactory)
     {
         _tabService = tabService;
         _localizationService = localizationService;
+        _localizedModelFactory = localizedModelFactory;
     }
 
     public async Task<Tab> PrepareTabAsync(TabModel model)
@@ -81,6 +84,15 @@ public class TabFactories : ITabFactories
         if (entity == null)
             throw new NotImplementedException();
 
+
+        // Define the localized model configuration function
+        Func<TabLocalizedModel, int, Task> localizedModelConfiguration = async (locale, languageId) =>
+        {
+            locale.Title = await _localizationService.GetLocalizedAsync(entity, e => e.Title, languageId);
+            locale.Description = await _localizationService.GetLocalizedAsync(entity, e => e.Description, languageId);
+        };
+
+
         return new TabModel()
         {
             Id = entity.Id,
@@ -90,6 +102,7 @@ public class TabFactories : ITabFactories
             DisplayOrder = entity.DisplayOrder,
             IsActive = entity.IsActive,
             ContentType = Enum.GetName(typeof(ContentTypes), entity.ContentType),
+            Locales = await _localizedModelFactory.PrepareLocalizedModelsAsync(localizedModelConfiguration)
         };
     }
 

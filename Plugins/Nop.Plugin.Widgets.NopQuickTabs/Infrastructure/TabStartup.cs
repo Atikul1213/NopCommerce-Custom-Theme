@@ -26,7 +26,7 @@ public class TabStartup : INopStartup
 
 
         services.AddScoped<ITabService, TabService>();
-        services.AddScoped<ITabFactories, TabFactories>();
+        services.AddScoped<ITabModelFactorie, TabModelFactories>();
         services.AddScoped<ITabHomeModelFactory, TabHomeModelFactory>();
 
     }

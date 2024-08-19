@@ -10,7 +10,7 @@ public class NopQuickTabAdminPanelViewComponent : NopViewComponent
     {
         var model = new TabModel();
         model.ProductId = additionalData.Id;
-        model.TabOptionModel.ProductId = additionalData.Id;
+
 
         return View("NopQuickTabs", model);
     }

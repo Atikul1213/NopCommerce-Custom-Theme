@@ -1,0 +1,201 @@
+﻿@model TabModel
+@{
+
+   @Html.HiddenFor(x => x.ProductId);
+}
+
+
+
+<div class="card-body">
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="Title" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for=" Title" />
+            <span asp-validation-for="Title"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="ContentType" />
+        </div>
+        <div class="col-md-9">
+            <nop-select asp-for="ContentType" asp-items="@Model.ContentTypeOptions" id="ContentTypeSelect" />
+            <span asp-validation-for="ContentType"></span>
+        </div>
+    </div>
+
+    <div class="form-group row" id="DescriptionField" style="display:none;">
+        <div class="col-md-3">
+            <nop-label asp-for="Description" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for="Description" asp-template="RichEditor" />
+            <span asp-validation-for="Description"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="DisplayOrder" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for="DisplayOrder" />
+            <span asp-validation-for="DisplayOrder"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            <nop-label asp-for="IsActive" />
+        </div>
+        <div class="col-md-9">
+            <nop-editor asp-for="IsActive" />
+            <span asp-validation-for="IsActive"></span>
+        </div>
+    </div>
+
+ 
+
+</div>
+
+
+
+@* 
+
+<div class="cards-group">
+
+    <div class="card card-default">
+
+
+        <div class="card-body">
+
+            <div class="form-group row">
+
+                <div class="col-md-3">
+                    <nop-label asp-for="Title" />
+                </div>
+
+                <div class="col-md-9">
+                    <nop-editor asp-for="Title" />
+                    <span asp-validation-for="Title"></span>
+                </div>
+
+            </div>
+
+
+            <div class="form-group row">
+
+                <div class="col-md-3">
+                    <nop-label asp-for="ContentType" />
+                </div>
+
+                <div class="col-md-9">
+                    <nop-select asp-for="ContentType" asp-items="Model.ContentTypeOptions" id="ContentTypeSelect" />
+                    <span asp-validation-for="ContentType"></span>
+                </div>
+
+            </div>
+
+
+            <div class="form-group row" id="DescriptionField" style="display:none;">
+
+                <div class="col-md-3">
+                    <nop-label asp-for="Description" />
+                </div>
+
+                <div class="col-md-9">
+                    <nop-editor asp-for="Description" asp-template="RichEditor" />
+                    <span asp-validation-for="Description"></span>
+                </div>
+
+            </div>
+
+            <div class="form-group row tabDisplayOrder advanced-setting">
+
+                <div class="col-md-3">
+                    <nop-label asp-for="DisplayOrder" />
+                </div>
+
+                <div class="col-md-9">
+                    <nop-editor asp-for="DisplayOrder" />
+                    <span asp-validation-for="DisplayOrder"></span>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-3">
+
+                    <nop-label asp-for="IsActive" />
+
+                </div>
+
+                <div class="col-md-9">
+
+                    <nop-editor asp-for="IsActive" />
+
+                    <span asp-validation-for="IsActive"></span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+
+
+ *@
+<script>
+
+    $(document).ready(function () {
+
+        // Function to check the selected value and toggle the Description field
+
+        function toggleDescriptionField() {
+
+            var selectedValue = $('#ContentTypeSelect').val();
+
+            if (selectedValue == "50") { // 50 corresponds to Cumstomm in ContentTypes enum
+
+                $('#DescriptionField').show();
+
+            } else {
+
+                $('#DescriptionField').hide();
+
+            }
+
+        }
+
+
+
+        // Initial check on page load
+
+        toggleDescriptionField();
+
+
+
+        // Bind the change event to the ContentType dropdown
+
+        $('#ContentTypeSelect').change(function () {
+
+            toggleDescriptionField();
+
+        });
+
+    });
+
+</script>

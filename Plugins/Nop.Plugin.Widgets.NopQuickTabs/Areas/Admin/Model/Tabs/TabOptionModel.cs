@@ -11,7 +11,6 @@ public partial record TabOptionModel : BaseSearchModel
         LoadContentTypeOptions();
     }
 
-    public int ProductId { get; set; }
 
     public string Title { get; set; }
 

@@ -2,7 +2,7 @@
 using Nop.Plugin.Widgets.NopQuickTabs.Domains;
 
 namespace Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Factories;
-public interface ITabFactories
+public interface ITabModelFactorie
 {
     Task<TabModel> PrepareTabModelAsync(TabModel model, Tab entity);
 
