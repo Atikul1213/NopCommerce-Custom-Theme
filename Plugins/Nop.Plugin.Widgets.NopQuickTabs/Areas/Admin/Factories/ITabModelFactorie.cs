@@ -14,4 +14,7 @@ public interface ITabModelFactorie
 
     Task<Tab> PrepareTabDataTableAsync(TabModel model);
 
+    Task UpdateLocalesAsync(Tab tab, TabModel tabModel);
+
+
 }

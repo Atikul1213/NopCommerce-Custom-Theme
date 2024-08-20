@@ -8,7 +8,7 @@ public record TabModel : BaseNopEntityModel, ILocalizedModel<TabLocalizedModel>
 {
     public TabModel()
     {
-
+        TabSearchModel = new TabSearchModel();
         Locales = new List<TabLocalizedModel>();
         ContentTypeOptions = new List<SelectListItem>();
         LoadContentTypeOptions();
@@ -27,8 +27,7 @@ public record TabModel : BaseNopEntityModel, ILocalizedModel<TabLocalizedModel>
     [NopResourceDisplayName("Admin.Widget.NopQuickTab.Field.ContentType")]
     public string ContentType { get; set; }
 
-    //public TabSearchModel SearchModel { get; set; }
-    //public TabOptionModel TabOptionModel { get; set; }
+    public TabSearchModel TabSearchModel { get; set; }
     public string ContentTypeStr { get; set; }
     public IList<TabLocalizedModel> Locales { get; set; }
     public IList<SelectListItem> ContentTypeOptions { get; set; }
@@ -57,8 +56,5 @@ public partial record TabLocalizedModel : ILocalizedLocaleModel
 
     [NopResourceDisplayName("Admin.Widget.NopQuickTab.Field.Title")]
     public string Title { get; set; }
-
-    [NopResourceDisplayName("Admin.Widget.NopQuickTab.Field.Description")]
-    public string Description { get; set; }
 
 }

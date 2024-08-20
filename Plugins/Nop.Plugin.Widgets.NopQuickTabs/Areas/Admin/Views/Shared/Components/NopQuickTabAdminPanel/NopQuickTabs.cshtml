@@ -26,11 +26,11 @@
 
                       <div class="content-header clearfix">
                         <div class="float-left">
-
                             <input type="button" id="btnAddNewProductAttachment" name="btnAddNewProductAttachment"
-                                   value="@T("NopQuickTabs.Admin.NopProductsTabTitle.AddNewTab")"
-                                   onclick="javascript:OpenWindow('@(Url.Action("Create", "Tab", new { productId = productId, IsPopup = true }))', 1080, 700, true); return false;"
-                                   class="btn bg-primary" />
+                             value="@T("NopQuickTabs.Admin.NopProductsTabTitle.AddNewTab")"
+                             onclick="openTabPopup(); return false;"
+                             class="btn bg-primary" />
+                            
                         </div>
                     </div>
 
@@ -52,50 +52,40 @@
                                                 Name = "product-specific-tabs-grid",
                                                 UrlRead = new DataUrl("ListProductSpecificTabs", "Tab", new RouteValueDictionary { ["productId"] = productId }),
                                                 UrlDelete = new DataUrl("DeleteProductSpecificTabs", "Tab", new RouteValueDictionary { ["productId"] = productId }),
-                                                UrlUpdate = new DataUrl("UpdateTabs", "Tab", new RouteValueDictionary { ["productId"] = productId }),
-                                                Length = defaultGridPageSize,
-                                                LengthMenu = gridPageSizes,
-                                                // Length = Model.SearchModel.PageSize,
-                                                // LengthMenu = Model.SearchModel.AvailablePageSizes,
+                                                Length = Model.TabSearchModel.PageSize,
+                                                LengthMenu = Model.TabSearchModel.AvailablePageSizes,
                                                 ColumnCollection = new List<ColumnProperty>
                                                 {
                                                     new ColumnProperty(nameof(TabModel.Title))
                                                     {
                                                         Title = T("Admin.Widget.NopQuickTab.Field.Title").Text,
-                                                        Width = "300",
-                                                        Editable = true,
-                                                        EditType = EditType.String
+                                                        Width = "300"
                                                     },
                                                     new ColumnProperty(nameof(TabModel.ContentType))
                                                     {
                                                         Title = T("Admin.Widget.NopQuickTab.Field.ContentType").Text,
                                                         Width = "200",
-                                                        Editable = false,
-
+                                                      
                                                     },
 
 
                                                     new ColumnProperty(nameof(TabModel.DisplayOrder))
                                                     {
                                                         Title = T("Admin.Widget.NopQuickTab.Field.DisplayOrder").Text,
-                                                        Width = "100",
-                                                        Editable = true,
-                                                        EditType = EditType.Number
+                                                        Width = "100"
                                                     },
                                                     new ColumnProperty(nameof(TabModel.IsActive))
                                                     {
                                                         Title = T("Admin.Widget.NopQuickTab.Field.IsActive").Text,
                                                         Width = "100",
-                                                        Editable = true,
-                                                        Render = new RenderBoolean(),
-                                                        EditType = EditType.Checkbox
+                                                        Render = new RenderBoolean()
                                                     },
                                                     new ColumnProperty(nameof(TabModel.Id))
                                                     {
                                                         Title = T("Admin.Common.Edit").Text,
                                                         Width = "100",
                                                         ClassName = NopColumnClassDefaults.Button,
-                                                        Render = new RenderButtonsInlineEdit()
+                                                        Render = new RenderCustom("renderColumnEdit")
                                                     },
                                                     new ColumnProperty(nameof(TabModel.Id))
                                                     {
@@ -115,236 +105,6 @@
                                 </div>
 
 
-
-
-
-                                <div class="cards-group" id="input-tab">
-                                    <div class="card card-default">
-                                        @* @Html.HiddenFor(x => x.ProductId); *@
-
-                                        <div class="card-header">
-                                            @T("Admin.Common.AddNewRecord")
-                                        </div>
-
-
-
-
-
-                                        <div class="card-body">
-                                        @(await Html.LocalizedEditorAsync<TabModel, TabLocalizedModel>("tab-localized",
-                                                @<div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-md-3">
-                                                            <nop-label asp-for="@Model.Locales[item].Title" />
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <nop-editor asp-for="@Model.Locales[item].Title" />
-                                                            <span asp-validation-for="@Model.Locales[item].Title" />
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-md-3">
-                                                            <nop-label asp-for="@Model.Locales[item].Description" />
-                                                        </div>
-                                                        <div>
-                                                            <nop-editor asp-for="@Model.Locales[item].Description" asp-template="RichEditor" />
-                                                            <span asp-validation-for="@Model.Locales[item].Description" />
-                                                        </div>
-
-                                                    </div>
-                                                    
-                                                        <input type="hidden" asp-for="@Model.Locales[item].LanguageId" />
-                                                     
-                                             </div>
-
-
-                                          
-                                            ,
-                                            @<div>
-
-                                                <div class="form-group row">
-                                                    <div class="col-md-3">
-                                                        <nop-label asp-for="Title" />
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <nop-editor asp-for="Title" />
-                                                        <span asp-validation-for="Title"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <div class="col-md-3">
-                                                        <nop-label asp-for="Description" />
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <nop-editor asp-for="Description" />
-                                                        <span asp-validation-for="Description"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            ))
-
-                                        </div>
-
-
-
-
-
-
-
-
-
-
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <div class="col-md-3">
-                                                    <nop-label asp-for="Title" />
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <nop-editor asp-for=" Title" />
-                                                    <span asp-validation-for="Title"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-md-3">
-                                                    <nop-label asp-for="ContentType" />
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <nop-select asp-for="ContentType" asp-items="@Model.ContentTypeOptions" id="ContentTypeSelect" />
-                                                    <span asp-validation-for="ContentType"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row" id="DescriptionField" style="display:none;">
-                                                <div class="col-md-3">
-                                                    <nop-label asp-for="Description" />
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <nop-editor asp-for="Description" asp-template="RichEditor" />
-                                                    <span asp-validation-for="Description"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-md-3">
-                                                    <nop-label asp-for="DisplayOrder" />
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <nop-editor asp-for="DisplayOrder" />
-                                                    <span asp-validation-for="DisplayOrder"></span>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group row">
-                                                <div class="col-md-3">
-                                                    <nop-label asp-for="IsActive" />
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <nop-editor asp-for="IsActive" />
-                                                    <span asp-validation-for="IsActive"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-md-9 offset-md-3">
-                                                    <button type="button" id="addTabOption" class="btn btn-primary">@T("Admin.Common.AddNewRecord")</button>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-
-
-
-                                        <script>
-
-                                            $(function () {
-                                                $('#addTabOption').click(function () {
-                                                    $('#addTabOption').attr('disabled', true);
-                                                    var description = tinymce.get('@Html.IdFor(Model => Model.Description)').getContent();
-                                                    var postData = {
-                                                        ProductId: $("#@Html.IdFor(Model => Model.ProductId)").val(),
-                                                        Title: $("#@Html.IdFor(Model => Model.Title)").val(),
-                                                        ContentType: $("#ContentTypeSelect").val(),
-                                                        Description: description,
-                                                        DisplayOrder: $("#input-tab input[name='DisplayOrder']").val(),
-                                                        IsActive: $("#@Html.IdFor(Model => Model.IsActive)").prop('checked')
-                                                    };
-
-                                                    console.log("postData: ", postData);
-
-                                                    addAntiForgeryToken(postData);
-
-                                                    $.ajax({
-                                                        cache: false,
-                                                        type: "POST",
-                                                        url: "@Html.Raw(Url.Action("TabOptionAdd", "Tab", new { productId = Model.ProductId }))",
-                                                        data: postData,
-                                                        success: function (data, textStatus, jqXHR) {
-                                                            if (data.Result) {
-                                                                //reload grid
-                                                                updateTable('#product-specific-tabs-grid');
-
-                                                                //clear input value
-                                                                $("#@Html.IdFor(Model => Model.Title)").val('');
-
-                                                                tinymce.get('@Html.IdFor(Model => Model.Description)').setContent(''); // Clear the TinyMCE content
-
-                                                                //$("#@Html.IdFor(Model => Model.Description)").val('');
-                                                                $("#input-tab input[name='DisplayOrder']").val('');
-                                                                $("#@Html.IdFor(Model => Model.IsActive)").prop('checked', false);
-                                                            }
-                                                            else {
-                                                                //display errors if returned
-                                                                display_nop_error(data);
-                                                            }
-                                                        },
-                                                        complete: function (jqXHR, textStatus) {
-                                                            $('#addTabOption').attr('disabled', false);
-                                                        }
-                                                    });
-                                                });
-                                            });
-                                        </script>
-
-
-
-
-
-                                    </div>
-                                </div>
-
-                                <script>
-                                    $(document).ready(function () {
-                                        function toggleDescriptionField() {
-                                            var selectedValue = $('#ContentTypeSelect').val();
-                                            if (selectedValue == "50") {
-                                                $('#DescriptionField').show();
-                                            } else {
-                                                $('#DescriptionField').hide();
-                                            }
-                                        }
-
-                                        toggleDescriptionField();
-
-                                        $('#ContentTypeSelect').change(function () {
-                                            toggleDescriptionField();
-                                        });
-                                    });
-                                </script>
-
-
-
-
-
-
                             </div>
                         </div>
                     </section>
@@ -358,3 +118,52 @@
 
 
 </nop-card>
+ 
+
+ 
+<script type="text/javascript">
+    function openTabPopup() {
+        var url = '@(Url.Action("Create", "Tab", new { productId = productId, IsPopup = true }))';
+        OpenWindow(url, 1080, 700, true, function (result) {
+            if (result) {
+                // Assuming the result is true when the operation is successful
+                updateTable('#product-specific-tabs-grid');
+            }
+        });
+    }
+
+    function OpenWindow(url, width, height, isPopup, callback) {
+        // Open the popup window
+        var popupWindow = window.open(url, 'PopupWindow', 'width=' + width + ',height=' + height + ',resizable=yes,scrollbars=yes');
+
+        // Check if the window was closed
+        var checkPopupClosed = setInterval(function () {
+            if (popupWindow.closed) {
+                clearInterval(checkPopupClosed);
+                // Assuming the operation in the popup was successful, pass true to the callback
+                if (typeof callback === 'function') {
+                    callback(true);
+                }
+            }
+        }, 1000);
+    }
+
+    function updateTable(tableId) {
+        // Logic to refresh the DataTables instance
+        $(tableId).DataTable().ajax.reload();
+    }
+
+      function renderColumnEdit(data, type, row, meta) {
+        return '<button onclick="openEditPopup(' + data + '); return false;" class="btn btn-default"><i class="fas fa-pencil-alt"></i> @T("Admin.Common.Edit").Text</button>';
+    }
+
+    function openEditPopup(id) {
+        var url = '@Url.Action("TabEditPopup", "Tab")/' + id + '?btnId=btnRefresh&formId=country-form';
+        OpenWindow(url, 800, 400, true, function () {
+            updateTable('#product-specific-tabs-grid');
+        });
+    }
+
+
+</script>
+

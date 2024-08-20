@@ -16,22 +16,22 @@ namespace Nop.Plugin.Widgets.NopQuickTabs.Areas.Admin.Controller;
 public class TabController : BasePluginController
 {
     private readonly ITabService _tabService;
-    private readonly ITabModelFactorie _tabFactories;
-    public TabController(ITabService tabService, ITabModelFactorie tabFactories)
+    private readonly ITabModelFactorie _tabModelFactorie;
+    public TabController(ITabService tabService, ITabModelFactorie tabModelFactorie)
     {
         _tabService = tabService;
-        _tabFactories = tabFactories;
-
+        _tabModelFactorie = tabModelFactorie;
 
     }
 
+    #region Jquery
 
     public async Task<JsonResult> ListProductSpecificTabs(TabSearchModel searchModel, int productId)
     {
 
-        var src = await _tabFactories.PrepareTabSearchModelAsync(searchModel);
+        //var src = await _tabModelFactorie.PrepareTabSearchModelAsync(searchModel);
 
-        var model = await _tabFactories.PrepareTabListModelAsync(searchModel, productId);
+        var model = await _tabModelFactorie.PrepareTabListModelAsync(searchModel, productId);
 
         return Json(model);
 
@@ -48,7 +48,7 @@ public class TabController : BasePluginController
         }
 
 
-        var tab = await _tabFactories.PrepareTabAsync(model);
+        var tab = await _tabModelFactorie.PrepareTabAsync(model);
         await _tabService.InsertTabAsync(tab);
 
 
@@ -64,7 +64,7 @@ public class TabController : BasePluginController
             return ErrorJson(ModelState.SerializeErrors());
         }
 
-        var tab = await _tabFactories.PrepareTabDataTableAsync(model);
+        var tab = await _tabModelFactorie.PrepareTabDataTableAsync(model);
         tab.Id = model.Id;
 
         await _tabService.UpdateTabAsync(tab);
@@ -88,27 +88,32 @@ public class TabController : BasePluginController
 
     }
 
+    #endregion
 
 
+    #region Create
 
     public async Task<IActionResult> Create(int productId, bool IsPopup)
     {
         var model = new TabModel();
+
+        model = await _tabModelFactorie.PrepareTabModelAsync(model, new Tab());
         model.ProductId = productId;
-        return View("~/Plugins/Widgets.NopQuickTabs/Areas/Admin/Views/Tab/Create.cshtml", model);
+        return View("Create", model);
     }
 
 
     [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
-
     public async Task<IActionResult> Create(TabModel model, bool continueEditing)
     {
         if (ModelState.IsValid)
         {
             var tab = new Tab();
 
-            tab = await _tabFactories.PrepareTabAsync(model);
+            tab = await _tabModelFactorie.PrepareTabAsync(model);
             await _tabService.InsertTabAsync(tab);
+
+            await _tabModelFactorie.UpdateLocalesAsync(tab, model);
 
             return RedirectToAction("Create");
         }
@@ -116,6 +121,54 @@ public class TabController : BasePluginController
         return RedirectToAction("Create");
 
     }
+
+    #endregion
+
+
+
+    #region Edit
+    public virtual async Task<IActionResult> TabEditPopup(int id)
+    {
+        var entity = await _tabService.GetTabByIdAsync(id);
+
+        var model = await _tabModelFactorie.PrepareTabModelAsync(new TabModel(), entity);
+
+        if (Enum.TryParse(typeof(ContentTypes), model.ContentType, out var contentTypeEnum))
+        {
+            model.ContentType = ((int)(ContentTypes)contentTypeEnum).ToString();
+        }
+
+        return View("TabEditPopup", model);
+
+    }
+
+
+    [HttpPost]
+
+    public virtual async Task<IActionResult> TabEditPopup(TabModel model)
+    {
+
+
+        if (ModelState.IsValid)
+        {
+            var tab = new Tab();
+
+            tab = await _tabModelFactorie.PrepareTabAsync(model);
+            tab.Id = model.Id;
+            await _tabService.UpdateTabAsync(tab);
+
+            await _tabModelFactorie.UpdateLocalesAsync(tab, model);
+
+            return RedirectToAction("Create");
+        }
+
+        return RedirectToAction("Create");
+
+    }
+
+    #endregion
+
+
 
 
 

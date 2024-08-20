@@ -1,0 +1,31 @@
+﻿ @model TabModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewBag.PageTitle = T("Admin.Widget.Tab.EditTab").Text;
+    NopHtml.SetActiveMenuItemSystemName("Tabs");
+}
+
+<form asp-controller="Tab" asp-action="TabEditPopup" method="post">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            @T("Admin.Widget.Tab.AddNew")
+            <small>
+                <i class="fas fa-arrow-circle-left"></i>
+                <a asp-action="List">@T("Admin.Widget.Tab.BackToList")</a>
+            </small>
+        </h1>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+        </div>
+    </div>
+    @await Html.PartialAsync("_CreateOrUpdate", Model)
+
+</form>
