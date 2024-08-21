@@ -28,7 +28,7 @@ public class TabHomeModelFactory : ITabHomeModelFactory
         var lang = await _workContext.GetWorkingLanguageAsync();
 
         tabHomeModel.Title = await _localizationService.GetLocalizedAsync(entity, x => x.Title, lang.Id);
-        tabHomeModel.Description = entity.Description;
+        tabHomeModel.Description = await _localizationService.GetLocalizedAsync(entity, x => x.Description, lang.Id);
         tabHomeModel.ContentType = entity.ContentType;
         tabHomeModel.IsActive = entity.IsActive;
         tabHomeModel.DisplayOrder = entity.DisplayOrder;

@@ -109,6 +109,7 @@ public class TabModelFactories : ITabModelFactorie
         Func<TabLocalizedModel, int, Task> localizedModelConfiguration = async (locale, languageId) =>
         {
             locale.Title = await _localizationService.GetLocalizedAsync(entity, e => e.Title, languageId);
+            locale.Description = await _localizationService.GetLocalizedAsync(entity, e => e.Description, languageId);
         };
 
         return new TabModel()
@@ -117,7 +118,8 @@ public class TabModelFactories : ITabModelFactorie
             //Title = entity.Title,
             Title = await _localizationService.GetLocalizedAsync(entity, x => x.Title, lang.Id),
             ProductId = entity.ProductId,
-            Description = entity.Description,
+            //Description = entity.Description,
+            Description = await _localizationService.GetLocalizedAsync(entity, x => x.Description, lang.Id),
             DisplayOrder = entity.DisplayOrder,
             IsActive = entity.IsActive,
             ContentType = Enum.GetName(typeof(ContentTypes), entity.ContentType),
@@ -154,6 +156,12 @@ public class TabModelFactories : ITabModelFactorie
                 x => x.Title,
                 localized.Title,
                 localized.LanguageId);
+
+            await _localizedEntityService.SaveLocalizedValueAsync(tab,
+                x => x.Description,
+                localized.Description,
+                localized.LanguageId);
+
         }
     }
 

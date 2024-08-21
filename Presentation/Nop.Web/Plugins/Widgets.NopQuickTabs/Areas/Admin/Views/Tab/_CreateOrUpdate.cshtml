@@ -17,6 +17,18 @@
                             <span asp-validation-for="@Model.Locales[item].Title" />
                         </div>
                     </div>
+
+
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="@Model.Locales[item].Description" />
+                        </div>
+                        <div class="col-md-9">
+                           <nop-editor asp-for="@Model.Locales[item].Description" asp-template="RichEditor" />
+                          <span asp-validation-for="@Model.Locales[item].Description"></span>
+                        </div>
+                    </div>
  
                     <input type="hidden" asp-for="@Model.Locales[item].LanguageId" />
 
@@ -36,6 +48,19 @@
                             <span asp-validation-for="Title"></span>
                         </div>
                     </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="Description" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="Description" asp-template="RichEditor" />
+                            <span asp-validation-for="Description"></span>
+                        </div>
+                    </div>
+
+
                     
 
                 </div>
@@ -57,15 +82,6 @@
         </div>
     </div>
 
-    <div class="form-group row" id="DescriptionField" style="display:none;">
-        <div class="col-md-3">
-            <nop-label asp-for="Description" />
-        </div>
-        <div class="col-md-9">
-            <nop-editor asp-for="Description" asp-template="RichEditor" />
-            <span asp-validation-for="Description"></span>
-        </div>
-    </div>
 
     <div class="form-group row">
         <div class="col-md-3">
@@ -94,6 +110,8 @@
 
 
 
+
+@* 
 <script>
 
     $(document).ready(function () {
@@ -124,4 +142,4 @@
 
     });
 
-</script>
+</script> *@

@@ -115,10 +115,11 @@ public class TabController : BasePluginController
 
             await _tabModelFactorie.UpdateLocalesAsync(tab, model);
 
-            return RedirectToAction("Create");
+            return continueEditing ? RedirectToAction("TabEditPopup", new { id = tab.Id }) : RedirectToAction("Create", model);
+            //return RedirectToAction("Create");
         }
 
-        return RedirectToAction("Create");
+        return RedirectToAction("Create", model);
 
     }
 

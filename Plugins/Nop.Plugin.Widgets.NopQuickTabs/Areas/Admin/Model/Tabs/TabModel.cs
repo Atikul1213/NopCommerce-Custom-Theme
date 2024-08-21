@@ -57,4 +57,7 @@ public partial record TabLocalizedModel : ILocalizedLocaleModel
     [NopResourceDisplayName("Admin.Widget.NopQuickTab.Field.Title")]
     public string Title { get; set; }
 
+    [NopResourceDisplayName("Admin.Widget.NopQuickTab.Field.Description")]
+    public string Description { get; set; }
+
 }
