@@ -26,6 +26,18 @@
     {
       "SystemName": "Nop.Plugins.Widgets.NopQuickTabs",
       "Version": "4.7"
+    },
+    {
+      "SystemName": "Pickup.PickupInStore",
+      "Version": "4.70.7"
+    },
+    {
+      "SystemName": "Misc.EmployeeManager",
+      "Version": "1.1.1a"
+    },
+    {
+      "SystemName": "Widgets.Ecommerce",
+      "Version": "4.8"
     }
   ],
   "PluginNamesToUninstall": [

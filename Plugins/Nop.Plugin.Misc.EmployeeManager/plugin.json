@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Misc",
+  "FriendlyName": "Employee Manager",
+  "SystemName": "Misc.EmployeeManager",
+  "Version": "1.1.1a",
+  "SupportedVersions": [ "4.70" ],
+  "Author": "nopStation noobCoder",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.EmployeeManager.dll",
+  "Description": "Simple Employee Manager plugin to manage employees in you store."
+}
