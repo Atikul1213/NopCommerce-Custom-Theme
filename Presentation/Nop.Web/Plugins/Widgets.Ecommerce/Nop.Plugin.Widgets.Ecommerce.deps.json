@@ -34,9 +34,10 @@
   },
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "Nop.Plugin.Payments.CheckMoneyOrder/1.0.0": {
+      "Nop.Plugin.Widgets.Ecommerce/1.0.0": {
         "dependencies": {
           "Nop.Web": "4.70.0",
+          "Nop.Web.Framework": "4.70.0",
           "Microsoft.AspNetCore.Antiforgery": "8.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "8.0.0.0",
           "Microsoft.AspNetCore.Authentication.BearerToken": "8.0.0.0",
@@ -340,10 +341,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "Nop.Plugin.Payments.CheckMoneyOrder.dll": {}
+          "Nop.Plugin.Widgets.Ecommerce.dll": {}
         },
         "compile": {
-          "Nop.Plugin.Payments.CheckMoneyOrder.dll": {}
+          "Nop.Plugin.Widgets.Ecommerce.dll": {}
         }
       },
       "AdvancedStringBuilder/0.1.1": {
@@ -5568,7 +5569,7 @@
     }
   },
   "libraries": {
-    "Nop.Plugin.Payments.CheckMoneyOrder/1.0.0": {
+    "Nop.Plugin.Widgets.Ecommerce/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

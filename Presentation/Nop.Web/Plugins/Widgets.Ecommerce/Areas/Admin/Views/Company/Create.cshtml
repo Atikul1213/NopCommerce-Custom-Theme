@@ -1,21 +1,20 @@
-@model CompanyModel
+﻿@model CompanyModel
 
 @{
     Layout = "_AdminLayout";
     //page title
-    ViewBag.PageTitle = T("Admin.Widgets.Ecommerce.EditDetails").Text;
+    ViewBag.PageTitle = T("Admin.Widgets.Company.AddNew").Text;
     //active menu item (system name)
-    NopHtml.SetActiveMenuItemSystemName("Companys");
+    NopHtml.SetActiveMenuItemSystemName("CreateCompany");
 }
 
- 
-<form asp-controller="EcommerceCompany" asp-action="Edit" method="post">
+<form asp-controller="Company" asp-action="Create" method="post">
     <div class="content-header clearfix">
         <h1 class="float-left">
-            @T("Admin.Widgets.Ecommerce.EditDetails")
+            @T("Admin.Widgets.Company.AddNew")
             <small>
                 <i class="fas fa-arrow-circle-left"></i>
-                <a asp-action="List">@T("Admin.Widgets.Ecommerce.BackToList")</a>
+                <a asp-action="List">@T("Admin.Widgets.Company.BackToList")</a>
             </small>
         </h1>
         <div class="float-right">
@@ -27,13 +26,7 @@
                 <i class="far fa-save"></i>
                 @T("Admin.Common.SaveContinue")
             </button>
-            <span id="employee-delete" class="btn btn-danger">
-                <i class="far fa-trash-alt"></i>
-                @T("Admin.Common.Delete")
-            </span>
-          
         </div>
     </div>
     @await Html.PartialAsync("_CreateOrUpdate", Model)
 </form>
-<nop-delete-confirmation asp-model-id="@Model.Id" asp-button-id="employee-delete" />

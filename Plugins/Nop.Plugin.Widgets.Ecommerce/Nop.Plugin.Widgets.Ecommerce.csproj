@@ -30,10 +30,11 @@
   
   
   <ItemGroup>
-    <None Remove="Areas\Admin\Views\EcommerceCompany\Create.cshtml" />
-    <None Remove="Areas\Admin\Views\EcommerceCompany\Edit.cshtml" />
-    <None Remove="Areas\Admin\Views\EcommerceCompany\List.cshtml" />
-    <None Remove="Areas\Admin\Views\EcommerceCompany\_CreateOrUpdate.cshtml" />
+    <None Remove="Areas\Admin\Views\Company\Create.cshtml" />
+    <None Remove="Areas\Admin\Views\Company\Edit.cshtml" />
+    <None Remove="Areas\Admin\Views\Company\List.cshtml" />
+    <None Remove="Areas\Admin\Views\Company\_CreateOrUpdate.cshtml" />
+    <None Remove="Areas\Admin\Views\Company\_CreateOrUpdate.Info.cshtml" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
@@ -44,16 +45,19 @@
   
   
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\EcommerceCompany\Create.cshtml">
+    <Content Include="Areas\Admin\Views\Company\Create.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Admin\Views\EcommerceCompany\Edit.cshtml">
+    <Content Include="Areas\Admin\Views\Company\Edit.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Admin\Views\EcommerceCompany\List.cshtml">
+    <Content Include="Areas\Admin\Views\Company\List.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Admin\Views\EcommerceCompany\_CreateOrUpdate.cshtml">
+    <Content Include="Areas\Admin\Views\Company\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Company\_CreateOrUpdate.Info.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\_ViewImports.cshtml">
@@ -80,7 +84,9 @@
     <Folder Include="Areas\Admin\Components\" />
     <Folder Include="Areas\Admin\Views\Shared\Components\" />
     <Folder Include="Factories\" />
+    <Folder Include="Mapping\" />
     <Folder Include="Model\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
   
   

@@ -2,7 +2,7 @@
 using Nop.Data.Mapping.Builders;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Mapping.Builders;
+namespace Nop.Plugin.Widgets.Ecommerce.Data.Builders;
 public class CompanyRecordBuilder : NopEntityBuilder<Company>
 {
     public override void MapEntity(CreateTableExpressionBuilder table)

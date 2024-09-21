@@ -16,10 +16,6 @@
       "Version": "4.70.3"
     },
     {
-      "SystemName": "Shipping.UPS",
-      "Version": "4.70.8"
-    },
-    {
       "SystemName": "Widgets.SocialMediaSharing",
       "Version": "4.72"
     },
@@ -32,8 +28,24 @@
       "Version": "4.70.7"
     },
     {
-      "SystemName": "Misc.EmployeeManager",
-      "Version": "1.1.1a"
+      "SystemName": "Misc.Zettle",
+      "Version": "4.70.7"
+    },
+    {
+      "SystemName": "Shipping.FixedByWeightByTotal",
+      "Version": "4.70.7"
+    },
+    {
+      "SystemName": "Shipping.UPS",
+      "Version": "4.70.8"
+    },
+    {
+      "SystemName": "Payments.CheckMoneyOrder",
+      "Version": "4.70.2"
+    },
+    {
+      "SystemName": "Payments.PayPalCommerce",
+      "Version": "4.70.6"
     },
     {
       "SystemName": "Widgets.Ecommerce",
@@ -41,7 +53,8 @@
     }
   ],
   "PluginNamesToUninstall": [
-    "Nop.Plugins.Widgets.NopQuickTabs"
+    "Nop.Plugins.Widgets.NopQuickTabs",
+    "Widgets.Ecommerce"
   ],
   "PluginNamesToDelete": [],
   "PluginNamesToInstall": []

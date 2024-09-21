@@ -34,7 +34,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "Nop.Plugin.Misc.Zettle/1.0.0": {
+      "Nop.Plugin.Misc.EmployeeManager/1.0.0": {
         "dependencies": {
           "Nop.Web": "4.70.0",
           "Microsoft.AspNetCore.Antiforgery": "8.0.0.0",
@@ -340,10 +340,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "Nop.Plugin.Misc.Zettle.dll": {}
+          "Nop.Plugin.Misc.EmployeeManager.dll": {}
         },
         "compile": {
-          "Nop.Plugin.Misc.Zettle.dll": {}
+          "Nop.Plugin.Misc.EmployeeManager.dll": {}
         }
       },
       "AdvancedStringBuilder/0.1.1": {
@@ -5568,7 +5568,7 @@
     }
   },
   "libraries": {
-    "Nop.Plugin.Misc.Zettle/1.0.0": {
+    "Nop.Plugin.Misc.EmployeeManager/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
