@@ -11,7 +11,6 @@ public class PluginNopStartup : INopStartup
 {
     public int Order => 3000;
 
-
     public void Configure(IApplicationBuilder application)
     {
 
