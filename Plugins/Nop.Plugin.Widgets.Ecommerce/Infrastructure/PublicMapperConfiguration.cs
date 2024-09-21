@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Nop.Core.Infrastructure.Mapper;
+using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Models.ProductBrochure;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Infrastructure;
 public class PublicMapperConfiguration : Profile, IOrderedMapperProfile
@@ -8,6 +10,6 @@ public class PublicMapperConfiguration : Profile, IOrderedMapperProfile
 
     public PublicMapperConfiguration()
     {
-
+        CreateMap<ProductBrochure, ProductBrochureInfoModel>().ReverseMap();
     }
 }

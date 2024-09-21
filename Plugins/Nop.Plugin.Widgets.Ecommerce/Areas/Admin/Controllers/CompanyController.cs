@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.Company;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.CompanyFactory;
 using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.CompanyModel;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
 using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
@@ -94,7 +94,7 @@ public class CompanyController : BaseAdminController
         if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
             return AccessDeniedView();
 
-        var searchModel = await _companyModelFactory.PrepareCompanySearchModelAsync(new Model.CompanySearchModel());
+        var searchModel = await _companyModelFactory.PrepareCompanySearchModelAsync(new CompanySearchModel());
 
         return View(searchModel);
     }

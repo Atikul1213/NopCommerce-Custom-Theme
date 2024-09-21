@@ -45,7 +45,7 @@ namespace Nop.Plugin.Widgets.Ecommerce
         {
             //  if (widgetZone == PublicWidgetZones.HomepageTop)
             //  {
-            return typeof(DemoViewComponent);
+            return typeof(PublicProductBrochureViewComponent);
             //}
         }
 
@@ -136,6 +136,17 @@ namespace Nop.Plugin.Widgets.Ecommerce
                 ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Model.CompanySearchModel.Fields.SearchCompanyType.Hint"] = "Search by company type",
 
 
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.ProductId"] = "Product",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.ProductId.Hint"] = "Enter the product",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.ButtonText"] = "Button text",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.ButtonText.Hint"] = "Enter the button text that your want to show public site",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.ProductDownloadId"] = "Files",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.ProductDownloadId.Hint"] = "Choose your file",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.IsActive"] = "Active",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.IsActive.Hint"] = "Checked for active",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.DisplayOrder"] = "Display order",
+                ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure.ProductBrochureModel.Fields.DisplayOrder.Hint"] = "Enter display order",
+                ["NopStation.Plugin.Theme.GeneratorShop.Products.ProductBrochure.Header"] = "Product brochures",
 
             };
         }
