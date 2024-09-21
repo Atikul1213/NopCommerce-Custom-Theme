@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Nop.Core.Infrastructure;
 using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.CompanyFactory;
 using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.ProductBrochureFactory;
+using Nop.Plugin.Widgets.Ecommerce.Factories.ProductBrochure;
 using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
 using Nop.Plugin.Widgets.Ecommerce.Services.ProductBrochureAttach;
 
@@ -29,6 +30,7 @@ public class PluginNopStartup : INopStartup
         services.AddScoped<ICompanyModelFactory, CompanyModelFactory>();
         services.AddScoped<IProductBrochureService, ProductBrochureService>();
         services.AddScoped<IProductBrochureModelFactory, ProductBrochureModelFactory>();
+        services.AddScoped<IProductBrochureInfoModelFactory, ProductBrochureInfoModelFactory>();
 
 
     }

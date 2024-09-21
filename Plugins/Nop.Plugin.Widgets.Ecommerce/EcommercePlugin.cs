@@ -1,4 +1,5 @@
 ﻿using Nop.Core;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Components;
 using Nop.Plugin.Widgets.Ecommerce.Components;
 using Nop.Services.Cms;
 using Nop.Services.Localization;
@@ -43,10 +44,20 @@ namespace Nop.Plugin.Widgets.Ecommerce
         #region WidgetZone
         public Type GetWidgetViewComponent(string widgetZone)
         {
-            //  if (widgetZone == PublicWidgetZones.HomepageTop)
-            //  {
-            return typeof(PublicProductBrochureViewComponent);
-            //}
+            if (widgetZone == PublicWidgetZones.ProductDetailsOverviewBottom)
+            {
+                return typeof(PublicProductBrochureViewComponent);
+            }
+
+            if (widgetZone == AdminWidgetZones.ProductDetailsBlock)
+                return typeof(AdminProductDetailsBlockAdditionWidgetZonesViewComponent);
+
+            if (widgetZone == "admin_product_details_block_product_brochure_mapping")
+                return typeof(ProductBrochureViewComponent);
+
+            return typeof(ProductBrochureViewComponent);
+
+
         }
 
         public Task<IList<string>> GetWidgetZonesAsync()
@@ -54,7 +65,9 @@ namespace Nop.Plugin.Widgets.Ecommerce
             return Task.FromResult<IList<string>>(
                 new List<string>
                 {
-                PublicWidgetZones.HomepageTop,
+                PublicWidgetZones.ProductDetailsOverviewTop,
+                "admin_product_details_block_product_brochure_mapping",
+                AdminWidgetZones.ProductDetailsBlock,
                 });
         }
 
@@ -85,7 +98,7 @@ namespace Nop.Plugin.Widgets.Ecommerce
 
         public override async Task UpdateAsync(string currentVersion, string targetVersion)
         {
-            if (currentVersion == "1.3" && targetVersion == "1.4")
+            if (currentVersion != targetVersion)
             {
                 await _localizationService.AddOrUpdateLocaleResourceAsync(GetLocaleResources());
             }
@@ -106,6 +119,7 @@ namespace Nop.Plugin.Widgets.Ecommerce
                 ["Nop.Plugin.Widget.Ecommerce.Company.Info"] = "Comapany info",
                 ["Admin.Widgets.Company.AddNew"] = "Add new ",
                 ["Admin.Widgets.Company.BackToList"] = "Back to list",
+                ["Admin.Widgets.Ecommerce.EditDetails"] = "Edit Details",
                 ["Nop.Plugin.Widget.Ecommerce.Companys"] = "Companys",
                 ["Nop.Plugin.Widget.Ecommerce.Company.Created"] = "Created successfully",
                 ["Nop.Plugin.Widget.Ecommerce.Company.NotFound"] = "Not found",

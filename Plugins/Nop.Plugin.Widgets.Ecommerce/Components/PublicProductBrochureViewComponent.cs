@@ -21,13 +21,13 @@ public class PublicProductBrochureViewComponent : NopViewComponent
     #endregion
 
     #region InvokeAsync
-    public async Task<IViewComponentResult> InvokeAsync(string widgetZone, ProductDetailsModel additionalData)
+    public async Task<IViewComponentResult> InvokeAsync(string widgetZone, object additionalData)
     {
 
-        if (additionalData == null || additionalData.Id <= 0)
+        if (additionalData == null || additionalData is not ProductDetailsModel productDetailsModel)
             return Content("");
 
-        var model = await _productBrochureInfoModelFactory.PrepareProductBrochureInfoListModelAsync(additionalData.Id);
+        var model = await _productBrochureInfoModelFactory.PrepareProductBrochureInfoListModelAsync(productDetailsModel.Id);
 
         if (model == null || model.ProductBrochures.Count == 0)
             return Content("");

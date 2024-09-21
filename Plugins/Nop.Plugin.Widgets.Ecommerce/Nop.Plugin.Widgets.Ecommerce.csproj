@@ -35,6 +35,7 @@
     <None Remove="Areas\Admin\Views\Company\List.cshtml" />
     <None Remove="Areas\Admin\Views\Company\_CreateOrUpdate.cshtml" />
     <None Remove="Areas\Admin\Views\Company\_CreateOrUpdate.Info.cshtml" />
+    <None Remove="Areas\Admin\Views\Shared\Components\AdminProductDetailsBlockAdditionWidgetZones\Default.cshtml" />
     <None Remove="Areas\Admin\Views\Shared\Components\ProductBrochure\Default.cshtml" />
     <None Remove="Areas\Admin\Views\Shared\_ProductBrochureModel.Info.cshtml" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
@@ -61,6 +62,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\Company\_CreateOrUpdate.Info.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\Components\AdminProductDetailsBlockAdditionWidgetZones\Default.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\Shared\Components\ProductBrochure\Default.cshtml">
