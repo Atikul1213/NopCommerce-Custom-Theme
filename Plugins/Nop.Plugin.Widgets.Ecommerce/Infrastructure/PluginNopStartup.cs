@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nop.Core.Infrastructure;
-using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories;
-using Nop.Plugin.Widgets.Ecommerce.Services;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.CompanyFactory;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.ProductBrochureFactory;
+using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
+using Nop.Plugin.Widgets.Ecommerce.Services.ProductBrochureAttach;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Infrastructure;
 public class PluginNopStartup : INopStartup
@@ -25,6 +27,8 @@ public class PluginNopStartup : INopStartup
 
         services.AddScoped<ICompanyService, CompanyService>();
         services.AddScoped<ICompanyModelFactory, CompanyModelFactory>();
+        services.AddScoped<IProductBrochureService, ProductBrochureService>();
+        services.AddScoped<IProductBrochureModelFactory, ProductBrochureModelFactory>();
 
 
     }

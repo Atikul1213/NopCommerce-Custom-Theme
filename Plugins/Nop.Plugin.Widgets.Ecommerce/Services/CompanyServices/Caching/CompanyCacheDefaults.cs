@@ -1,6 +1,6 @@
 ﻿using Nop.Core.Caching;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Services.Caching;
+namespace Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices.Caching;
 public static class CompanyCacheDefaults
 {
     public const string PREFIX = "Nop.Plugin.Widget.Ecommerce.Company.Caching.CompanyCacheDefaults";

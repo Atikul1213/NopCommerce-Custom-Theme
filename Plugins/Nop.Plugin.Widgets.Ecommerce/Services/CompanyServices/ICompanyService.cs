@@ -1,7 +1,7 @@
 ﻿using Nop.Core;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Services;
+namespace Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
 public interface ICompanyService
 {
     Task InsertCompanyAsync(Company company);

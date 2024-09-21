@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories;
-using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Model;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.Company;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.CompanyModel;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
-using Nop.Plugin.Widgets.Ecommerce.Services;
+using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Messages;

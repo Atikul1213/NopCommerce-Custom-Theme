@@ -2,9 +2,9 @@
 using Nop.Core.Caching;
 using Nop.Data;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
-using Nop.Plugin.Widgets.Ecommerce.Services.Caching;
+using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices.Caching;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Services;
+namespace Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
 public class CompanyService : ICompanyService
 {
     private readonly IRepository<Company> _companyRepository;

@@ -7,6 +7,7 @@ public class BaseNameCompatibility : INameCompatibility
     public Dictionary<Type, string> TableNames => new Dictionary<Type, string>
     {
         { typeof(Company), "NS_Company" },
+        { typeof(ProductBrochure), "NS_ProductBrochure" },
 
     };
 

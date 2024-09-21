@@ -2,7 +2,7 @@
 using Nop.Web.Framework.Models;
 using Nop.Web.Framework.Mvc.ModelBinding;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Model;
+namespace Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.CompanyModel;
 public record CompanySearchModel : BaseSearchModel
 {
     #region Ctor

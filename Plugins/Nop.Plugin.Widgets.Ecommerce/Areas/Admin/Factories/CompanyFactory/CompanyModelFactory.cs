@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Core;
-using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Model;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.CompanyModel;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
-using Nop.Plugin.Widgets.Ecommerce.Services;
+using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
 using Nop.Services;
 using Nop.Services.Localization;
 using Nop.Services.Media;
@@ -10,7 +10,7 @@ using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
 using Nop.Web.Framework.Factories;
 using Nop.Web.Framework.Models.Extensions;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories;
+namespace Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.CompanyFactory;
 public class CompanyModelFactory : ICompanyModelFactory
 {
 
@@ -71,16 +71,14 @@ public class CompanyModelFactory : ICompanyModelFactory
 
         if (!excludeProperties)
         {
-            model.AvailableCompanyOptions = ((CompanyTypes[])System.Enum.GetValues(typeof(CompanyTypes)))
+            model.AvailableCompanyOptions = ((CompanyTypes[])Enum.GetValues(typeof(CompanyTypes)))
                                                 .Select(ct => new SelectListItem
                                                 {
                                                     Value = ((int)ct).ToString(),
                                                     Text = ct.ToString()
                                                 }).ToList();
             if (Enum.TryParse(typeof(CompanyTypes), model.CompanyTypeStr, out var companyTypeEnum))
-            {
                 model.CompanyTypeStr = ((int)(CompanyTypes)companyTypeEnum).ToString();
-            }
 
             model.Locales = await _localizedModelFactory.PrepareLocalizedModelsAsync(localizedModelConfiguration);
 

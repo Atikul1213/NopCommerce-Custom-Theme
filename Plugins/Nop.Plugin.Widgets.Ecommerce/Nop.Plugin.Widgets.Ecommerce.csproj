@@ -35,6 +35,8 @@
     <None Remove="Areas\Admin\Views\Company\List.cshtml" />
     <None Remove="Areas\Admin\Views\Company\_CreateOrUpdate.cshtml" />
     <None Remove="Areas\Admin\Views\Company\_CreateOrUpdate.Info.cshtml" />
+    <None Remove="Areas\Admin\Views\Shared\Components\ProductBrochure\Default.cshtml" />
+    <None Remove="Areas\Admin\Views\Shared\_ProductBrochureModel.Info.cshtml" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
@@ -60,6 +62,12 @@
     <Content Include="Areas\Admin\Views\Company\_CreateOrUpdate.Info.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\Views\Shared\Components\ProductBrochure\Default.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_ProductBrochureModel.Info.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\Admin\Views\_ViewImports.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -81,11 +89,9 @@
   
   
   <ItemGroup>
-    <Folder Include="Areas\Admin\Components\" />
-    <Folder Include="Areas\Admin\Views\Shared\Components\" />
     <Folder Include="Factories\" />
     <Folder Include="Mapping\" />
-    <Folder Include="Model\" />
+    <Folder Include="Models\" />
     <Folder Include="Validators\" />
   </ItemGroup>
   

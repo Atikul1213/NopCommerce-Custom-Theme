@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Model;
+using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.CompanyModel;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
 using Nop.Services.Localization;
 using Nop.Web.Framework.Validators;
