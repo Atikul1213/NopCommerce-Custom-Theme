@@ -13,6 +13,7 @@ public record CompanyModel : BaseNopEntityModel, ILocalizedModel<CompanyLocalize
         AvailableCompanyOptions = new List<SelectListItem>();
         Locales = new List<CompanyLocalizedModel>();
     }
+
     #endregion
 
     #region Properties
@@ -44,7 +45,6 @@ public record CompanyModel : BaseNopEntityModel, ILocalizedModel<CompanyLocalize
     #endregion
 
 }
-
 
 
 #region Localized

@@ -80,8 +80,14 @@ public class CompanyController : BaseAdminController
 
     #endregion
 
-
     #region Method List Create Edit Delete
+
+
+    public async Task<IActionResult> Index()
+    {
+        return RedirectToAction("List");
+    }
+
 
     public async Task<IActionResult> List()
     {
@@ -100,11 +106,6 @@ public class CompanyController : BaseAdminController
     {
         if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
             return AccessDeniedView();
-
-        if (!ModelState.IsValid)
-        {
-            return Json(new { Success = false });
-        }
 
         var model = await _companyModelFactory.PrepareCompanyListModelAsync(searchModel);
 
@@ -142,6 +143,7 @@ public class CompanyController : BaseAdminController
             await UpdatePictureSeoNamesAsync(company);
 
             await UpdateLocalesAsync(company, model);
+
             _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.Created"));
 
             return continueEditing ? RedirectToAction("Edit", new { id = company.Id }) : RedirectToAction("List");
@@ -149,7 +151,7 @@ public class CompanyController : BaseAdminController
 
         model = await _companyModelFactory.PrepareCompanyModelAsync(model, null);
 
-        return View("Create", model);
+        return View(model);
     }
 
 
@@ -189,6 +191,7 @@ public class CompanyController : BaseAdminController
 
             var message = await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.EditFailed");
             _notificationService.ErrorNotification(message);
+
             return RedirectToAction("List");
         }
 
@@ -207,6 +210,7 @@ public class CompanyController : BaseAdminController
         }
 
         model = await _companyModelFactory.PrepareCompanyModelAsync(model, company);
+
         return View(model);
     }
 
@@ -228,6 +232,7 @@ public class CompanyController : BaseAdminController
 
         await _companyService.DeleteCompanyAsync(company);
         _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.Deleted"));
+
         return RedirectToAction("List");
     }
 
@@ -260,6 +265,7 @@ public class CompanyController : BaseAdminController
         {
             throw;
         }
+
         return Json(new { Result = true });
     }
 

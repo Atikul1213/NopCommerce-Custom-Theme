@@ -25,7 +25,6 @@ public class CompanyModelFactory : ICompanyModelFactory
     #endregion
 
 
-
     #region Ctor
     public CompanyModelFactory(ICompanyService companyService, IPictureService pictureService, IWorkContext workContext,
             ILocalizationService localizationService, ILocalizedModelFactory localizedModelFactory
@@ -133,8 +132,6 @@ public class CompanyModelFactory : ICompanyModelFactory
     }
 
     #endregion
-
-
 
 
 }
