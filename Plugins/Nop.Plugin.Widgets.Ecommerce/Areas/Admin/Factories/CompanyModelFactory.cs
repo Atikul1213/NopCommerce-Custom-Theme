@@ -26,8 +26,11 @@ public class CompanyModelFactory : ICompanyModelFactory
 
 
     #region Ctor
-    public CompanyModelFactory(ICompanyService companyService, IPictureService pictureService, IWorkContext workContext,
-            ILocalizationService localizationService, ILocalizedModelFactory localizedModelFactory
+    public CompanyModelFactory(ICompanyService companyService,
+            IPictureService pictureService,
+            IWorkContext workContext,
+            ILocalizationService localizationService,
+            ILocalizedModelFactory localizedModelFactory
         )
     {
         _companyService = companyService;
@@ -93,7 +96,8 @@ public class CompanyModelFactory : ICompanyModelFactory
     #region PrepareCompanyListModelAsync
     public async Task<CompanyListModel> PrepareCompanyListModelAsync(CompanySearchModel searchModel)
     {
-        ArgumentNullException.ThrowIfNull(nameof(searchModel));
+        if (searchModel == null)
+            throw new ArgumentNullException(nameof(searchModel));
 
 
         var companys = await _companyService.SearchCompanysAsync(searchModel.SearchName, searchModel.SearchCompanyType, searchModel.SearchIsActive,

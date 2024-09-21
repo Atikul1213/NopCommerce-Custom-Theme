@@ -1,15 +1,19 @@
 ﻿using Nop.Core;
+using Nop.Core.Caching;
 using Nop.Data;
 using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Services.Caching;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Services;
 public class CompanyService : ICompanyService
 {
     private readonly IRepository<Company> _companyRepository;
+    private readonly IStaticCacheManager _staticCacheManager;
 
-    public CompanyService(IRepository<Company> companyRepository)
+    public CompanyService(IRepository<Company> companyRepository, IStaticCacheManager staticCacheManager)
     {
         _companyRepository = companyRepository;
+        _staticCacheManager = staticCacheManager;
     }
 
 
@@ -29,16 +33,20 @@ public class CompanyService : ICompanyService
     }
     public virtual async Task<Company> GetCompanyByIdAsync(int companyId)
     {
-        return await _companyRepository.GetByIdAsync(companyId);
+        return await _companyRepository.GetByIdAsync(companyId, cache => default);
     }
 
     public virtual async Task<IList<Company>> GetAllCompanyAsync()
     {
-        var query = from c in _companyRepository.Table
-                    select c;
-        query = query.OrderBy(x => x.DisplayOrder);
+        var cacheKey = _staticCacheManager.PrepareKeyForDefaultCache(CompanyCacheDefaults.GetAllCompanyAsync);
 
-        return await query.ToListAsync();
+        return await _staticCacheManager.GetAsync(cacheKey, async () =>
+        {
+            var companies = await _companyRepository.GetAllAsync(query => query.OrderBy(o => o.DisplayOrder), cache => default);
+            return companies;
+        });
+
+
     }
 
 
