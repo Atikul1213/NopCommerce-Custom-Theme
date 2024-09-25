@@ -22,6 +22,11 @@ public class CompanyService : ICompanyService
         await _companyRepository.InsertAsync(company);
     }
 
+    public virtual async Task<IList<Company>> GetCompaniesByIdsAsync(int[] ids)
+    {
+        return await _companyRepository.GetByIdsAsync(ids, cache => default);
+    }
+
     public virtual async Task UpdateCompanyAsync(Company company)
     {
         await _companyRepository.UpdateAsync(company);
@@ -30,6 +35,11 @@ public class CompanyService : ICompanyService
     public virtual async Task DeleteCompanyAsync(Company company)
     {
         await _companyRepository.DeleteAsync(company);
+    }
+
+    public virtual async Task DeleteCompanysAsync(IList<Company> companies)
+    {
+        await _companyRepository.DeleteAsync(companies);
     }
     public virtual async Task<Company> GetCompanyByIdAsync(int companyId)
     {

@@ -94,6 +94,7 @@
   
   
   <ItemGroup>
+    <Folder Include="Contents\css\" />
     <Folder Include="Validators\" />
   </ItemGroup>
   

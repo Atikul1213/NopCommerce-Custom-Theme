@@ -105,7 +105,7 @@ public class CompanyController : BaseAdminController
     public async Task<IActionResult> List(CompanySearchModel searchModel)
     {
         if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
-            return AccessDeniedView();
+            return await AccessDeniedDataTablesJson();
 
         var model = await _companyModelFactory.PrepareCompanyListModelAsync(searchModel);
 
@@ -239,26 +239,21 @@ public class CompanyController : BaseAdminController
 
     [HttpPost]
 
-    public async Task<IActionResult> DeleteSelected(ICollection<int> selectedId)
+    public async Task<IActionResult> DeleteSelected(ICollection<int> selectedIds)
     {
 
+        if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
+            return AccessDeniedView();
 
-        if (selectedId == null || !selectedId.Any())
+        if (selectedIds == null || !selectedIds.Any())
         {
             _notificationService.ErrorNotification(await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.NotFound"));
             return RedirectToAction("List");
         }
         try
         {
-            foreach (var id in selectedId)
-            {
-                var company = await _companyService.GetCompanyByIdAsync(id);
-                if (company != null)
-                {
-                    await _companyService.DeleteCompanyAsync(company);
-                }
-            }
-
+            var entities = await _companyService.GetCompaniesByIdsAsync(selectedIds.ToArray());
+            await _companyService.DeleteCompanysAsync(entities);
             _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.Deleted"));
         }
         catch (Exception)

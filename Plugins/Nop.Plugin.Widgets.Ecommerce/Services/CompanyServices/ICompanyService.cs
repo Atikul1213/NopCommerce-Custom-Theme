@@ -10,7 +10,10 @@ public interface ICompanyService
 
     Task DeleteCompanyAsync(Company company);
 
+    Task DeleteCompanysAsync(IList<Company> companies);
+
     Task<Company> GetCompanyByIdAsync(int companyId);
+    Task<IList<Company>> GetCompaniesByIdsAsync(int[] ids);
 
     Task<IList<Company>> GetAllCompanyAsync();
 

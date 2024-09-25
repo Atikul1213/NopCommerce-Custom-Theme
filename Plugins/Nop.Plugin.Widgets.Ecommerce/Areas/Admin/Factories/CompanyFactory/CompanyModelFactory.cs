@@ -94,8 +94,7 @@ public class CompanyModelFactory : ICompanyModelFactory
     #region PrepareCompanyListModelAsync
     public async Task<CompanyListModel> PrepareCompanyListModelAsync(CompanySearchModel searchModel)
     {
-        if (searchModel == null)
-            throw new ArgumentNullException(nameof(searchModel));
+        ArgumentNullException.ThrowIfNull(searchModel);
 
 
         var companys = await _companyService.SearchCompanysAsync(searchModel.SearchName, searchModel.SearchCompanyType, searchModel.SearchIsActive,
@@ -120,6 +119,8 @@ public class CompanyModelFactory : ICompanyModelFactory
     #region PrepareCompanySearchModelAsync
     public async Task<CompanySearchModel> PrepareCompanySearchModelAsync(CompanySearchModel searchModel)
     {
+        ArgumentNullException.ThrowIfNull(searchModel);
+
         searchModel.AvailableCompanyOptions = (await CompanyTypes.Public.ToSelectListAsync()).ToList();
         searchModel.AvailableCompanyOptions.Insert(0,
             new SelectListItem
