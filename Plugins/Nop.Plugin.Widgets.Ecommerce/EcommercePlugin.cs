@@ -118,7 +118,7 @@ namespace Nop.Plugin.Widgets.Ecommerce
                 ["Admin.Widgets.Company.BackToList"] = "Back to list",
                 ["Nop.Plugin.Widget.Ecommerce.Company.Info"] = "Comapany info",
                 ["Admin.Widgets.Company.AddNew"] = "Add new ",
-                ["Admin.Widgets.Company.BackToList"] = "Back to list",
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.Create.BackToList"] = "Back to List",
                 ["Admin.Widgets.Ecommerce.EditDetails"] = "Edit Details",
                 ["Nop.Plugin.Widget.Ecommerce.Companys"] = "Companys",
                 ["Nop.Plugin.Widget.Ecommerce.Company.Created"] = "Created successfully",
@@ -126,8 +126,13 @@ namespace Nop.Plugin.Widgets.Ecommerce
                 ["Nop.Plugin.Widget.Ecommerce.Company.EditFailed"] = "Edit failed",
                 ["Nop.Plugin.Widget.Ecommerce.Company.UpdateSuccessfully"] = "Update successfully",
                 ["Nop.Plugin.Widget.Ecommerce.Company.Deleted"] = "Delete successfully",
-
-
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.Create.Title"] = "Create Company",
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.Create.Header"] = "Create Company",
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.Edit.Titile"] = "Create Company",
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.Edit.Header"] = "Create Company",
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.Edit.BackToList"] = "Back to List",
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.List.Title"] = "Company List",
+                ["Admin.Widgets.Ecommerce.Areas.Admin.Company.List.Header"] = "Company List",
 
 
                 ["Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Model.CompanyModel.Fields.Name"] = "Name",
