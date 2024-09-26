@@ -151,6 +151,9 @@ public class CompanyController : BaseAdminController
 
         model = await _companyModelFactory.PrepareCompanyModelAsync(model, null);
 
+        var message = await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.Create.Failed");
+        _notificationService.ErrorNotification(message);
+
         return View(model);
     }
 
@@ -161,9 +164,14 @@ public class CompanyController : BaseAdminController
         if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
             return AccessDeniedView();
 
+        if (id <= 0)
+        {
+            return RedirectToAction("List");
+        }
+
         var company = await _companyService.GetCompanyByIdAsync(id);
 
-        if (company == null)
+        if (company is null)
         {
             var message = await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.NotFound");
             _notificationService.ErrorNotification(message);
@@ -206,10 +214,14 @@ public class CompanyController : BaseAdminController
             await UpdatePictureSeoNamesAsync(company);
             await UpdateLocalesAsync(company, model);
             _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.UpdateSuccessfully"));
+
             return continueEditing ? RedirectToAction("Edit", new { id = company.Id }) : RedirectToAction("List");
         }
 
+
         model = await _companyModelFactory.PrepareCompanyModelAsync(model, company);
+        var errorMessage = await _localizationService.GetResourceAsync("Nop.Plugin.Widget.Ecommerce.Company.EditFailed");
+        _notificationService.ErrorNotification(errorMessage);
 
         return View(model);
     }
