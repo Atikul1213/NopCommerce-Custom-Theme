@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Core;
 using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.CompanyModel;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
 using Nop.Services;
 using Nop.Services.Localization;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.ProductBrochureFactory;
 using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 using Nop.Plugin.Widgets.Ecommerce.Services.ProductBrochureAttach;
 using Nop.Services.Catalog;
 using Nop.Services.Media;

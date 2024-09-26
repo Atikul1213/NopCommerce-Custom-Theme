@@ -1,6 +1,6 @@
 ﻿using Nop.Core;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Domain;
+namespace Nop.Plugin.Widgets.Ecommerce.Domains;
 public class ProductBrochure : BaseEntity
 {
     public int ProductId { get; set; }

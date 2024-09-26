@@ -3,7 +3,7 @@ using Nop.Core;
 using Nop.Data.Extensions;
 using Nop.Data.Mapping;
 using Nop.Data.Migrations;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Data;
 

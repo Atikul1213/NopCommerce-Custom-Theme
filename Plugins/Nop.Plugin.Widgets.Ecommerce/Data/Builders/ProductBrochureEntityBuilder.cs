@@ -1,6 +1,6 @@
 ﻿using FluentMigrator.Builders.Create.Table;
 using Nop.Data.Mapping.Builders;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Data.Builders;
 public class ProductBrochureEntityBuilder : NopEntityBuilder<ProductBrochure>

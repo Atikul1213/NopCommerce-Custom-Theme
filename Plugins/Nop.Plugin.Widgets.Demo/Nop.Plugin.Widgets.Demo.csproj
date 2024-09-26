@@ -1,0 +1,101 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Copyright>Copyright ©Demo</Copyright>
+    <Company>Demo, Ltd</Company>
+    <Authors>Demo</Authors>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl> </PackageProjectUrl>
+    <RepositoryUrl> </RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Widgets.Demo</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+    <!--Set this parameter to true to get the dlls copied from the NuGet cache to the output of your project.
+    You need to set this parameter to true if your plugin has a nuget package 
+    to ensure that the dlls copied from the NuGet cache to the output of your project-->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  
+  
+  
+  
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+  
+  
+  
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\Controller\**" />
+    <Compile Remove="Areas\Admin\Model\**" />
+    <Compile Remove="Domain\**" />
+    <Compile Remove="Model\**" />
+    <EmbeddedResource Remove="Areas\Admin\Controller\**" />
+    <EmbeddedResource Remove="Areas\Admin\Model\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <None Remove="Areas\Admin\Controller\**" />
+    <None Remove="Areas\Admin\Model\**" />
+    <None Remove="Domain\**" />
+    <None Remove="Model\**" />
+  </ItemGroup>
+  
+  
+  
+  
+  <ItemGroup>
+    <None Remove="logo.jpg" />
+    <None Remove="plugin.json" />
+    <None Remove="Views\_ViewImports.cshtml" />
+  </ItemGroup>
+  
+  
+  
+  
+  <ItemGroup>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Components\Demo\Default.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+  
+  
+  
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Components\" />
+    <Folder Include="Areas\Admin\Factories\" />
+    <Folder Include="Areas\Admin\Infrastructure\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Validators\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\" />
+    <Folder Include="Contents\css\" />
+    <Folder Include="Data\Builders\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Domains\" />
+    <Folder Include="Services\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
+  
+  
+  
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+  </ItemGroup>
+
+</Project>

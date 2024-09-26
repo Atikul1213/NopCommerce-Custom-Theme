@@ -1,5 +1,5 @@
 ﻿using Nop.Data.Mapping;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Data;
 public class BaseNameCompatibility : INameCompatibility

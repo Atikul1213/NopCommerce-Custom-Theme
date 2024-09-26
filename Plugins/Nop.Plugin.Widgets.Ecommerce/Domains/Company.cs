@@ -1,7 +1,7 @@
 ﻿using Nop.Core;
 using Nop.Core.Domain.Localization;
 
-namespace Nop.Plugin.Widgets.Ecommerce.Domain;
+namespace Nop.Plugin.Widgets.Ecommerce.Domains;
 public class Company : BaseEntity, ILocalizedEntity
 {
     public string Name { get; set; }

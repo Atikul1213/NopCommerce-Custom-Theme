@@ -1,4 +1,4 @@
-﻿using Nop.Plugin.Widgets.Ecommerce.Domain;
+﻿using Nop.Plugin.Widgets.Ecommerce.Domains;
 using Nop.Services.Caching;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices.Caching;

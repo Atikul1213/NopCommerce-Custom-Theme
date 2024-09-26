@@ -1,5 +1,5 @@
 ﻿using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.CompanyModel;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Factories.CompanyFactory;
 public interface ICompanyModelFactory

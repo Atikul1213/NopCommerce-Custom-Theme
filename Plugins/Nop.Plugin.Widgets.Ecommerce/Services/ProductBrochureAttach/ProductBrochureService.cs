@@ -1,6 +1,6 @@
 ﻿using Nop.Core;
 using Nop.Data;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Services.ProductBrochureAttach;
 public class ProductBrochureService : IProductBrochureService

@@ -1,5 +1,5 @@
 ﻿using Nop.Plugin.Widgets.Ecommerce.Areas.Admin.Models.ProductBrochure;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 using Nop.Plugin.Widgets.Ecommerce.Services.ProductBrochureAttach;
 using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
 using Nop.Web.Framework.Models.Extensions;

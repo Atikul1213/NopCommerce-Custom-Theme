@@ -1,5 +1,5 @@
 ﻿using Nop.Core;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
 public interface ICompanyService

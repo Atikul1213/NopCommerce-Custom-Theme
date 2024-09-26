@@ -1,7 +1,7 @@
 ﻿using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Data;
-using Nop.Plugin.Widgets.Ecommerce.Domain;
+using Nop.Plugin.Widgets.Ecommerce.Domains;
 using Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices.Caching;
 
 namespace Nop.Plugin.Widgets.Ecommerce.Services.CompanyServices;
