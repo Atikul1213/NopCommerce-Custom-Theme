@@ -3,7 +3,7 @@
 @{
     Layout = "_AdminLayout";
     //page title
-    ViewBag.PageTitle = T("Admin.Widgets.Ecommerce.EditDetails").Text;
+    ViewBag.PageTitle = T("Admin.Widgets.Ecommerce.Areas.Admin.Company.Edit.Titile").Text;
     //active menu item (system name)
     NopHtml.SetActiveMenuItemSystemName("Companys");
 }
@@ -12,10 +12,10 @@
 <form asp-controller="Company" asp-action="Edit" method="post">
     <div class="content-header clearfix">
         <h1 class="float-left">
-            @T("Admin.Widgets.Ecommerce.EditDetails")
+            @T("Admin.Widgets.Ecommerce.Areas.Admin.Company.Edit.Header")
             <small>
                 <i class="fas fa-arrow-circle-left"></i>
-                <a asp-action="List">@T("Admin.Widgets.Company.BackToList")</a>
+                <a asp-action="List">@T("Admin.Widgets.Ecommerce.Areas.Admin.Company.Edit.BackToList")</a>
             </small>
         </h1>
         <div class="float-right">

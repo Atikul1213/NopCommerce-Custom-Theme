@@ -3,7 +3,7 @@
 @{
     Layout = "_AdminLayout";
     //page title
-    ViewBag.PageTitle = T("Admin.Widgets.Company.AddNew").Text;
+    ViewBag.PageTitle = T("Admin.Widgets.Ecommerce.Areas.Admin.Company.Create.Title").Text;
     //active menu item (system name)
     NopHtml.SetActiveMenuItemSystemName("CreateCompany");
 }
@@ -11,10 +11,10 @@
 <form asp-controller="Company" asp-action="Create" method="post">
     <div class="content-header clearfix">
         <h1 class="float-left">
-            @T("Admin.Widgets.Company.AddNew")
+            @T("Admin.Widgets.Ecommerce.Areas.Admin.Company.Create.Header")
             <small>
                 <i class="fas fa-arrow-circle-left"></i>
-                <a asp-action="List">@T("Admin.Widgets.Company.BackToList")</a>
+                <a asp-action="List">@T("Admin.Widgets.Ecommerce.Areas.Admin.Company.Create.BackToList")</a>
             </small>
         </h1>
         <div class="float-right">
@@ -30,3 +30,5 @@
     </div>
     @await Html.PartialAsync("_CreateOrUpdate", Model)
 </form>
+
+<nop-delete-confirmation asp-model-id="@Model.Id" asp-button-id="company-delete"/>

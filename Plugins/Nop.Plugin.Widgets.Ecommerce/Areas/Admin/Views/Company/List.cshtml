@@ -157,7 +157,7 @@
                                 $(document).ready(function () {
                                     $('#delete-selected-action-confirmation-submit-button').bind('click', function () {
                                         let postData = {
-                                            selectedId: selectedIds
+                                            selectedIds: selectedIds
                                         };
                                         addAntiForgeryToken(postData);
                                         console.log(postData);
