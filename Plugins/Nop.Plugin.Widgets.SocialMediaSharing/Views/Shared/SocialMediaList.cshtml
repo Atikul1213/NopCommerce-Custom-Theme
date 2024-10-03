@@ -1,0 +1,9 @@
+@model List<SocialMediaHomeModel>
+@{
+    var pictureUrl = ViewData["pictureUrl"]?.ToString() ?? "";
+
+    if(!string.IsNullOrEmpty(pictureUrl))
+    {
+        <img src="@pictureUrl"/>
+    }
+}

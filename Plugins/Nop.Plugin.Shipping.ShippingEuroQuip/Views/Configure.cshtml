@@ -1,0 +1,30 @@
+﻿@model ConfigurationModel
+@using Nop.Web.Framework.Models.AdminAreaTour
+
+@{
+    Layout = "_ConfigurePlugin";
+ 
+}
+
+@await Html.PartialAsync("_AdminTour")
+
+<div class="row pb-3">
+    <div class="col-md-3">
+        
+    </div>
+    <div class="col-md-9">
+        <div class="float-right">
+            <a asp-controller="Shipping" asp-action="Methods" class="btn btn-primary" id="manage-shipping-methods-button">
+                <i class="fas fa-truck"></i>
+                @T("Admin.Configuration.Shipping.Methods.Manage")
+            </a>
+           
+        </div>
+    </div>
+</div>
+
+
+<nop-alert asp-alert-id="saveModeAlert" asp-alert-message="@T("Admin.Common.Alert.Save.Error")" />
+
+@await Html.PartialAsync("~/Plugins/Shipping.EuroQuip/Views/_FixedRate.cshtml")
+

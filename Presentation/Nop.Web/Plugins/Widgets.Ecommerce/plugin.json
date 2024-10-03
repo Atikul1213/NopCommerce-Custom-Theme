@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Ecommerce",
+  "SystemName": "Widgets.Ecommerce",
+  "Version": "4.8",
+  "SupportedVersions": [ "4.70" ],
+  "Author": "Md Atikul Islam",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.Ecommerce.dll",
+  "Description": "This plugin is use for the E-commerce Company."
+}

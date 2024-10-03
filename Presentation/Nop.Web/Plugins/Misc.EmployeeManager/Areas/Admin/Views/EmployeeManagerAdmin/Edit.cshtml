@@ -1,0 +1,39 @@
+@using Nop.Plugin.Misc.EmployeeManager.Models
+
+@model EmployeeAddressModel
+
+@{
+    //page title
+    // ViewBag.PageTitle = T("Admin.EmployeeManager.Employee.EditEmployee").Text;
+    ViewBag.PageTitle = T(EmployeeManagerConstants.EMPLOYEE_EDIT_EMPLOYEE).Text;
+
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName(EmployeeManagerConstants.SYSTEM_NAME);
+}
+
+<form asp-controller="EmployeeManagerAdmin" asp-action="EditEmployee">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            @T(EmployeeManagerConstants.EMPLOYEE_EDIT_EMPLOYEE)
+            <small>
+                <i class="fas fa-arrow-circle-left"></i>
+                <a asp-action="List">@T(EmployeeManagerConstants.EMPLOYEE_BACK_TO_LIST)</a>
+            </small>
+        </h1>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" asp-route-continue="true" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+            @if ((bool)ViewData["IsEditView"])
+            {
+                <a href="/Admin/EmployeeManagerAdmin/DeleteSelected/@Model.Employee.Id" class="btn btn-danger">Delete</a>
+            }
+        </div>
+    </div>
+    @await Html.PartialAsync("_EmployeeInfoInput", Model)
+</form>

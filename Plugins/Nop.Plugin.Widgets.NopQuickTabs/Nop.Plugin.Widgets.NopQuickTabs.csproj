@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Copyright>Copyright ©NopQuickTabs</Copyright>
+    <Company>NopQuickTabs, Ltd</Company>
+    <Authors>NopQuickTabs</Authors>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl> </PackageProjectUrl>
+    <RepositoryUrl> </RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Widgets.NopQuickTabs</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+    <!--Set this parameter to true to get the dlls copied from the NuGet cache to the output of your project.
+    You need to set this parameter to true if your plugin has a nuget package 
+    to ensure that the dlls copied from the NuGet cache to the output of your project-->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <None Remove="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\NopQuickTabs.cshtml" />
+    <None Remove="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\_ViewImports.cshtml" />
+    <None Remove="Areas\Admin\Views\Tab\Create.cshtml" />
+    <None Remove="Areas\Admin\Views\Tab\TabEditPopup.cshtml" />
+    <None Remove="Areas\Admin\Views\Tab\_CreateOrUpdate.cshtml" />
+    <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
+    <None Remove="logo.jpg" />
+    <None Remove="plugin.json" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\Default.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductContactUsTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductCustomTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductDescriptionTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\ProductSpecificationsTab.cshtml" />
+    <None Remove="Views\Shared\Components\NopQuickTabsPublic\_ViewImports.cshtml" />
+    <None Remove="Views\Shared\_ViewImports.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\NopQuickTabs.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\Components\NopQuickTabAdminPanel\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Tab\Create.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Tab\TabEditPopup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Tab\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Components\NopQuickTabsPublic\Default.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\ProductContactUsTab.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\ProductCustomTab.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\ProductDescriptionTab.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\ProductSpecificationsTab.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Components\NopQuickTabsPublic\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+    <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj" />
+  </ItemGroup>
+
+</Project>

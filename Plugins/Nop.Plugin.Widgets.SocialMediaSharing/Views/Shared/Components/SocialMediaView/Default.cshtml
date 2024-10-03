@@ -1,0 +1,251 @@
+@using Nop.Web.Framework.Models.DataTables
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@using Nop.Plugin.Widgets.SocialMediaSharing.Areas.Admin.Model.MediaFolder
+@model List<SocialMediaHomeModel>
+
+@{
+    var currentUrl = Context.Request.GetEncodedUrl();
+    var zone = Model[0].Zone;
+    var zoneModal = Model[0].Zone + "Modal";
+    var closeModal = Model[0].Zone + "Close";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .share-options a {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            text-decoration: none;
+            color: black;
+        }
+
+        .share-options img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        #copyBtn {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn btn-primary" type="button" id="@zone"><i class="bi bi-share-fill"></i> Share</button>
+
+    <div id="@zoneModal" class="modal">
+        <div class="modal-content">
+            <span id="@closeModal" class="close">&times;</span>
+            <h3>Share advert</h3>
+            <div class="share-options">
+                @foreach (var media in Model)
+                {
+
+                    string urlWithMessage="";
+
+                    if (media.Name == SocialMediaPlatform.WhatsApp.ToString())
+                        urlWithMessage = $"{media.Url}{currentUrl} {Uri.EscapeDataString(media.CustomMessage)}";
+
+                    else if (media.Name == SocialMediaPlatform.Facebook.ToString())
+                        urlWithMessage = $"{media.Url}{currentUrl}&hashtag={Uri.EscapeDataString(media.CustomMessage)}";
+
+                    else if (media.Name == SocialMediaPlatform.LinkedIn.ToString() || media.Name == SocialMediaPlatform.Twitter.ToString())
+                        urlWithMessage = $"{media.Url}{currentUrl}&text={Uri.EscapeDataString(media.CustomMessage)}";
+
+                    else if (media.Name == SocialMediaPlatform.Outlook.ToString())
+                        urlWithMessage = $"{media.Url}body={Uri.EscapeDataString(media.CustomMessage)}%0A%0A{currentUrl}";
+
+                    else if (media.Name == SocialMediaPlatform.Gmail.ToString())
+                        urlWithMessage = $"{media.Url}";
+
+                    if (media.Name != SocialMediaPlatform.Outlook.ToString() || media.Name != SocialMediaPlatform.Gmail.ToString())
+                        urlWithMessage += $"&link={currentUrl}";
+
+                    <a data-provider="@media.Name" href="@urlWithMessage" onclick="openShareWindow(event,this.href)" target="_blank" rel="noopener" title="Share on @media.Name">
+                        <img src="@media.Icon.ThumbImageUrl" alt="@media.Name" />
+                        Share on @media.Name
+                    </a>
+
+
+                }
+            </div>
+            <input type="text" value="@currentUrl" id="shareLink" readonly>
+            <button id="copyBtn">Copy</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var shareBtn = document.getElementById("@zone");
+            var shareModal = document.getElementById("@zoneModal");
+            var closeModal = document.getElementById("@closeModal");
+
+            shareBtn.onclick = function () {
+                shareModal.style.display = "block";
+            };
+
+            closeModal.onclick = function () {
+                shareModal.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if (event.target == shareModal) {
+                    shareModal.style.display = "none";
+                }
+            };
+
+            document.getElementById("copyBtn").onclick = function () {
+                var shareLink = document.getElementById("shareLink");
+                shareLink.select();
+                document.execCommand("copy");
+                alert("Link copied to clipboard!");
+            };
+        });
+
+        function openShareWindow(event, url) {
+            event.preventDefault();
+            window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+            return false;
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnCopyProductUrl").click(function () {
+                navigator.clipboard.writeText($("#txtCopyProductUrl").val());
+                var copied = $(this).attr("data-copied");
+                $(this).text(copied);
+            });
+
+            $("#btnShareAdvertMobile").on('click', async () => {
+                try {
+                    await navigator.share({ title: document.title, text: window.location.href });
+                } catch (err) {
+                    console.log(err);
+                }
+            });
+
+            $("#btn_notify_similar").on('click', async (e) => {
+                e.preventDefault();
+                if ($('#btnAutoModalLogin').length) {
+                    $('#frm_login_popup').prop("send-alert", true);
+                    $('.btnExternalLogin').prop("send-alert", true);
+                    $('#btnAutoModalLogin').click();
+                    return false;
+                }
+
+                var productId = $("#btn_notify_similar").attr("data-productid");
+                var thisButton = $(this);
+                if (productId) {
+                    thisButton.attr('disabled', true);
+                    var baseUrl = window.location.origin;
+                    var currentUrl = window.location.href.replace(baseUrl, '');
+                    var requestModel = {
+                        ProductId: productId,
+                        SearchLink: currentUrl
+                    };
+
+                    addAntiForgeryToken(requestModel);
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "@(Url.Action("SubscribeToEmailAlertsForProduct", "EmailAlert"))",
+                        data: requestModel,
+                        success: function (response) {
+                            alert(response.Message);
+                        },
+                        error: function () {
+                            alert("Something went wrong! Please contact the store owner.");
+                        },
+                        complete: function () {
+                            thisButton.attr('disabled', false);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $("#mobileShare").on('click', async () => {
+            try {
+                await navigator.share({ title: document.title, text: window.location.href });
+            } catch (err) {
+                console.log(err);
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.click-to-call .call-block').on('click', function (e) {
+                e.preventDefault();
+                var phoneNumber = $(this).attr("data-number");
+                var textSpan = $(this).find('span');
+                textSpan.text(phoneNumber);
+                $(this).removeClass("call-block");
+                $(this).off('click');
+            });
+        });
+    </script>
+
+</body>
+</html>

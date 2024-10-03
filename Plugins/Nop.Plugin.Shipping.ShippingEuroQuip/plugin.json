@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Shipping",
+  "FriendlyName": "EuroQuip",
+  "SystemName": "Shipping.EuroQuip",
+  "Version": "4.70.7",
+  "SupportedVersions": [ "4.70" ],
+  "Author": "nopCommerce team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Shipping.EuroQuip.dll",
+  "Description": "Shipping EuroQuip method with options for Standard Freight, Overnight Delivery, and Click & Collect"
+}
