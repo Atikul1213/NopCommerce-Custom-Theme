@@ -44,7 +44,7 @@ namespace Nop.Plugin.Widgets.Ecommerce
         #region WidgetZone
         public Type GetWidgetViewComponent(string widgetZone)
         {
-            if (widgetZone == PublicWidgetZones.ProductDetailsOverviewBottom)
+            if (widgetZone == PublicWidgetZones.ProductDetailsOverviewTop)
             {
                 return typeof(PublicProductBrochureViewComponent);
             }

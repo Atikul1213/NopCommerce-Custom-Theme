@@ -80,7 +80,7 @@ public class ProductBrochureController : BaseAdminController
 
     public virtual async Task<IActionResult> ProductBrochureUpdate(ProductBrochureModel model)
     {
-        if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageProducts))
+        if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
             return await AccessDeniedDataTablesJson();
 
         var productBrochure = await _productBrochureService.GetProductBrochureByIdAsync(model.Id)
@@ -101,7 +101,7 @@ public class ProductBrochureController : BaseAdminController
 
     public virtual async Task<IActionResult> ProductBrochureDelete(int id)
     {
-        if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageProducts))
+        if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
             return await AccessDeniedDataTablesJson();
 
         var productBrochure = await _productBrochureService.GetProductBrochureByIdAsync(id)
