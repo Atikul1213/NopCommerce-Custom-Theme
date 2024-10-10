@@ -49,6 +49,7 @@
     <Folder Include="Factories\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
 
 </Project>

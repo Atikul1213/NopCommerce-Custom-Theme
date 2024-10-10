@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nop.Core.Infrastructure;
 
-namespace Nop.Plugin.Widgets.Demo.Infrastructure;
-public class PluginNopStartup : INopStartup
+namespace NopStation.Plugin.Widgets.AddCrawlers.Infrastructure;
+public class NopStartup : INopStartup
 {
     public int Order => 3000;
 
