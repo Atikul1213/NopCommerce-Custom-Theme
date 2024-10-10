@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Copyright>Nop-Station Team</Copyright>
+    <Company>Nop-Station</Company>
+    <Authors>Nop-Station Team</Authors>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl> </PackageProjectUrl>
+    <RepositoryUrl> </RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <PackageTags>NopStation,Add Crawler,NopCommerce,Plugin</PackageTags>
+    <Description>This plugin enables to add new Crawlers to the crawlers list.</Description>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\NopStation.Plugin.Widgets.AddCrawlers</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+    <!--Set this parameter to true to get the dlls copied from the NuGet cache to the output of your project.
+    You need to set this parameter to true if your plugin has a nuget package 
+    to ensure that the dlls copied from the NuGet cache to the output of your project-->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  
+
+  <ItemGroup>
+    <None Remove="logo.png" />
+    <None Remove="plugin.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+﻿{
+  "Group": "Nop-Station",
+  "FriendlyName": "Add Crawlers",
+  "SystemName": "NopStation.Plugin.Widgets.AddCrawlers",
+  "Version": "4.70.1.1",
+  "SupportedVersions": [ "4.70" ],
+  "Author": "Nop-Station team",
+  "DisplayOrder": 1,
+  "FileName": "NopStation.Plugin.Widgets.AddCrawlers.dll",
+  "Description": "This plugin enables to add new Crawlers to the crawlers list.",
+  "DependsOnSystemNames": [ "NopStation.Core" ]
+}
