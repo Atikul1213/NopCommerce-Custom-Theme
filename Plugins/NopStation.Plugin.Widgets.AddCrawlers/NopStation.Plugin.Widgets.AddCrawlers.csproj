@@ -26,6 +26,7 @@
   <ItemGroup>
     <None Remove="logo.png" />
     <None Remove="plugin.json" />
+    <None Remove="Views\_ViewImports.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\_ViewImports.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -45,9 +49,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Data\Builders\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Domains\" />
     <Folder Include="Factories\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
