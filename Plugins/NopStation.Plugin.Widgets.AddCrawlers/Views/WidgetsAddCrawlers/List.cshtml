@@ -1,0 +1,64 @@
+﻿@model OnlineCustomerSearchModel
+
+@{
+    //page title
+    ViewBag.PageTitle = T("Plugins.Widgets.AddCrawlers.Menu.AddCrawlersList").Text;
+    //active menu item (system name)
+    NopHtml.SetActiveMenuItemSystemName("WidgetsAddCrawlers.List");
+}
+
+<div class="content-header clearfix">
+    <h1 class="float-left">
+        @T("Plugins.Widgets.AddCrawlers.Menu.AddCrawlersList")
+    </h1>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <div class="card card-default">
+                    <div class="card-body">
+                       
+
+                        @await Html.PartialAsync("Table", new DataTablesModel
+                        {
+                            Name = "crawlers-grid",
+                            UrlRead = new DataUrl("List", "WidgetsAddCrawlers", null),
+                            Length = Model.PageSize,
+                            LengthMenu = Model.AvailablePageSizes,
+                            ColumnCollection = new List<ColumnProperty>
+                            {
+                                new ColumnProperty(nameof(CrawlerModel.CrawlerInfo))
+                                {
+                                    Title = T("Plugins.Widgets.AddCrawlers.Fields.CrawlerInfo").Text,
+                                },
+                                new ColumnProperty(nameof(CrawlerModel.IPAddress))
+                                {
+                                    Title = T("Plugins.Widgets.AddCrawlers.Fields.IPAddress").Text,
+                                    Width = "100"
+                                },
+                                new ColumnProperty(nameof(CrawlerModel.Location))
+                                {
+                                    Title = T("Plugins.Widgets.AddCrawlers.Fields.Location").Text,
+                                    Width = "100"
+                                },
+                                new ColumnProperty(nameof(CrawlerModel.AddedBy))
+                                {
+                                    Title = T("Plugins.Widgets.AddCrawlers.Fields.AddedBy").Text,
+                                },
+                                new ColumnProperty(nameof(CrawlerModel.AddedOnUtc))
+                                {
+                                    Title = T("Plugins.Widgets.AddCrawlers.Fields.AddedOnUtc").Text,
+                                    Width = "200",
+                                    Render = new RenderDate()
+                                }
+                            }
+                        })
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

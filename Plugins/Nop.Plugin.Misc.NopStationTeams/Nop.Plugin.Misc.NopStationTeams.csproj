@@ -23,7 +23,6 @@
     <None Remove="Areas\Admin\Views\Setting\_Employee.EmployeeSetting.cshtml" />
     <None Remove="logo.jpg" />
     <None Remove="plugin.json" />
-    <None Remove="Areas\Admin\Views\Configure.cshtml" />
     <None Remove="Areas\Admin\Views\Employee\Create.cshtml" />
     <None Remove="Areas\Admin\Views\Employee\Edit.cshtml" />
     <None Remove="Areas\Admin\Views\Employee\List.cshtml" />
@@ -44,9 +43,6 @@
     </Content>
     <Content Include="plugin.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Areas\Admin\Views\Configure.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\Employee\Create.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

@@ -50,6 +50,14 @@
     {
       "SystemName": "Widgets.Ecommerce",
       "Version": "4.8"
+    },
+    {
+      "SystemName": "NopStation.Core",
+      "Version": "4.70.1.0"
+    },
+    {
+      "SystemName": "NopStation.Plugin.Widgets.AddCrawlers",
+      "Version": "4.70.1.0"
     }
   ],
   "PluginNamesToUninstall": [
