@@ -50,7 +50,6 @@
     <Folder Include="Data\Builders\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="Factories\" />
-    <Folder Include="Services\" />
     <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
 
