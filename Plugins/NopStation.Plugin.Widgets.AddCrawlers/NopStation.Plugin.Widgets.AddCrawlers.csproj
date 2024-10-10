@@ -41,4 +41,14 @@
     <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Data\Builders\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Domains\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
