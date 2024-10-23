@@ -80,7 +80,7 @@ public class CompanyController : BaseAdminController
 
     #endregion
 
-    #region Method List Create Edit Delete
+    #region Method List / Create / Edit / Delete
 
 
     public async Task<IActionResult> Index()

@@ -41,7 +41,7 @@ public class ProductBrochureController : BaseAdminController
     #endregion
 
 
-    #region  Create ProductBrochureUpdate ProductBrochureDelete
+    #region ProductBrochure List / Create / Update /  Delete
 
     [HttpPost]
     public virtual async Task<IActionResult> ProductBrochureList(ProductBrochureSearchModel searchModel)
