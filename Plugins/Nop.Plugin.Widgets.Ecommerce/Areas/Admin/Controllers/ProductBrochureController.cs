@@ -46,7 +46,7 @@ public class ProductBrochureController : BaseAdminController
     [HttpPost]
     public virtual async Task<IActionResult> ProductBrochureList(ProductBrochureSearchModel searchModel)
     {
-        if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.ManageProducts))
+        if (!await _permissionService.AuthorizeAsync(StandardPermissionProvider.AccessAdminPanel))
             return await AccessDeniedDataTablesJson();
 
         var product = await _productService.GetProductByIdAsync(searchModel.ProductId)
